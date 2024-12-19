@@ -24,8 +24,12 @@
   </head>
 
   <body>
-    <main class="container mx-auto mt-28 px-5 flex">
-      <%= yield %>
-    </main>
+    <% unless controller_name == "home" %>
+      <main class="container mx-auto mt-28 px-5 flex">
+        <%= yield %>
+      </main>
+    <% end %>
+
+    <%= yield %>
   </body>
 </html>
