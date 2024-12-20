@@ -10,5 +10,7 @@
     <% else %>
       <p class="text-gray-600 mb-4"><%= post.content %></p>
     <% end %>
+
+    <p class="text-sm text-gray-500 mt-4"><%= time_ago_in_words(post.created_at) %> ago</p>
   </div>
 </div>

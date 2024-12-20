@@ -21,9 +21,9 @@
     <%= form.textarea :content, rows: 4, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full" %>
   </div>
 
-  <div class="my-5">
-    <%= form.label :published %>
-    <%= form.checkbox :published, class: "block mt-2 h-5 w-5" %>
+  <div class="my-5 flex items-center">
+    <%= form.label :published, class: "mr-2" %>
+    <%= form.check_box :published, class: "h-5 w-5" %>
   </div>
 
   <div class="inline">
