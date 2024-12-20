@@ -24,6 +24,21 @@
   </head>
 
   <body>
+    <% if authenticated? %>
+      <nav class="bg-blue-600 text-white py-4">
+        <div class="container mx-auto flex flex-wrap items-center justify-between">
+          <a href="<%= root_path %>" class="text-2xl font-bold hover:text-blue-300">Bloudme</a>
+          <ul class="flex flex-wrap items-center space-x-6 mt-2 sm:mt-0">
+            <li class="text-center">
+              <%= Current.user.email_address %>
+            </li>
+            <li>
+              <%= button_to 'Sign out', session_path, method: :delete, class: "bg-red-600 hover:bg-red-700 text-white py-2 px-4 rounded" %>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    <% end %>
     <main class="container mx-auto mt-28 px-5 flex">
       <%= yield %>
     </main>

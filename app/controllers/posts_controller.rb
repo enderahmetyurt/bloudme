@@ -1,5 +1,4 @@
 class PostsController < ApplicationController
-  allow_unauthenticated_access
   before_action :set_post, only: %i[ show edit update destroy ]
 
   # GET /posts or /posts.json
