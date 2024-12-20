@@ -25,20 +25,39 @@
 
   <body>
     <% if authenticated? %>
-      <nav class="bg-blue-600 text-white py-4">
+      <nav class="bg-blue-600 text-white py-4" data-controller="menu">
         <div class="container mx-auto flex flex-wrap items-center justify-between">
           <a href="<%= root_path %>" class="text-2xl font-bold hover:text-blue-300">Bloudme</a>
-          <ul class="flex flex-wrap items-center space-x-6 mt-2 sm:mt-0">
+          <button
+            data-action="click->menu#toggle"
+            class="sm:hidden text-white focus:outline-none focus:ring-2 focus:ring-white"
+            aria-label="Toggle navigation">
+            <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+            </svg>
+          </button>
+          <ul class="hidden sm:flex flex-wrap items-center space-x-6 mt-2 sm:mt-0">
             <li class="text-center">
               <%= Current.user.email_address %>
             </li>
-              <li>
+            <li>
               <%= button_to 'Sign out', session_path, method: :delete, class: "bg-red-600 hover:bg-red-700 text-white py-2 px-4 rounded" %>
             </li>
           </ul>
         </div>
+        <div
+          data-menu-target="dropdown"
+          class="hidden sm:hidden flex flex-col bg-blue-700 text-white mt-4">
+          <div class="px-4 py-2 text-center">
+            <%= Current.user.email_address %>
+          </div>
+          <div class="px-4 py-2 text-center">
+            <%= button_to 'Sign out', session_path, method: :delete, class: "bg-red-600 hover:bg-red-700 text-white py-2 px-4 rounded w-full" %>
+          </div>
+        </div>
       </nav>
     <% end %>
+
     <main class="container mx-auto mt-28 px-5 flex">
       <%= yield %>
     </main>
