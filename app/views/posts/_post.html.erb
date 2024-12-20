@@ -4,9 +4,7 @@
       <%= link_to post.title, post_path(post) %>
     </h2>
 
-    <% if controller_name == "posts" && action_name == "index" %>
-      <p class="text-gray-600 mb-4"><%= post.content.truncate(150) %></p>
-    <% else %>
+    <% unless controller_name == "posts" && action_name == "index" %>
       <p class="text-gray-600 mb-4"><%= post.content %></p>
     <% end %>
 
