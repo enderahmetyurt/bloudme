@@ -37,6 +37,8 @@ registry:
 # Configure builder setup.
 builder:
   arch: amd64
+  secrets:
+    - RAILS_MASTER_KEY
   # Pass in additional build args needed for your Dockerfile.
   # args:
   #   RUBY_VERSION: <%= File.read('.ruby-version').strip %>
@@ -60,8 +62,9 @@ env:
 
 # Use a persistent storage volume.
 #
-# volumes:
-#   - "app_storage:/app/storage"
+volumes:
+  - "/db:/rails/sqlite"
+  - "/storage:/rails/storage"
 
 # Bridge fingerprinted assets, like JS and CSS, between versions to avoid
 # hitting 404 on in-flight requests. Combines all files from new and old
@@ -98,3 +101,8 @@ env:
 #     port: 6379
 #     directories:
 #       - data:/data
+aliases:
+  console: app exec --interactive --reuse "bin/rails console"
+  shell: app exec --interactive --reuse "bash"
+  logs: app logs -f
+  dbc: app exec --interactive --reuse "bin/rails dbconsole"
