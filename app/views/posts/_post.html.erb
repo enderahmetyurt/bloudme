@@ -1,16 +1,18 @@
 <div id="<%= dom_id post %>">
   <div class="bg-white shadow-md rounded-lg p-6">
-    <h2 class="text-2xl font-semibold text-blue-600 mb-4"><%= post.title %></h2>
+    <h2 class="text-2xl font-semibold text-blue-600 mb-4 hover:text-black">
+      <%= link_to post.title, post_path(post) %>
+    </h2>
 
     <% if controller_name == "posts" && action_name == "index" %>
       <p class="text-gray-600 mb-4"><%= post.content.truncate(150) %></p>
-      <div class="text-right">
-        <a href="<%= post_path(post) %>" class="text-blue-600 hover:text-blue-800">Read More &rarr;</a>
-      </div>
     <% else %>
       <p class="text-gray-600 mb-4"><%= post.content %></p>
     <% end %>
 
-    <p class="text-sm text-gray-500 mt-4"><%= time_ago_in_words(post.created_at) %> ago</p>
+    <p class="text-sm text-gray-500 mt-4">
+      <%= post.user.email_address %> |
+      <%= time_ago_in_words(post.created_at) %> ago
+    </p>
   </div>
 </div>
