@@ -1,22 +1,14 @@
 <div id="<%= dom_id post %>">
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Title:</strong>
-    <%= post.title %>
-  </p>
+  <div class="bg-white shadow-md rounded-lg p-6">
+    <h2 class="text-2xl font-semibold text-blue-600 mb-4"><%= post.title %></h2>
 
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Content:</strong>
-    <%= post.content %>
-  </p>
-
-  <p class="my-5">
-    <strong class="block font-medium mb-1">User:</strong>
-    <%= post.user_id %>
-  </p>
-
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Published:</strong>
-    <%= post.published %>
-  </p>
-
+    <% if controller_name == "posts" && action_name == "index" %>
+      <p class="text-gray-600 mb-4"><%= post.content.truncate(150) %></p>
+      <div class="text-right">
+        <a href="<%= post_path(post) %>" class="text-blue-600 hover:text-blue-800">Read More &rarr;</a>
+      </div>
+    <% else %>
+      <p class="text-gray-600 mb-4"><%= post.content %></p>
+    <% end %>
+  </div>
 </div>

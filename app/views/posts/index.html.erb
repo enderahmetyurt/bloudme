@@ -10,12 +10,9 @@
     <%= link_to "New post", new_post_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
   </div>
 
-  <div id="posts" class="min-w-full">
+  <div id="posts" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
     <% @posts.each do |post| %>
       <%= render post %>
-      <p>
-        <%= link_to "Show this post", post, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
-      </p>
     <% end %>
   </div>
 </div>
