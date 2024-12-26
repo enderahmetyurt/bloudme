@@ -64,3 +64,5 @@ group :test do
   gem "selenium-webdriver"
   gem "rails-controller-testing"
 end
+
+gem "aws-sdk-s3", require: false
