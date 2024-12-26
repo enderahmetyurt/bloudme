@@ -442,7 +442,3 @@ trix-editor .attachment__metadata {
   padding: 0 !important;
   max-width: 100% !important;
 }
-
-.trix-button-group.trix-button-group--file-tools {
-  display:none;
-}
