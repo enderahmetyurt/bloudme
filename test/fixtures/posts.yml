@@ -6,6 +6,12 @@ one:
   user: one
   published: false
 
+one_1:
+  title: MyString2
+  content: MyText2
+  user: one
+  published: false
+
 two:
   title: MyString
   content: MyText
