@@ -58,9 +58,9 @@
                 >
                   <ul class="py-1">
                     <li>
-                      <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
-                        Profile
-                      </a>
+                      <%= link_to user_path(Current.user), class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" do %>
+                        <%= Current.user.nick_name %>
+                      <% end %>
                     </li>
                     <li>
                       <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 mb-5">

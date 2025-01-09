@@ -1,5 +1,7 @@
 class User < ApplicationRecord
   DICE_BEAR_URL = "https://api.dicebear.com/6.x/adventurer/svg?".freeze
+
+  before_create :set_nick_name
   before_create :set_random_avatar
 
   has_secure_password
@@ -14,5 +16,9 @@ class User < ApplicationRecord
 
   def set_random_avatar
     self.avatar_url ||= "#{DICE_BEAR_URL}seed=#{SecureRandom.hex(8)}"
+  end
+
+  def set_nick_name
+    self.nick_name ||= email_address.split("@").first
   end
 end

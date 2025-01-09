@@ -4,7 +4,7 @@
       <%= link_to post.title, post_path(post) %>
     </h2>
 
-    <% unless controller_name == "posts" && action_name == "index" %>
+    <% unless (controller_name == "posts" && action_name == "index") || (controller_name == "users" && action_name == "show") %>
       <p class="text-gray-600 mb-4"><%= post.content %></p>
     <% end %>
 
