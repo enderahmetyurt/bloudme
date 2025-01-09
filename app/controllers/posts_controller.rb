@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
   before_action :set_post, only: %i[ show edit update destroy ]
+  before_action :check_current_uer, only: %i[ edit update destroy ]
 
   # GET /posts or /posts.json
   def index
@@ -66,5 +67,9 @@ class PostsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def post_params
       params.expect(post: [ :title, :content, :user_id, :published ])
+    end
+
+    def check_current_uer
+      redirect_to root_path, notice: "You are not authorized" if Current.user != @post.user
     end
 end
