@@ -38,10 +38,37 @@
         <% if authenticated? %>
           <ul class="hidden sm:flex flex-wrap items-center space-x-6 mt-2 sm:mt-0">
             <li class="text-center">
-              <%= link_to Current.user.email_address, dashboard_index_path, class: "text-red-500 hover:underline text-white" %>
-            </li>
-            <li>
-              <%= button_to 'Sign out', session_path, method: :delete, class: "bg-red-600 hover:bg-red-700 text-white py-2 px-4 rounded" %>
+              <div data-controller="dropdown" class="relative">
+                <!-- User Avatar -->
+                <img
+                  src=<%= Current.user.avatar_url %>
+                  alt="User Avatar"
+                  class="w-10 h-10 p-0.5 rounded-full ring-2 ring-gray-300 dark:ring-gray-500l cursor-pointer"
+                  data-action="click->dropdown#toggle"
+                />
+
+                <!-- Dropdown Menu -->
+                <div
+                  class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg hidden pb-5"
+                  data-dropdown-target="menu"
+                >
+                  <ul class="py-1">
+                    <li>
+                      <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                        Profile
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 mb-5">
+                        Settings
+                      </a>
+                    </li>
+                    <li>
+                      <%= button_to 'Sign out', session_path, method: :delete, class: "bg-red-600 hover:bg-red-700 text-white py-2 px-4 rounded text-sm" %>
+                    </li>
+                  </ul>
+                </div>
+              </div>
             </li>
           </ul>
         </div>
