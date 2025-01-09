@@ -1,16 +1,23 @@
 <div id="<%= dom_id post %>" class="w-full">
   <div class="bg-white shadow-md rounded-lg p-6">
-    <h2 class="text-2xl font-semibold text-blue-600 mb-4 hover:text-black">
-      <%= link_to post.title, post_path(post) %>
-    </h2>
-
-    <% unless (controller_name == "posts" && action_name == "index") || (controller_name == "users" && action_name == "show") %>
-      <p class="text-gray-600 mb-4"><%= post.content %></p>
-    <% end %>
-
-    <p class="text-sm text-gray-500 mt-4">
-      <%= post.user.email_address %> |
-      <%= time_ago_in_words(post.created_at) %> ago
-    </p>
+    <div class="flex flex-col sm:flex-row sm:items-center gap-4">
+      <% unless (controller_name == "posts" && action_name == "show") %>
+        <%= image_tag post.user.avatar_url, class: "w-16 h-16 sm:w-10 sm:h-10 rounded-full" %>
+      <% end %>
+      <div>
+        <h2 class="text-xl sm:text-2xl font-semibold text-blue-600 mb-2 hover:text-black">
+          <%= link_to post.title, post_path(post) %>
+        </h2>
+        <% unless (controller_name == "posts" && action_name == "index") || (controller_name == "users" && action_name == "show") %>
+          <div class="prose max-w-none text-sm sm:text-base text-gray-600">
+            <%= post.content %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    <div class="mt-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+      <div class="text-sm text-red-400"><%= post.user.email_address %></div>
+      <div class="text-sm text-gray-500"><%= time_ago_in_words(post.created_at) %> ago</div>
+    </div>
   </div>
 </div>
