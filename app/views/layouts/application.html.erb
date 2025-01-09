@@ -24,7 +24,7 @@
   </head>
 
   <body>
-    <nav class="bg-blue-600 text-white py-4 p-10" data-controller="menu">
+    <nav class="bg-blue-600 text-white py-4 p-5" data-controller="menu">
       <div class="container mx-auto flex flex-wrap items-center justify-between">
         <%= link_to "Bloudme", root_path, class: "text-2xl font-bold hover:text-blue-300" %>
         <button
@@ -37,16 +37,20 @@
         </button>
         <% if authenticated? %>
           <ul class="hidden sm:flex flex-wrap items-center space-x-6 mt-2 sm:mt-0">
+            <li>
+              <% unless controller_name == "posts" && action_name == "new" %>
+                <%= link_to "New post", new_post_path, class: "rounded-lg py-1 px-2 border-2 border-white-500 text-white block font-medium" %>
+              <% end %>
+            </li>
             <li class="text-center">
               <div data-controller="dropdown" class="relative">
                 <!-- User Avatar -->
                 <img
                   src=<%= Current.user.avatar_url %>
                   alt="User Avatar"
-                  class="w-10 h-10 p-0.5 rounded-full ring-2 ring-gray-300 dark:ring-gray-500l cursor-pointer"
+                  class="w-10 h-10 p-0.5 rounded-full ring-2 ring-gray-500 dark:ring-gray-500l cursor-pointer"
                   data-action="click->dropdown#toggle"
                 />
-
                 <!-- Dropdown Menu -->
                 <div
                   class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg hidden pb-5"
