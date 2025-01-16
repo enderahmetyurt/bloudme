@@ -15,8 +15,9 @@
         <% end %>
       </div>
     </div>
+    <hr class="border-gray-150 mt-5 mb-5">
     <div class="mt-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
-      <div class="text-sm text-red-400"><%= post.user.email_address %></div>
+      <%= link_to post.user.nick_name, user_path(post.user), class: "text-sm text-red-400" %>
       <div class="text-sm text-gray-500"><%= time_ago_in_words(post.created_at) %> ago</div>
     </div>
   </div>
