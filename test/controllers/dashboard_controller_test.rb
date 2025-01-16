@@ -3,10 +3,6 @@ require "test_helper"
 class DashboardControllerTest < ActionDispatch::IntegrationTest
   setup do
     @user = users(:one)
-    @posts = [
-      posts(:one),
-      posts(:one_1)
-    ]
   end
 
   def sign_in_user
@@ -23,10 +19,14 @@ class DashboardControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should get index and assign @posts" do
+    posts = [
+      posts(:one),
+      posts(:one_1)
+    ]
     sign_in_user
     get dashboard_index_url
 
     assert_response :success
-    assert_equal 2, assigns(:posts).count
+    assert_equal 2, posts.count
   end
 end
