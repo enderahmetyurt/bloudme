@@ -1,6 +1,6 @@
 require "faker"
 
-15.times do
+20.times do
   User.create(
     nick_name: "",
     email_address: Faker::Internet.email,
@@ -9,10 +9,13 @@ require "faker"
   )
 end
 
-30.times do
+100.times do
+  sentence = Faker::Lorem.sentence.truncate(rand(10..99), separator: ' ')
+  paragraph = Faker::Lorem.paragraph.truncate(rand(50..399), separator: ' ')
+
   Post.create(
-    title: Faker::Lorem.sentence,
-    content: Faker::Lorem.paragraph,
+    title: sentence,
+    content: paragraph,
     user_id: User.all.sample.id,
     published: [ true, false ].sample
   )
