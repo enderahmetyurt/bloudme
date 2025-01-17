@@ -1,0 +1,16 @@
+<div id="<%= dom_id article %>" class="w-full">
+  <div class="bg-white shadow-md rounded-lg p-6">
+    <div class="flex flex-col sm:flex-row sm:items-center gap-4">
+      <div>
+        <h2 class="text-xl sm:text-2xl font-semibold text-blue-600 mb-2 hover:text-black">
+          <%= link_to article.title, article_path(article) %>
+        </h2>
+        <% unless (controller_name == "articles" && action_name == "index") || (controller_name == "users" && action_name == "show") %>
+          <div class="prose max-w-none text-sm sm:text-base text-gray-600">
+            <%= sanitize article.content %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
