@@ -69,5 +69,4 @@ gem "aws-sdk-s3", require: false
 gem "faker"
 gem "feedjira"
 gem "httparty"
-gem "whenever", require: false
 gem "mission_control-jobs"
