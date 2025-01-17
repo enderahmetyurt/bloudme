@@ -38,9 +38,7 @@
         <% if authenticated? %>
           <ul class="hidden sm:flex flex-wrap items-center space-x-6 mt-2 sm:mt-0">
             <li>
-              <% unless controller_name == "posts" && action_name == "new" %>
-                <%= link_to "New post", new_post_path, class: "rounded-lg py-1 px-2 border-2 border-white-500 text-white block font-medium" %>
-              <% end %>
+              <%= link_to "New feed", new_feed_path, class: "rounded-lg py-1 px-2 border-2 border-white-500 text-white block font-medium" %>
             </li>
             <li class="text-center">
               <div data-controller="dropdown" class="relative">

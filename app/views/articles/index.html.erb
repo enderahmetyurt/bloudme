@@ -6,7 +6,7 @@
   <% content_for :title, "Articles" %>
 
   <div class="flex justify-between items-center">
-    <h1 class="font-bold text-4xl">Articles</h1>
+    <h1 class="font-bold text-4xl">Articles <span class="text-s text-gray-300"><%= @articles.count if @articles.any? %></span></h1>
   </div>
   <% if @articles.any? %>
     <div id="articles" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-6 mt-5">
@@ -17,7 +17,7 @@
   <% else %>
     <%= form_with(model: @feed, class: "contents") do |form| %>
       <div class="my-5" data-controller="character-counter">
-        <%= form.label :url %>
+        <%= form.label :feed_url %>
         <%= form.text_field :url, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full", data: {character_counter_target: "input"}, maxlength: "100" %>
       </div>
       <div class="inline">

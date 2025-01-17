@@ -1,0 +1,17 @@
+<div class="w-full">
+  <% if notice.present? %>
+    <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
+  <% end %>
+
+  <% content_for :title, "Feeds" %>
+
+  <div class="flex justify-between items-center">
+    <h1 class="font-bold text-4xl">Feeds</h1>
+  </div>
+
+  <div id="feeds" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-6 mt-5">
+    <% @feeds.each do |feed| %>
+      <%= render feed %>
+    <% end %>
+  </div>
+</div>

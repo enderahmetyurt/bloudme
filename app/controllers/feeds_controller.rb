@@ -1,10 +1,10 @@
 class FeedsController < ApplicationController
   def index
-    @feeds = current_user.feeds
+    @feeds = Current.user.feeds
   end
 
   def new
-    @feed = Feed.new
+    @feed = Current.user.feeds.build
   end
 
   def create
