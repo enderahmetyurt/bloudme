@@ -1,7 +1,7 @@
 class UpdateFeedsJob < ApplicationJob
   queue_as :default
 
-  def perform
+  def perform(*args)
     Feed.find_each do |feed|
       parsed_feed = RssParserService.fetch_and_parse(feed.url)
       next unless parsed_feed
