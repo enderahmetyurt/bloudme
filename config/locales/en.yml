@@ -1,5 +1,11 @@
 en:
   home:
     welcome: "Welcome to Bloudme"
+    description: "Stay updated with the latest content from your favorite blogs and news sites."
+    sign_up: "Sign Up"
+    sign_in: "Sign In"
+    why: "Why Bloudme?"
+    why_description: "Our service makes it easy to organize, save, and track updates from your favorite RSS feeds. Automatically check for new articles daily and never miss out on the content you care about."
+    all_rights_reserved: "All rights reserved."
   article:
     read_original: "Read Original"

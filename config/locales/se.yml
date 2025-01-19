@@ -1,5 +1,11 @@
 se:
   home:
     welcome: "Välkommen till Bloudme"
+    description: "Håll dig uppdaterad med det senaste innehållet från dina favoritbloggar och nyhetssajter."
+    sign_up: "Registrera dig"
+    sign_in: "Logga in"
+    why: "Varför Bloudme?"
+    why_description: "Vår tjänst gör det enkelt att organisera, spara och spåra uppdateringar från dina favorit-RSS-flöden. Sök automatiskt efter nya artiklar dagligen och missa aldrig innehållet du bryr dig om."
+    all_rights_reserved: "Alla rättigheter reserverade."
   article:
     read_original: "Läs original"
