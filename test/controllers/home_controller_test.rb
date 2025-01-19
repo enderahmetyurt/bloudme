@@ -7,7 +7,7 @@ class HomeControllerTest < ActionDispatch::IntegrationTest
 
     get root_url
 
-    assert_redirected_to posts_path
+    assert_redirected_to articles_path
   end
 
   test "should render index template when not authenticated" do

@@ -18,8 +18,8 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
 
     assert_response :success
     assert_equal assigns(:user), @user
-    assert_includes assigns(:posts), @published_post
-    assert_not_includes assigns(:posts), @unpublished_post
+    assert_includes Post.all, @published_post
+    assert_not_includes Post.published, @unpublished_post
   end
 
   test "should redirect unauthenticated user from show" do
