@@ -11,20 +11,14 @@
     </div>
   <% end %>
 
-  <div class="my-5" data-controller="character-counter" data-character-counter-countdown-value="true">
+  <div class="my-5">
     <%= form.label :title %>
-    <%= form.text_field :title, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full", data: {character_counter_target: "input"}, maxlength: "100" %>
-    <p class="mt-3 text-gray-400">
-      There are <strong data-character-counter-target="counter"></strong> characters remaining.
-    </p>
+    <%= form.text_field :title, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full" %>
   </div>
 
-  <div class="my-5" data-controller="character-counter" data-character-counter-countdown-value="true">
+  <div class="my-5">
     <%= form.label :content %>
-    <%= form.textarea :content, rows: 10, class: "customized-min-height block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full", data: {character_counter_target: "input"}, maxlength: "400" %>
-    <p class="mt-3 text-gray-400">
-      There are <strong data-character-counter-target="counter"></strong> characters remaining.
-    </p>
+    <%= form.textarea :content, rows: 10, class: "customized-min-height block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full" %>
   </div>
 
   <div class="my-5 flex items-center">
