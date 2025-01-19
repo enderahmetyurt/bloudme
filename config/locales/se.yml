@@ -14,3 +14,4 @@ se:
       email:
         placeholder: "Ange din e-postadress"
         password: "Ange ditt lösenord"
+        forgot_password: "Glömt lösenord?"

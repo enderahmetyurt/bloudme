@@ -14,3 +14,4 @@ en:
       email:
         placeholder: "Enter your email address"
         password: "Enter your password"
+        forgot_password: "Forgot password?"

@@ -14,3 +14,4 @@ tr:
       email:
         placeholder: "E-posta adresinizi girin"
         password: "Parolanızı girin"
+        forgot_password: "Unuttuz mu?"
