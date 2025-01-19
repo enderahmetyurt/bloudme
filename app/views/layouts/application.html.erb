@@ -34,15 +34,16 @@
             <% end %>
           </div>
         <% end %>
-        <button
-          data-action="click->menu#toggle"
-          class="sm:hidden text-white focus:outline-none focus:ring-2 focus:ring-white"
-          aria-label="Toggle navigation">
-          <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
-          </svg>
-        </button>
+
         <% if authenticated? %>
+          <button
+            data-action="click->menu#toggle"
+            class="sm:hidden text-white focus:outline-none focus:ring-2 focus:ring-white"
+            aria-label="Toggle navigation">
+            <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+            </svg>
+          </button>
           <ul class="hidden sm:flex flex-wrap items-center space-x-6 mt-2 sm:mt-0">
             <li>
               <%= link_to "New feed", new_feed_path, class: "rounded-lg py-1 px-2 border-2 border-white-500 text-white block font-medium" %>
@@ -93,10 +94,21 @@
           data-menu-target="dropdown"
           class="hidden sm:hidden flex-col bg-blue-700 text-white mt-4">
           <div class="px-4 py-2 text-center">
-            <%= link_to Current.user.email_address, dashboard_index_path, class: "text-red-500 hover:underline text-white" %>
+            <%= link_to "New feed", new_feed_path, class: "rounded-lg py-1 px-2 border-2 border-white-500 text-white block font-medium mb-3 mt-2" %>
           </div>
           <div class="px-4 py-2 text-center">
-            <%= button_to 'Sign out', session_path, method: :delete, class: "bg-red-600 hover:bg-red-700 text-white py-2 px-4 rounded w-full" %>
+            <%= link_to Current.user.nick_name, dashboard_index_path, class: "text-red-500 hover:underline text-white" %>
+          </div>
+          <div class="px-4 py-2 text-center">
+            <%= link_to "Settings", dashboard_index_path, class: "text-red-500 hover:underline text-white" %>
+          </div>
+          <div class="px-4 py-2 text-center">
+            <% I18n.available_locales.each do |locale| %>
+              <%= link_to locale_to_flag(locale), url_for(locale: locale), class: (locale == I18n.locale ? "text-2xl" : "") %>
+            <% end %>
+          </div>
+          <div class="px-4 py-2 text-center">
+            <%= button_to 'Sign out', session_path, method: :delete, class: "bg-red-600 hover:bg-red-700 text-white py-2 px-4 rounded w-full mt-5" %>
           </div>
         </div>
       <% end %>
