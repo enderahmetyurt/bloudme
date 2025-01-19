@@ -1,6 +1,6 @@
 <div class="w-full max-w-2xl text-center bg-white shadow-md rounded-lg p-8">
   <header>
-    <h1 class="text-4xl font-bold text-blue-600">Welcome to Bloudme</h1>
+    <h1 class="text-4xl font-bold text-blue-600"><%= t("home.welcome") %></h1>
     <p class="text-lg text-gray-600 mt-4">Stay updated with the latest content from your favorite blogs and news sites.</p>
     <nav class="mt-6">
       <%= link_to "Sign Up", new_registration_path, class: "text-white bg-blue-600 hover:bg-blue-700 py-2 px-4 rounded-lg mx-2" %>
@@ -14,7 +14,12 @@
         Automatically check for new articles daily and never miss out on the content you care about.</p>
     </section>
   </main>
-  <footer class="mt-10 text-gray-500">
+  <footer class="mt-10 text-gray-500 flex flex-col gap-5">
     <p>&copy; <%= Time.now.year %> Bloudme. All rights reserved.</p>
+    <div>
+      <% I18n.available_locales.each do |locale| %>
+        <%= link_to locale_to_flag(locale), url_for(locale: locale), class: (locale == I18n.locale ? "border-solid" : "") %>
+      <% end %>
+    </div>
   </footer>
 </div>

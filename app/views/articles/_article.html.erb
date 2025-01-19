@@ -5,7 +5,7 @@
         <h2 class="text-xl sm:text-2xl font-semibold text-blue-600 mb-2 hover:text-black">
           <%= link_to article.title, article_path(article) %>
         </h2>
-        <span><%= link_to "Read Orginal", article.link, target: "_blank" %></span>
+        <span><%= link_to t("article.read_original"), article.link, target: "_blank" %></span>
         <% if controller_name == "articles" && action_name == "show" %>
           <div class="prose max-w-none text-sm sm:text-base text-gray-600 mt-5">
             <%= sanitize article.content %>
