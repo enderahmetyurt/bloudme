@@ -9,3 +9,8 @@ en:
     all_rights_reserved: "All rights reserved."
   article:
     read_original: "Read Original"
+  registration:
+    form:
+      email:
+        placeholder: "Enter your email address"
+        password: "Enter your password"

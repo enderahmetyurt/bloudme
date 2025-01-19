@@ -27,6 +27,13 @@
     <nav class="bg-blue-600 text-white py-4 p-5" data-controller="menu">
       <div class="container mx-auto flex flex-wrap items-center justify-between">
         <%= link_to "Bloudme", root_path, class: "text-2xl font-bold hover:text-blue-300" %>
+        <% unless authenticated? %>
+          <div>
+            <% I18n.available_locales.each do |locale| %>
+              <%= link_to locale_to_flag(locale), url_for(locale: locale), class: (locale == I18n.locale ? "text-2xl" : "") %>
+            <% end %>
+          </div>
+        <% end %>
         <button
           data-action="click->menu#toggle"
           class="sm:hidden text-white focus:outline-none focus:ring-2 focus:ring-white"
@@ -61,10 +68,18 @@
                       <% end %>
                     </li>
                     <li>
-                      <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 mb-5">
+                      <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
                         Settings
                       </a>
                     </li>
+                    <li>
+                      <div class="mb-5">
+                        <% I18n.available_locales.each do |locale| %>
+                        <%= link_to locale_to_flag(locale), url_for(locale: locale), class: (locale == I18n.locale ? "text-2xl" : "") %>
+                        <% end %>
+                      </div>
+                    </li>
+
                     <li>
                       <%= button_to 'Sign out', session_path, method: :delete, class: "bg-red-600 hover:bg-red-700 text-white py-2 px-4 rounded text-sm" %>
                     </li>

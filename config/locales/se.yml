@@ -9,3 +9,8 @@ se:
     all_rights_reserved: "Alla rättigheter reserverade."
   article:
     read_original: "Läs original"
+  registration:
+    form:
+      email:
+        placeholder: "Ange din e-postadress"
+        password: "Ange ditt lösenord"

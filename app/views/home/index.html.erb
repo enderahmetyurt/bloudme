@@ -17,7 +17,7 @@
     <p>&copy; <%= Time.now.year %> Bloudme. <%= t("home.all_rights_reserved") %></p>
     <div>
       <% I18n.available_locales.each do |locale| %>
-        <%= link_to locale_to_flag(locale), url_for(locale: locale), class: (locale == I18n.locale ? "text-xl" : "") %>
+        <%= link_to locale_to_flag(locale), url_for(locale: locale), class: (locale == I18n.locale ? "text-2xl" : "") %>
       <% end %>
     </div>
   </footer>

@@ -9,3 +9,8 @@ tr:
     all_rights_reserved: "Her hakkı saklıdır."
   article:
     read_original: "Orijinali Oku"
+  registration:
+    form:
+      email:
+        placeholder: "E-posta adresinizi girin"
+        password: "Parolanızı girin"
