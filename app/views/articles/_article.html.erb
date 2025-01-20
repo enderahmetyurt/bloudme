@@ -15,7 +15,7 @@
     </div>
     <hr class="border-gray-150 mt-5 mb-5">
     <div class="mt-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
-      <%= link_to article.feed.url, "#", class: "text-sm text-red-400" %>
+      <%= link_to article.feed.url, feed_path(article.feed), class: "text-sm text-red-400" %>
       <div class="text-sm text-gray-500"><%= article.published_at.strftime("%d-%m-%Y") %></div>
     </div>
   </div>

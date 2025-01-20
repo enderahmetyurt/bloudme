@@ -28,7 +28,7 @@ class FeedsController < ApplicationController
 
   def show
     @feed = Current.user.feeds.find(params[:id])
-    @articles = @feed.articles
+    @articles = @feed.articles.recent
   end
 
   private
