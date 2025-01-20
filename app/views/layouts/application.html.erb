@@ -97,10 +97,10 @@
             <%= link_to  t("feeds.new"), new_feed_path, class: "rounded-lg py-1 px-2 border-2 border-white-500 text-white block font-medium mb-3 mt-2" %>
           </div>
           <div class="px-4 py-2 text-center">
-            <%= link_to Current.user.nick_name, dashboard_index_path, class: "text-red-500 hover:underline text-white" %>
+            <%= link_to Current.user.nick_name, feeds_path, class: "text-red-500 hover:underline text-white" %>
           </div>
           <div class="px-4 py-2 text-center">
-            <%= link_to t("settings"), dashboard_index_path, class: "text-red-500 hover:underline text-white" %>
+            <%= link_to t("settings"), "#", class: "text-red-500 hover:underline text-white" %>
           </div>
           <div class="px-4 py-2 text-center">
             <% I18n.available_locales.each do |locale| %>
