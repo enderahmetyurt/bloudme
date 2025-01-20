@@ -3,10 +3,10 @@
     <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
   <% end %>
 
-  <% content_for :title, "Articles" %>
+  <% content_for :title, t("articles") %>
 
   <div class="flex justify-between items-center">
-    <h1 class="font-bold text-4xl">Articles <span class="text-s text-gray-300"><%= @articles.count if @articles.any? %></span></h1>
+    <h1 class="font-bold text-4xl"><%= t("articles") %> <span class="text-s text-gray-300"><%= @articles.count if @articles.any? %></span></h1>
   </div>
   <% if @articles.any? %>
     <div id="articles" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-6 mt-5">

@@ -46,7 +46,7 @@
           </button>
           <ul class="hidden sm:flex flex-wrap items-center space-x-6 mt-2 sm:mt-0">
             <li>
-              <%= link_to "New feed", new_feed_path, class: "rounded-lg py-1 px-2 border-2 border-white-500 text-white block font-medium" %>
+              <%= link_to t("feeds.new"), new_feed_path, class: "rounded-lg py-1 px-2 border-2 border-white-500 text-white block font-medium" %>
             </li>
             <li class="text-center">
               <div data-controller="dropdown" class="relative">
@@ -70,7 +70,7 @@
                     </li>
                     <li>
                       <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
-                        Settings
+                        <%= t("settings") %>
                       </a>
                     </li>
                     <li>
@@ -82,7 +82,7 @@
                     </li>
 
                     <li>
-                      <%= button_to 'Sign out', session_path, method: :delete, class: "bg-red-600 hover:bg-red-700 text-white py-2 px-4 rounded text-sm" %>
+                      <%= button_to t("home.sign_out"), session_path, method: :delete, class: "bg-red-600 hover:bg-red-700 text-white py-2 px-4 rounded text-sm" %>
                     </li>
                   </ul>
                 </div>
@@ -94,13 +94,13 @@
           data-menu-target="dropdown"
           class="hidden sm:hidden flex-col bg-blue-700 text-white mt-4">
           <div class="px-4 py-2 text-center">
-            <%= link_to "New feed", new_feed_path, class: "rounded-lg py-1 px-2 border-2 border-white-500 text-white block font-medium mb-3 mt-2" %>
+            <%= link_to  t("feeds.new"), new_feed_path, class: "rounded-lg py-1 px-2 border-2 border-white-500 text-white block font-medium mb-3 mt-2" %>
           </div>
           <div class="px-4 py-2 text-center">
             <%= link_to Current.user.nick_name, dashboard_index_path, class: "text-red-500 hover:underline text-white" %>
           </div>
           <div class="px-4 py-2 text-center">
-            <%= link_to "Settings", dashboard_index_path, class: "text-red-500 hover:underline text-white" %>
+            <%= link_to t("settings"), dashboard_index_path, class: "text-red-500 hover:underline text-white" %>
           </div>
           <div class="px-4 py-2 text-center">
             <% I18n.available_locales.each do |locale| %>
@@ -108,7 +108,7 @@
             <% end %>
           </div>
           <div class="px-4 py-2 text-center">
-            <%= button_to 'Sign out', session_path, method: :delete, class: "bg-red-600 hover:bg-red-700 text-white py-2 px-4 rounded w-full mt-5" %>
+            <%= button_to t("home.sign_out"), session_path, method: :delete, class: "bg-red-600 hover:bg-red-700 text-white py-2 px-4 rounded w-full mt-5" %>
           </div>
         </div>
       <% end %>

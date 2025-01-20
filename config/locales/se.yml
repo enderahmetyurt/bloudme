@@ -4,6 +4,9 @@ se:
     description: "Håll dig uppdaterad med det senaste innehållet från dina favoritbloggar och nyhetssajter."
     sign_up: "Registrera dig"
     sign_in: "Logga in"
+    sign_out: "Logga ut"
+    signed_in: "Inloggad"
+    signed_out: "Utloggad"
     why: "Varför Bloudme?"
     why_description: "Vår tjänst gör det enkelt att organisera, spara och spåra uppdateringar från dina favorit-RSS-flöden. Sök automatiskt efter nya artiklar dagligen och missa aldrig innehållet du bryr dig om."
     all_rights_reserved: "Alla rättigheter reserverade."
@@ -15,3 +18,18 @@ se:
         placeholder: "Ange din e-postadress"
         password: "Ange ditt lösenord"
         forgot_password: "Glömt lösenord?"
+  articles: "Artiklar"
+  activerecord:
+    models:
+      feed: Foder
+    attributes:
+      feed:
+        url: Länk
+  feeds:
+    new: "Lägg till foder"
+  settings: "Inställningar"
+  helpers:
+    submit:
+      feed:
+        create: Tillägga
+  already_signed_in: Du är redan inloggad.

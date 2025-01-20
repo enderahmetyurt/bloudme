@@ -4,6 +4,9 @@ tr:
     description: "Favori bloglarınızdan ve haber sitelerinizden en son içeriklerle güncel kalın."
     sign_up: "Kayıt Ol"
     sign_in: "Giriş Yap"
+    sign_out: "Çıkış Yap"
+    signed_in: "Oturum Açıldı"
+    signed_out: "Oturum Kapandı"
     why: "Neden Bloudme?"
     why_description: "Hizmetimiz, favori RSS beslemelerinizden gelen güncellemeleri düzenlemenizi, kaydetmenizi ve takip etmenizi kolaylaştırır. Her gün yeni makaleleri otomatik olarak kontrol edin ve önemsediğiniz içerikleri asla kaçırmayın."
     all_rights_reserved: "Her hakkı saklıdır."
@@ -15,3 +18,18 @@ tr:
         placeholder: "E-posta adresinizi girin"
         password: "Parolanızı girin"
         forgot_password: "Unuttuz mu?"
+  articles: "Makaleler"
+  activerecord:
+    models:
+      feed: Kaynak
+    attributes:
+      feed:
+        url: Link
+  feeds:
+    new: "Kaynak Ekle"
+  settings: "Ayarlar"
+  helpers:
+    submit:
+      feed:
+        create: Ekle
+  already_signed_in: Zaten oturum açmış durumdasınız.
