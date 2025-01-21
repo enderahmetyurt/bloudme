@@ -27,6 +27,8 @@ tr:
         url: Link
   feeds:
     new: "Kaynak Ekle"
+    create:
+      error: "Kaynak eklenirken hata oluştu. Lütfen Link'i kontrol edin ve tekrar deneyin."
   settings: "Ayarlar"
   helpers:
     submit:

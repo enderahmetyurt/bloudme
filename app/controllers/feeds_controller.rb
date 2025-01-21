@@ -22,7 +22,7 @@ class FeedsController < ApplicationController
 
       redirect_to articles_path, notice: "Feed added successfully."
     else
-      redirect_to new_feed_path, alert: "Failed to parse feed."
+      redirect_to new_feed_path, alert: t("feeds.create.error")
     end
   end
 

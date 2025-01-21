@@ -27,6 +27,8 @@ se:
         url: Länk
   feeds:
     new: "Lägg till feed"
+    create:
+      error: "Det gick inte att lägga till flöde. Kontrollera webbadressen och försök igen."
   settings: "Inställningar"
   helpers:
     submit:

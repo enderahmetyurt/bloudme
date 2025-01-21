@@ -27,6 +27,8 @@ en:
         url: Url
   feeds:
     new: "Add Feed"
+    create:
+      error: "Error adding feed. Please check the URL and try again."
   settings: "Settings"
   helpers:
     submit:
