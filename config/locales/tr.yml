@@ -12,6 +12,8 @@ tr:
     all_rights_reserved: "Her hakkı saklıdır."
   article:
     read_original: "Orijinali Oku"
+    mark_as_read: "Okundu Olarak İşaretle"
+    mark_as_unread: "Okunmamış Olarak İşaretle"
   registration:
     form:
       email:

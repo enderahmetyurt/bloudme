@@ -12,6 +12,8 @@ se:
     all_rights_reserved: "Alla rättigheter reserverade."
   article:
     read_original: "Läs original"
+    mark_as_read: "Markera som läst"
+    mark_as_unread: "Markera som oläst"
   registration:
     form:
       email:
