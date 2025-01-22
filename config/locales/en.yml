@@ -12,6 +12,8 @@ en:
     all_rights_reserved: "All rights reserved."
   article:
     read_original: "Read Original"
+    mark_as_read: "Mark as Read"
+    mark_as_unread: "Mark as Unread"
   registration:
     form:
       email:

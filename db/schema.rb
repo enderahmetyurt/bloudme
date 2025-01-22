@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_01_17_083946) do
+ActiveRecord::Schema[8.1].define(version: 2025_01_22_091536) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.text "body"
     t.datetime "created_at", null: false
@@ -53,6 +53,7 @@ ActiveRecord::Schema[8.1].define(version: 2025_01_17_083946) do
     t.text "content"
     t.datetime "created_at", null: false
     t.integer "feed_id", null: false
+    t.boolean "is_read", default: false
     t.string "link"
     t.datetime "published_at"
     t.string "title"
