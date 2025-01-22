@@ -14,7 +14,7 @@
       </div>
     </div>
     <hr class="border-gray-150 mt-5 mb-5">
-    <div class="mt-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+    <div class="mt-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
       <%= link_to article.feed.url, feed_path(article.feed), class: "text-sm text-red-400" %>
       <div>
         <%= turbo_frame_tag "read_status", class: "flex items-center" do %>
