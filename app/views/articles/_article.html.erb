@@ -26,8 +26,8 @@
             <% end %>
           <% end %>
           <div data-controller="autohide">
-            <% if notice.present? %>
-              <span class="ml-3 text-green-500 text-sm" id="notice"><%= notice %></span>
+            <% if @message.present? %>
+              <span class="ml-3 text-green-500 text-sm" id="message"><%= @message %></span>
             <% end %>
           </div>
         <% end %>

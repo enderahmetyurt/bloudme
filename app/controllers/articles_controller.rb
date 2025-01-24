@@ -13,11 +13,11 @@ class ArticlesController < ApplicationController
     @article.is_read = !@article.is_read
     @article.save
 
-    message = @article.reload.is_read ?  t("article.mark_as_read") :  t("article.mark_as_unread")
+    @message = @article.reload.is_read ?  t("article.mark_as_read") :  t("article.mark_as_unread")
 
     respond_to do |format|
       format.turbo_stream do
-        render turbo_stream: turbo_stream.replace(@article, partial: "articles/article", locals: { article: @article, notice: message })
+        render turbo_stream: turbo_stream.replace(@article, partial: "articles/article", locals: { article: @article, message: @message })
       end
     end
   end
