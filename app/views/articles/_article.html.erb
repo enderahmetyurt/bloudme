@@ -14,25 +14,29 @@
       </div>
     </div>
     <hr class="border-gray-150 mt-5 mb-5">
-    <div class="mt-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
-      <%= link_to article.feed.url, feed_path(article.feed), class: "text-sm text-red-400" %>
+    <div class="mt-4 flex flex-row items-center sm:flex-row sm:items-center sm:justify-between gap-3">
       <div>
-        <%= turbo_frame_tag "read_status", class: "flex items-center" do %>
-          <%= button_to update_read_article_path(article), method: :patch do %>
-            <% if article.is_read? %>
-              <%= image_tag "checked_green.svg" %>
-            <% else %>
-              <%= image_tag "checked.svg" %>
-            <% end %>
-          <% end %>
-          <div data-controller="autohide">
-            <% if @message.present? %>
-              <span class="ml-3 text-green-500 text-sm" id="message"><%= @message %></span>
-            <% end %>
-          </div>
-        <% end %>
+        <%= link_to article.feed.url, feed_path(article.feed), class: "text-sm text-red-400" %>
       </div>
-      <div class="text-sm text-gray-500"><%= article.published_at.strftime("%d-%m-%Y") %></div>
+      <div class="flex flex-col items-center sm:flex-row sm:items-center sm:justify-between">
+        <div>
+          <%= turbo_frame_tag "read_status", class: "flex items-center" do %>
+            <%= button_to update_read_article_path(article), method: :patch do %>
+              <% if article.is_read? %>
+                <%= image_tag "checked_green.svg" %>
+              <% else %>
+                <%= image_tag "checked.svg" %>
+              <% end %>
+            <% end %>
+            <div data-controller="autohide">
+              <% if @message.present? %>
+                <span class="ml-3 text-green-500 text-sm" id="message"><%= @message %></span>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+        <div class="text-sm text-gray-500 ml-10"><%= article.published_at.strftime("%d-%m-%Y") %></div>
+      </div>
     </div>
   </div>
 </div>
