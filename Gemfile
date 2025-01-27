@@ -65,7 +65,6 @@ group :test do
   gem "rails-controller-testing"
 end
 
-gem "aws-sdk-s3", require: false
 gem "faker"
 gem "feedjira"
 gem "httparty"
