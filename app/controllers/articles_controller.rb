@@ -15,9 +15,13 @@ class ArticlesController < ApplicationController
 
     @message = @article.reload.is_read ?  t("article.mark_as_read") :  t("article.mark_as_unread")
 
+    referrer = Rails.application.routes.recognize_path(request.referrer)
+
+    show_content = referrer[:action] == "show" ? true : false
+
     respond_to do |format|
       format.turbo_stream do
-        render turbo_stream: turbo_stream.replace(@article, partial: "articles/article", locals: { article: @article, message: @message })
+        render turbo_stream: turbo_stream.replace(@article, partial: "articles/article", locals: { article: @article, message: @message, show_content: show_content })
       end
     end
   end
