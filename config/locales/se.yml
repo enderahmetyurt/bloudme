@@ -14,6 +14,8 @@ se:
     read_original: "Läs original"
     mark_as_read: "Markerad som läst"
     mark_as_unread: "Markerad som oläst"
+  no_article_unicorn: "Detta är en enhörning 🦄"
+  no_article: "Du har läst alla artiklar."
   registration:
     form:
       email:
