@@ -1,6 +1,6 @@
 class ArticlesController < ApplicationController
   def index
-    @articles =  Article.joins(feed: :user).where(feeds: { user: Current.user }).recent
+    @articles =  Article.joins(feed: :user).where(feeds: { user: Current.user }).unread.recent
     @feed = Feed.new
   end
 
