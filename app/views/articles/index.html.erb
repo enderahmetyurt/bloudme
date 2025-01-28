@@ -2,9 +2,7 @@
   <% if notice.present? %>
     <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
   <% end %>
-
   <% content_for :title, t("articles") %>
-
   <div class="flex justify-between items-center">
     <h1 class="font-bold text-4xl"><%= t("articles") %> <span class="text-s text-gray-300"><%= @articles.count if @articles.any? %></span></h1>
   </div>
@@ -15,12 +13,11 @@
       <% end %>
     </div>
   <% else %>
-<div class="flex flex-col gap-5 justify-center items-center mt-40 font-mono text-2xl">
-    <p><%= t("no_article_unicorn") %></p>
-    <p><%= t("no_article") %></p>
-</div>
+    <div class="flex flex-col gap-5 justify-center items-center mt-40 font-mono text-2xl">
+      <p><%= t("no_article_unicorn") %></p>
+      <p><%= t("no_article") %></p>
+    </div>
   <% end %>
-
   <% if Current.user.feeds.none? %>
     <%= form_with(model: @feed, class: "contents") do |form| %>
       <div class="my-5" data-controller="character-counter">
