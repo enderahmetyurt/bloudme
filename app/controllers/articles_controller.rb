@@ -1,6 +1,6 @@
 class ArticlesController < ApplicationController
   def index
-    @articles =  Article.joins(feed: :user).where(feeds: { user: Current.user }).unread.recent
+    @articles = Article.joins(feed: :user).where(feeds: { user: Current.user }).unread.recent
     @feed = Feed.new
   end
 
@@ -13,16 +13,14 @@ class ArticlesController < ApplicationController
     @article.is_read = !@article.is_read
     @article.save
 
-    @message = @article.reload.is_read ?  t("article.mark_as_read") :  t("article.mark_as_unread")
-
     referrer = Rails.application.routes.recognize_path(request.referrer)
 
-    show_content = referrer[:action] == "show" ? true : false
+    redirect_feed = referrer[:controller] == "feeds" ? true : false
 
-    respond_to do |format|
-      format.turbo_stream do
-        render turbo_stream: turbo_stream.replace(@article, partial: "articles/article", locals: { article: @article, message: @message, show_content: show_content })
-      end
+    if redirect_feed
+      redirect_to feed_path(@article.feed)
+    else
+      redirect_to articles_path
     end
   end
 end
