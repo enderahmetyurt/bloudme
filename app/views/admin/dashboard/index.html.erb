@@ -1,0 +1,22 @@
+<div class="container mx-auto px-4 sm:px-6 lg:px-8">
+  <div class="overflow-x-auto">
+    <table class="min-w-full border border-gray-300 rounded-lg overflow-hidden">
+      <thead class="bg-gray-100">
+        <tr>
+          <th class="px-4 py-2 text-left text-sm font-semibold text-gray-700">Email Address</th>
+          <th class="px-4 py-2 text-left text-sm font-semibold text-gray-700">Nick Name</th>
+          <th class="px-4 py-2 text-left text-sm font-semibold text-gray-700">Created At</th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-gray-200">
+        <% @users.each do |user| %>
+          <tr class="hover:bg-gray-50">
+            <td class="px-4 py-2 text-sm text-gray-800"><%= user.email_address %></td>
+            <td class="px-4 py-2 text-sm text-gray-800"><%= user.nick_name %></td>
+            <td class="px-4 py-2 text-sm text-gray-800"><%= user.created_at.strftime("%Y-%m-%d %H:%M") %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
