@@ -1,0 +1,25 @@
+<div class="container mx-auto px-4 sm:px-6 lg:px-8">
+  <div class="flex justify-between items-center">
+    <h1 class="font-bold text-4xl">Feeds (<%= @feeds.count %>)</h1>
+  </div>
+  <div class="overflow-x-auto mt-5">
+    <table class="min-w-full border border-gray-300 rounded-lg overflow-hidden">
+      <thead class="bg-gray-100">
+        <tr>
+          <th class="px-4 py-2 text-left text-sm font-semibold text-gray-700">Title</th>
+          <th class="px-4 py-2 text-left text-sm font-semibold text-gray-700">Url</th>
+          <th class="px-4 py-2 text-left text-sm font-semibold text-gray-700">Created At</th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-gray-200">
+        <% @feeds.each do |feed| %>
+          <tr class="hover:bg-gray-50">
+            <td class="px-4 py-2 text-sm text-gray-800"><%= feed.title %></td>
+            <td class="px-4 py-2 text-sm text-gray-800"><%= feed.url %></td>
+            <td class="px-4 py-2 text-sm text-gray-800"><%= feed.created_at.strftime("%Y-%m-%d %H:%M") %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

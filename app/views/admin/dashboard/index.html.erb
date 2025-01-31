@@ -1,5 +1,8 @@
 <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-  <div class="overflow-x-auto">
+  <div class="flex justify-between items-center">
+    <h1 class="font-bold text-4xl">Users (<%= @users.count %>)</h1>
+  </div>
+  <div class="overflow-x-auto mt-5">
     <table class="min-w-full border border-gray-300 rounded-lg overflow-hidden">
       <thead class="bg-gray-100">
         <tr>
@@ -11,7 +14,7 @@
       <tbody class="divide-y divide-gray-200">
         <% @users.each do |user| %>
           <tr class="hover:bg-gray-50">
-            <td class="px-4 py-2 text-sm text-gray-800"><%= user.email_address %></td>
+            <td class="px-4 py-2 text-sm text-gray-800"><%= link_to user.email_address, admin_user_path(user), class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" %></td>
             <td class="px-4 py-2 text-sm text-gray-800"><%= user.nick_name %></td>
             <td class="px-4 py-2 text-sm text-gray-800"><%= user.created_at.strftime("%Y-%m-%d %H:%M") %></td>
           </tr>
