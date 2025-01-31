@@ -1,35 +1,41 @@
-<div id="<%= dom_id article %>" class="w-full">
-  <div class="bg-white shadow-md rounded-lg p-6">
-    <div class="flex flex-col sm:flex-row sm:items-center gap-4">
-      <div>
-        <h2 class="text-xl sm:text-2xl font-semibold text-blue-600 mb-2 hover:text-black">
-          <%= link_to article.title, article_path(article) %>
-        </h2>
-        <span><%= link_to t("article.read_original"), article.link, target: "_blank" %></span>
-        <% if show_content %>
-          <div class="prose max-w-none text-sm sm:text-base text-gray-600 mt-5">
-            <%= sanitize article.content %>
-          </div>
-        <% end %>
-      </div>
-    </div>
-    <hr class="border-gray-150 mt-5 mb-5">
-    <div class="mt-4 flex flex-row items-center sm:flex-row sm:items-center sm:justify-between gap-3">
-      <div>
-        <%= link_to article.feed.url, feed_path(article.feed), class: "text-sm text-red-400" %>
-      </div>
-      <div class="flex flex-col items-center sm:flex-row sm:items-center sm:justify-between">
+<div id="<%= "#{dom_id(article)}_container" %>" class="w-full">
+  <%= turbo_frame_tag dom_id(article) do %>
+    <div class="bg-white shadow-md rounded-lg p-6">
+      <div class="flex flex-col sm:flex-row sm:items-center gap-4">
         <div>
-          <%= button_to update_read_article_path(article), method: :patch do %>
-            <% if article.is_read? %>
-              <%= image_tag "checked_green.svg" %>
-            <% else %>
-              <%= image_tag "checked.svg" %>
-            <% end %>
-          <% end %>
+          <h2 class="text-xl sm:text-2xl font-semibold text-blue-600 mb-2 hover:text-black">
+            <%= link_to article.title, article_path(article) %>
+          </h2>
+          <span><%= link_to t("article.read_original"), article.link, target: "_blank" %></span>
+
         </div>
-        <div class="text-sm text-gray-500 ml-10"><%= article.published_at.strftime("%d-%m-%Y") %></div>
+      </div>
+      <hr class="border-gray-150 mt-5 mb-5">
+      <div class="mt-4 flex flex-row items-center sm:flex-row sm:items-center sm:justify-between gap-3">
+        <div>
+          <%= link_to article.feed.url, feed_path(article.feed), class: "text-sm text-red-400" %>
+        </div>
+        <div class="flex flex-col items-center sm:flex-row sm:items-center sm:justify-between">
+          <div>
+            <% if article.is_read? %>
+              <%= button_to update_read_article_path(article, article: { read: false }), class: "bg-green-600 px-4 py-2 rounded hover:bg-green-700", method: :patch do %>
+                <span class="sr-only">Mark as unread</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                  </svg>
+                <% end %>
+            <% else %>
+              <%= button_to update_read_article_path(article, article: { read: true }), class: "bg-gray-400 px-4 py-2 rounded hover:bg-green-700", method: :patch do %>
+                <span class="sr-only">Mark as read</span>
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                </svg>
+              <% end %>
+            <% end %>
+          </div>
+          <div class="text-sm text-gray-500 ml-10"><%= article.published_at.strftime("%d-%m-%Y") %></div>
+        </div>
       </div>
     </div>
-  </div>
+  <% end %>
 </div>

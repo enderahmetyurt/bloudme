@@ -1,6 +1,6 @@
 class ArticlesController < ApplicationController
   def index
-    @articles = Article.joins(feed: :user).where(feeds: { user: Current.user }).unread.recent
+    @articles = Article.joins(feed: :user).where(feeds: { user: Current.user }).where(is_read: ActiveModel::Type::Boolean.new.cast(params[:read]) || false).recent
     @feed = Feed.new
   end
 
@@ -10,17 +10,11 @@ class ArticlesController < ApplicationController
 
   def update_read
     @article = Article.find(params[:id])
-    @article.is_read = !@article.is_read
-    @article.save
+    @article.update(is_read: ActiveModel::Type::Boolean.new.cast(params[:article][:read]))
 
-    referrer = Rails.application.routes.recognize_path(request.referrer)
-
-    redirect_feed = referrer[:controller] == "feeds" ? true : false
-
-    if redirect_feed
-      redirect_to feed_path(@article.feed)
-    else
-      redirect_to articles_path
+    respond_to do |format|
+      format.turbo_stream { render turbo_stream: turbo_stream.remove("#{helpers.dom_id(@article)}_container") }
+      format.html { redirect_to todos_path, notice: "Updated todo status." }
     end
   end
 end
