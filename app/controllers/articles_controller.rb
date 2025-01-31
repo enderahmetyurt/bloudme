@@ -14,7 +14,7 @@ class ArticlesController < ApplicationController
 
     respond_to do |format|
       format.turbo_stream { render turbo_stream: turbo_stream.remove("#{helpers.dom_id(@article)}_container") }
-      format.html { redirect_to todos_path, notice: "Updated todo status." }
+      format.html { redirect_to articles_path, notice: "Updated todo status." }
     end
   end
 end
