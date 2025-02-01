@@ -14,6 +14,8 @@ en:
     read_original: "Read Original"
     mark_as_read: "Marked as Read"
     mark_as_unread: "Marked as Unread"
+    read: Read
+    unread: Unread
   no_article_unicorn: "This is a unicorn 🦄"
   no_article: "You've read all articles."
   registration:

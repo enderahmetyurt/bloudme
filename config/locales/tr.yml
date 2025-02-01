@@ -14,6 +14,8 @@ tr:
     read_original: "Orijinali Oku"
     mark_as_read: "Okundu Olarak İşaretlendi"
     mark_as_unread: "Okunmamış Olarak İşaretlendi"
+    read: Okunanlar
+    unread: Okunmayanlar
   no_article_unicorn: "Bu bir tek boynuzlu at 🦄"
   no_article: "Tüm makaleleri okudunuz."
   registration:
