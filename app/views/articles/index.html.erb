@@ -26,6 +26,9 @@
       </ul>
     </div>
     <div id="articles" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-6 mt-5">
+      <div class="only:flex hidden gap-5 justify-center items-center mt-10 font-mono text-2xl">
+        <p><%= t("no_article_unicorn") %> <%= t("no_article") %></p>
+      </div>
       <%= render @articles %>
     </div>
   <% end %>
