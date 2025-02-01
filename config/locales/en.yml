@@ -35,6 +35,8 @@ en:
     new: "Add Feed"
     create:
       error: "Error adding feed. Please check the URL and try again."
+    destroy:
+      success: Feed deleted successfully
   settings: "Settings"
   helpers:
     submit:

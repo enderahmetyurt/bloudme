@@ -31,6 +31,13 @@ class FeedsController < ApplicationController
     @articles = @feed.articles.recent
   end
 
+  def destroy
+    @feed = Current.user.feeds.find(params[:id])
+    @feed.destroy
+
+    redirect_to feeds_path, notice: t("feeds.destroy.success")
+  end
+
   private
 
   def feed_params

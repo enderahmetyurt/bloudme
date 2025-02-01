@@ -35,6 +35,8 @@ tr:
     new: "Kaynak Ekle"
     create:
       error: "Kaynak eklenirken hata oluştu. Lütfen Link'i kontrol edin ve tekrar deneyin."
+    destroy:
+      success: Kaynak başarı ile silindi
   settings: "Ayarlar"
   helpers:
     submit:

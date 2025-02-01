@@ -35,6 +35,8 @@ se:
     new: "Lägg till feed"
     create:
       error: "Det gick inte att lägga till flöde. Kontrollera webbadressen och försök igen."
+    destroy:
+      success: Flödet har tagits bort
   settings: "Inställningar"
   helpers:
     submit:
