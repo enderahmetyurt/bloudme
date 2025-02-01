@@ -1,6 +1,9 @@
 class ArticlesController < ApplicationController
   def index
-    @articles = Article.joins(feed: :user).where(feeds: { user: Current.user }).where(is_read: ActiveModel::Type::Boolean.new.cast(params[:read]) || false).recent
+    @articles = Article
+      .by_current_user(Current.user)
+      .where(is_read: ActiveModel::Type::Boolean.new.cast(params[:read]) || false)
+      .recent
     @feed = Feed.new
   end
 
