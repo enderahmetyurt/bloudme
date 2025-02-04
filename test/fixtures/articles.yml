@@ -6,6 +6,7 @@ one:
   content: MyText
   published_at: 2025-01-17 11:39:46
   link: MyString
+  is_read: true
 
 two:
   feed: two
@@ -13,3 +14,12 @@ two:
   content: MyText
   published_at: 2025-01-17 11:39:46
   link: MyString
+  is_read: true
+
+unread:
+  feed: two
+  title: MyString
+  content: MyText
+  published_at: 2025-01-17 11:39:46
+  link: MyString
+  is_read: false
