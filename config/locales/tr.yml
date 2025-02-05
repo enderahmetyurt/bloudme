@@ -43,3 +43,6 @@ tr:
       feed:
         create: Ekle
   already_signed_in: Zaten oturum açmış durumdasınız.
+  users:
+    show:
+      alert: "Diğer kullanıcının profilini görüntüleyemezsiniz."

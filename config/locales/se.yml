@@ -43,3 +43,6 @@ se:
       feed:
         create: Tillägga
   already_signed_in: Du är redan inloggad.
+  users:
+    show:
+      alert: "Du kan inte se andra användares profil"

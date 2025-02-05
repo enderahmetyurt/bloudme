@@ -43,3 +43,6 @@ en:
       feed:
         create: Add
   already_signed_in: You are already signed in.
+  users:
+    show:
+      alert: "You can't view other user's profile"
