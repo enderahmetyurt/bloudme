@@ -16,7 +16,14 @@ class ArticlesController < ApplicationController
     @article.update(is_read: ActiveModel::Type::Boolean.new.cast(params[:article][:read]))
 
     respond_to do |format|
-      format.turbo_stream { render turbo_stream: turbo_stream.remove("#{helpers.dom_id(@article)}_container") }
+      format.turbo_stream do
+        render(
+          turbo_stream: [
+            turbo_stream.remove("#{helpers.dom_id(@article)}_container"),
+            turbo_stream.update("unread", partial: "articles/unread_count", locals: { count: Article.by_current_user(Current.user).unread.count }),
+            turbo_stream.update("read", partial: "articles/read_count", locals: { count: Article.by_current_user(Current.user).read.count })
+          ])
+      end
       format.html { redirect_to articles_path, notice: "Updated todo status." }
     end
   end
