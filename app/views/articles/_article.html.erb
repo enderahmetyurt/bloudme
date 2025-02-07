@@ -17,7 +17,7 @@
       <hr class="border-gray-150 mt-5 mb-5">
       <div class="mt-4 flex flex-col items-center xl:flex-row xl:items-center xl:justify-between gap-3 xl:top-5">
         <div>
-          <%= link_to article.feed.title, feed_path(article.feed), class: "text-sm text-red-400" %>
+          <%= link_to article.feed.title, feed_path(article.feed), class: "text-sm text-red-400", data: { turbo_frame: "_top" } %>
         </div>
         <div class="flex flex-col items-center sm:flex-row sm:items-center sm:justify-between">
           <div>
