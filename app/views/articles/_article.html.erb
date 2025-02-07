@@ -6,10 +6,10 @@
           <h2 class="text-xl sm:text-2xl font-semibold text-blue-600 mb-2 hover:text-black">
             <%= link_to article.title, article_path(article), data: { turbo_frame: "_top" } %>
           </h2>
-          <span><%= link_to t("article.read_original"), article.link, target: "_blank" %></span>
+          <span><%= link_to article_action(article), article.link, target: "_blank" %></span>
           <% if params["controller"] == "articles" && params["action"] == "show" %>
             <div class="prose max-w-none text-sm sm:text-base text-gray-600 mt-5">
-              <%= sanitize article.content %>
+              <iframe src="https://www.youtube.com/embed/<%= @article.youtube_video_id %>?rel=0&autoplay=0 %>" frameborder="0"></iframe>
             </div>
           <% end %>
         </div>
@@ -17,7 +17,7 @@
       <hr class="border-gray-150 mt-5 mb-5">
       <div class="mt-4 flex flex-col items-center xl:flex-row xl:items-center xl:justify-between gap-3 xl:top-5">
         <div>
-          <%= link_to article.feed.url, feed_path(article.feed), class: "text-sm text-red-400" %>
+          <%= link_to article.feed.title, feed_path(article.feed), class: "text-sm text-red-400" %>
         </div>
         <div class="flex flex-col items-center sm:flex-row sm:items-center sm:justify-between">
           <div>

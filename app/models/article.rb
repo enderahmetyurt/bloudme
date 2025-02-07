@@ -7,4 +7,8 @@ class Article < ApplicationRecord
   scope :by_current_user, ->(user) {
     joins(feed: :user).where(feeds: { user: user })
   }
+
+  def youtube?
+    self.thumbnail.present?
+  end
 end
