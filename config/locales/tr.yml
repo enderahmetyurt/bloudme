@@ -12,6 +12,7 @@ tr:
     all_rights_reserved: "Her hakkı saklıdır."
   article:
     read_original: "Orijinali Oku"
+    watch_original: "Orijinali İzle"
     mark_as_read: "Okundu Olarak İşaretlendi"
     mark_as_unread: "Okunmamış Olarak İşaretlendi"
     read: Okunanlar

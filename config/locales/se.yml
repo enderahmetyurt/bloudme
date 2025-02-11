@@ -12,6 +12,7 @@ se:
     all_rights_reserved: "Alla rättigheter reserverade."
   article:
     read_original: "Läs original"
+    watch_original: "Titta på Original"
     mark_as_read: "Markerad som läst"
     mark_as_unread: "Markerad som oläst"
     read: Läs

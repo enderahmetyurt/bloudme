@@ -12,6 +12,7 @@ en:
     all_rights_reserved: "All rights reserved."
   article:
     read_original: "Read Original"
+    watch_original: "Watch Original"
     mark_as_read: "Marked as Read"
     mark_as_unread: "Marked as Unread"
     read: Read

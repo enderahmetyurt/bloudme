@@ -8,9 +8,15 @@
           </h2>
           <span><%= link_to article_action(article), article.link, target: "_blank" %></span>
           <% if params["controller"] == "articles" && params["action"] == "show" %>
-            <div class="prose max-w-none text-sm sm:text-base text-gray-600 mt-5">
-              <%= sanitize article.content %>
-            </div>
+            <% if @article.youtube_channel_id %>
+              <div class="aspect-w-16 aspect-h-9 mt-5">
+                <iframe src="https://www.youtube.com/embed/<%= @article.youtube_video_id %>?rel=0&autoplay=0 %>" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+              </div>
+            <% else %>
+              <div class="prose max-w-none text-sm sm:text-base text-gray-600 mt-5">
+                <%= sanitize article.content %>
+              </div>
+            <% end %>
           <% end %>
         </div>
       </div>

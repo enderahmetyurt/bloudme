@@ -1,7 +1,12 @@
 class RssParserService
+  YOUTUBE_API_URL = "https://www.googleapis.com/youtube/v3/search?part=snippet&type=channel".freeze
+  YOUTUBE_RSS_URL = "https://www.youtube.com/feeds/videos.xml?channel_id".freeze
+
   def self.fetch_and_parse(url)
-    feed = Feedjira.parse(HTTParty.get(url).body)
     if youtube_url?(url)
+      channel_id = find_channel_id(url)
+      youtube_url = "#{YOUTUBE_RSS_URL}=#{channel_id}"
+      feed = Feedjira.parse(HTTParty.get(youtube_url).body)
       {
         title: feed.title,
         entries: feed.entries.map do |entry|
@@ -17,6 +22,7 @@ class RssParserService
         end
       }
     else
+      feed = Feedjira.parse(HTTParty.get(url).body)
       {
         title: feed.title,
         description: feed.description,
@@ -45,5 +51,18 @@ class RssParserService
     %w[youtube.com youtu.be].include?(host)
   rescue URI::InvalidURIError
     false
+  end
+
+  def self.find_channel_id(url)
+    channel_name = url.split("@").last
+    channel_url = URI("#{YOUTUBE_API_URL}&q=#{URI.encode_www_form_component(channel_name)}&key=#{Rails.application.credentials.dig(:youtube, :api_key)}")
+    response = Net::HTTP.get(channel_url)
+    data = JSON.parse(response)
+
+    if data["items"] && !data["items"].empty?
+      data["items"][0]["id"]["channelId"]
+    else
+      nil
+    end
   end
 end
