@@ -29,9 +29,15 @@ tr:
   activerecord:
     models:
       feed: Kaynak
+      user: Kullanıcı
     attributes:
       feed:
         url: Link
+      user:
+        nick_name: Kullanıcı adı
+        email_address: Eposta
+        password: Parola
+        password_confirmation: Parola tekrarı
   feeds:
     new: "Kaynak Ekle"
     create:
@@ -43,7 +49,14 @@ tr:
     submit:
       feed:
         create: Ekle
+      user:
+        update: Güncelle
   already_signed_in: Zaten oturum açmış durumdasınız.
   users:
+    update:
+      notice: Kullanıcı güncellendi
     show:
       alert: "Diğer kullanıcının profilini görüntüleyemezsiniz."
+    settings: Ayarlar
+  settings:
+    profile: Profil

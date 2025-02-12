@@ -9,7 +9,11 @@ Rails.application.routes.draw do
   resource :session
   resources :passwords, param: :token
   resource :registration, only: %i[new create]
-  resources :users
+  resources :users do
+    member do
+      get :settings
+    end
+  end
   resources :feeds
   resources :articles do
     member do

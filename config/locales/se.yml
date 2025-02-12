@@ -29,9 +29,15 @@ se:
   activerecord:
     models:
       feed: Foder
+      user: Användare
     attributes:
       feed:
         url: Länk
+      user:
+        nick_name: Smeknamn
+        email_address: Epost
+        password: Lösenord
+        password_confirmation: Lösenordsbekräftelse
   feeds:
     new: "Lägg till feed"
     create:
@@ -43,7 +49,14 @@ se:
     submit:
       feed:
         create: Tillägga
+      user:
+        update: Uppdatera
   already_signed_in: Du är redan inloggad.
   users:
+    update:
+      notice: Användaren uppdaterad
     show:
       alert: "Du kan inte se andra användares profil"
+    settings: Inställningar
+  settings:
+    profile: Profil

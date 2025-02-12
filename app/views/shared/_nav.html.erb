@@ -42,16 +42,16 @@
                     <% end %>
                   </li>
                   <li>
-                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
-                      <%= t("settings") %>
-                    </a>
+                    <%= link_to settings_user_path(Current.user), class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" do %>
+                      <%= t("users.settings") %>
+                    <% end %>
                   </li>
                   <li>
-                  <% if Current.user.is_admin %>
-                    <li>
-                      <%= link_to "Admin", admin_dashboard_index_path, class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" %>
-                    </li>
-                  <% end %>
+                    <% if Current.user.is_admin %>
+                      <li>
+                        <%= link_to "Admin", admin_dashboard_index_path, class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" %>
+                      </li>
+                    <% end %>
                   </li>
                   <li>
                     <div class="mb-5">
@@ -80,7 +80,7 @@
         <%= link_to Current.user.nick_name, feeds_path, class: "text-red-500 hover:underline text-white" %>
       </div>
       <div class="px-4 py-2 text-center">
-        <%= link_to t("settings"), "#", class: "text-red-500 hover:underline text-white" %>
+        <%= link_to t("users.settings"), settings_user_path(Current.user), class: "text-red-500 hover:underline text-white" %>
       </div>
       <% if Current.user.is_admin %>
         <div class="px-4 py-2 text-center">

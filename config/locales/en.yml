@@ -29,9 +29,15 @@ en:
   activerecord:
     models:
       feed: Feed
+      user: User
     attributes:
       feed:
         url: Url
+      user:
+        nick_name: Nickname
+        email_address: Email
+        password: Password
+        password_confirmation: Password confirmation
   feeds:
     new: "Add Feed"
     create:
@@ -45,5 +51,10 @@ en:
         create: Add
   already_signed_in: You are already signed in.
   users:
+    update:
+      notice: User updated.
     show:
       alert: "You can't view other user's profile"
+    settings: Settings
+  settings:
+    profile: Profile
