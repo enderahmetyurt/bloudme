@@ -64,6 +64,8 @@ group :test do
   gem "selenium-webdriver"
   gem "rails-controller-testing"
   gem "simplecov"
+  gem "vcr"
+  gem "webmock"
 end
 
 gem "faker"

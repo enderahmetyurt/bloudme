@@ -46,3 +46,4 @@
 **/._.DS_Store
 
 /coverage/*
+/config/credentials/test.key

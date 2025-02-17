@@ -1,6 +1,7 @@
 class RssParserService
   YOUTUBE_API_URL = "https://www.googleapis.com/youtube/v3/search?part=snippet&type=channel".freeze
   YOUTUBE_RSS_URL = "https://www.youtube.com/feeds/videos.xml?channel_id".freeze
+  YOUTUBE_API_KEY = Rails.application.credentials.dig(:youtube, :api_key)
 
   def self.fetch_and_parse(url)
     if youtube_url?(url)
@@ -55,7 +56,7 @@ class RssParserService
 
   def self.find_channel_id(url)
     channel_name = url.split("@").last
-    channel_url = URI("#{YOUTUBE_API_URL}&q=#{URI.encode_www_form_component(channel_name)}&key=#{Rails.application.credentials.dig(:youtube, :api_key)}")
+    channel_url = URI("#{YOUTUBE_API_URL}&q=#{URI.encode_www_form_component(channel_name)}&key=#{YOUTUBE_API_KEY}")
     response = Net::HTTP.get(channel_url)
     data = JSON.parse(response)
 
