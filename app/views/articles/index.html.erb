@@ -15,9 +15,6 @@
             class: "inline-block text-sm font-medium text-center text-gray-500 border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300"
           %>
           <li class="p-5 <%= params["read"] == "true" ? "bg-gray-100" : "" %>">
-            <%= turbo_frame_tag "read" do %>
-              <%= render partial: "articles/read_count", locals: {count: Article.by_current_user(Current.user).read.count} %>
-            <% end %>
             <%= link_to t("article.read"),
             articles_path(read: true),
             class: "inline-block text-sm font-medium text-center text-gray-500 border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300"
