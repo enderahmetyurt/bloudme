@@ -16,6 +16,9 @@ Rails.application.routes.draw do
   end
   resources :feeds
   resources :articles do
+    collection do
+      get :search
+    end
     member do
       patch :update_read
     end

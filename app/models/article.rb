@@ -8,6 +8,12 @@ class Article < ApplicationRecord
     joins(feed: :user).where(feeds: { user: user })
   }
 
+  scope :search, ->(query) {
+    return all if query.blank?
+
+    where("articles.title LIKE :query OR articles.content LIKE :query", query: "%#{query}%")
+  }
+
   def youtube?
     self.thumbnail.present?
   end

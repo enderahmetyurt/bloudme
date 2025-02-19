@@ -12,6 +12,14 @@ class ArticlesController < ApplicationController
     @article.update(is_read: true)
   end
 
+  def search
+    @query = params[:query]
+    @articles = Article
+      .by_current_user(Current.user)
+      .search(@query)
+      .recent
+  end
+
   def update_read
     @article = Article.find(params[:id])
     @article.update(is_read: ActiveModel::Type::Boolean.new.cast(params[:article][:read]))

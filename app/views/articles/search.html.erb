@@ -1,0 +1,14 @@
+<div class="w-full">
+  <% content_for :title, t("result_for", query: @query) %>
+  <div class="flex justify-between items-center">
+    <h1 class="font-bold text-4xl"><%= t("result_for", query: @query) %></h1>
+  </div>
+  <%= turbo_frame_tag "articles-container" do %>
+    <div id="articles" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-6 mt-5">
+      <div class="only:flex hidden gap-5 justify-center items-center mt-10 font-mono text-2xl">
+        <p><%= t("not_found_for", query: @query) %></p>
+      </div>
+      <%= render @articles %>
+    </div>
+  <% end %>
+</div>

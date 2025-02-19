@@ -19,6 +19,16 @@
       </button>
       <ul class="hidden sm:flex flex-wrap items-center space-x-6 mt-2 sm:mt-0">
         <li>
+          <%= form_with(url: search_articles_path, method: :get, data: { turbo_frame: "articles" }) do |f| %>
+            <div>
+              <%= f.text_field :query,
+                  placeholder: "Search",
+                  class: "border rounded-lg w-full text-gray-900",
+                  data: { turbo_frame: "articles" } %>
+            </div>
+          <% end %>
+        </li>
+        <li>
           <%= link_to t("feeds.new"), new_feed_path, class: "rounded-lg py-1 px-2 border-2 border-white-500 text-white block font-medium" %>
         </li>
         <li class="text-center">
