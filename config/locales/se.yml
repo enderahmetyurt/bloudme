@@ -60,5 +60,6 @@ se:
     settings: Inställningar
   settings:
     profile: Profil
+  search: Sök
   result_for: Resultat för %{query}
   not_found_for: Hittade inte för %{query}

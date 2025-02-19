@@ -22,7 +22,7 @@
           <%= form_with(url: search_articles_path, method: :get, data: { turbo_frame: "articles" }) do |f| %>
             <div>
               <%= f.text_field :query,
-                  placeholder: "Search",
+                  placeholder: t("search"),
                   class: "border rounded-lg w-full text-gray-900",
                   data: { turbo_frame: "articles" } %>
             </div>

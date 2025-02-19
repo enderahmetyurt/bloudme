@@ -60,5 +60,6 @@ tr:
     settings: Ayarlar
   settings:
     profile: Profil
+  search: Ara
   result_for: "%{query} için sonuçlar"
   not_found_for: "%{query} için sonuç bulunamadı"

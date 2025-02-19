@@ -58,5 +58,6 @@ en:
     settings: Settings
   settings:
     profile: Profile
+  search: Search
   result_for: Result for %{query}
   not_found_for: Not found for %{query}
