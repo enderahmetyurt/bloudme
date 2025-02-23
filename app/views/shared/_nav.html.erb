@@ -59,7 +59,7 @@
                   <li>
                     <% if Current.user.is_admin %>
                       <li>
-                        <%= link_to "Admin", admin_dashboard_index_path, class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" %>
+                        <%= link_to "Admin", "/avo", class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" %>
                       </li>
                     <% end %>
                   </li>
@@ -94,7 +94,7 @@
       </div>
       <% if Current.user.is_admin %>
         <div class="px-4 py-2 text-center">
-          <%= link_to "Admin", admin_dashboard_index_path, class: "text-red-500 hover:underline text-white" %>
+          <%= link_to "Admin", "/avo", class: "text-red-500 hover:underline text-white" %>
         </div>
       <% end %>
       <div class="px-4 py-2 text-center">

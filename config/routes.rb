@@ -1,9 +1,5 @@
 Rails.application.routes.draw do
-  namespace :admin do
-    resources :dashboard, only: :index
-    resources :users, only: :show
-  end
-
+  mount Avo::Engine, at: Avo.configuration.root_path
   mount MissionControl::Jobs::Engine, at: "/jobs"
 
   resource :session
