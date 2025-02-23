@@ -4,7 +4,7 @@ class Avo::Resources::Article < Avo::BaseResource
   # self.search = {
   #   query: -> { query.ransack(id_eq: params[:q], m: "or").result(distinct: false) }
   # }
-  
+
   def fields
     field :id, as: :id
     field :content, as: :textarea
@@ -19,5 +19,3 @@ class Avo::Resources::Article < Avo::BaseResource
     field :feed, as: :belongs_to
   end
 end
-
-
