@@ -17,6 +17,7 @@ Rails.application.routes.draw do
     end
     member do
       patch :update_read
+      patch :update_bookmark
     end
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

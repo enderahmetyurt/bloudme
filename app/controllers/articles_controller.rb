@@ -36,4 +36,15 @@ class ArticlesController < ApplicationController
       format.html { redirect_to articles_path, notice: "Updated todo status." }
     end
   end
+
+  def update_bookmark
+    @article = Article.find(params[:id])
+    if ActiveModel::Type::Boolean.new.cast(params[:article][:bookmarked])
+      Bookmark.create(article: @article, user: Current.user)
+    else
+      Bookmark.find_by(article: @article, user: Current.user).destroy
+    end
+
+    redirect_to articles_path
+  end
 end
