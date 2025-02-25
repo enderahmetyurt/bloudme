@@ -46,7 +46,13 @@ class ArticlesController < ApplicationController
     end
 
     respond_to do |format|
-      format.html { redirect_to articles_path, notice: "Updated todo status." }
+      format.turbo_stream do
+        render(
+          turbo_stream: [
+            turbo_stream.remove("#{helpers.dom_id(@article)}_container")
+          ])
+      end
+      format.html { redirect_to bookmarks_path, notice: "Updated bookmarked." }
     end
   end
 end
