@@ -45,6 +45,8 @@ class ArticlesController < ApplicationController
       Bookmark.find_by(article: @article, user: Current.user).destroy
     end
 
-    redirect_to articles_path
+    respond_to do |format|
+      format.html { redirect_to articles_path, notice: "Updated todo status." }
+    end
   end
 end

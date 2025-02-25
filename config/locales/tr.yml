@@ -63,3 +63,4 @@ tr:
   search: Ara
   result_for: "%{query} için sonuçlar"
   not_found_for: "%{query} için sonuç bulunamadı"
+  bookmarks: Yer İmleri

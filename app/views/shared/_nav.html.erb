@@ -52,6 +52,9 @@
                     <% end %>
                   </li>
                   <li>
+                    <%= link_to t("bookmarks"), bookmarks_path, class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" %>
+                  </li>
+                  <li>
                     <%= link_to settings_user_path(Current.user), class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" do %>
                       <%= t("users.settings") %>
                     <% end %>
@@ -88,6 +91,9 @@
       </div>
       <div class="px-4 py-2 text-center">
         <%= link_to Current.user.nick_name, feeds_path, class: "text-red-500 hover:underline text-white" %>
+      </div>
+      <div class="px-4 py-2 text-center">
+        <%= link_to t("bookmarks"), bookmarks_path, class: "text-red-500 hover:underline text-white" %>
       </div>
       <div class="px-4 py-2 text-center">
         <%= link_to t("users.settings"), settings_user_path(Current.user), class: "text-red-500 hover:underline text-white" %>
