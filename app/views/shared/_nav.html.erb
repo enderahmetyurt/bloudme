@@ -47,9 +47,7 @@
             >
                 <ul class="py-1">
                   <li>
-                    <%= link_to user_path(Current.user), class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" do %>
-                      <%= Current.user.nick_name %>
-                    <% end %>
+                    <%= link_to t("settings.profile"), user_path(Current.user), class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" %>
                   </li>
                   <li>
                     <%= link_to t("bookmarks"), bookmarks_path, class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" %>
@@ -90,7 +88,7 @@
         <%= link_to  t("feeds.new"), new_feed_path, class: "rounded-lg py-1 px-2 border-2 border-white-500 text-white block font-medium mb-3 mt-2" %>
       </div>
       <div class="px-4 py-2 text-center">
-        <%= link_to Current.user.nick_name, feeds_path, class: "text-red-500 hover:underline text-white" %>
+        <%= link_to t("settings.profile"), feeds_path, class: "text-red-500 hover:underline text-white" %>
       </div>
       <div class="px-4 py-2 text-center">
         <%= link_to t("bookmarks"), bookmarks_path, class: "text-red-500 hover:underline text-white" %>
