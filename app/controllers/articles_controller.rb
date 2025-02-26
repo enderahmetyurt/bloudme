@@ -39,6 +39,7 @@ class ArticlesController < ApplicationController
 
   def update_bookmark
     @article = Article.find(params[:id])
+
     if ActiveModel::Type::Boolean.new.cast(params[:article][:bookmarked])
       Bookmark.create(article: @article, user: Current.user)
     else
@@ -47,10 +48,17 @@ class ArticlesController < ApplicationController
 
     respond_to do |format|
       format.turbo_stream do
-        render(
-          turbo_stream: [
-            turbo_stream.update("#{helpers.dom_id(@article)}_bookmark", partial: "articles/bookmark", locals: { article: @article })
-          ])
+        if request.referrer.include?("bookmarks")
+          render(
+            turbo_stream: [
+              turbo_stream.remove("#{helpers.dom_id(@article)}_container")
+            ])
+        else
+          render(
+            turbo_stream: [
+              turbo_stream.update("#{helpers.dom_id(@article)}_bookmark", partial: "articles/bookmark", locals: { article: @article })
+            ])
+        end
       end
       format.html { redirect_to bookmarks_path, notice: "Updated bookmarked." }
     end
