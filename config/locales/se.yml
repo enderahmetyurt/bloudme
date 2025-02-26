@@ -64,3 +64,4 @@ se:
   result_for: Resultat för %{query}
   not_found_for: Hittade inte för %{query}
   bookmarks: Bokmärken
+  no_bookmarks: Kom igen 😭 Lägg till några fina artiklar här
