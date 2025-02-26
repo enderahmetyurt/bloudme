@@ -49,7 +49,7 @@ class ArticlesController < ApplicationController
       format.turbo_stream do
         render(
           turbo_stream: [
-            turbo_stream.remove("#{helpers.dom_id(@article)}_container")
+            turbo_stream.update("#{helpers.dom_id(@article)}_bookmark", partial: "articles/bookmark", locals: { article: @article })
           ])
       end
       format.html { redirect_to bookmarks_path, notice: "Updated bookmarked." }
