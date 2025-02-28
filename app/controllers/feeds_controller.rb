@@ -12,7 +12,10 @@ class FeedsController < ApplicationController
 
     if parsed_feed
       @feed = Current.user.feeds.create(
-        url: feed_params[:url],
+        url: parsed_feed[:url],
+        site_url: parsed_feed[:site_url],
+        favicon: parsed_feed[:favicon],
+        is_podcast: parsed_feed[:is_podcast],
         title: parsed_feed[:title],
         description: parsed_feed[:description]
       )

@@ -1,15 +1,19 @@
 class RssParserService
-  YOUTUBE_API_URL = "https://www.googleapis.com/youtube/v3/search?part=snippet&type=channel".freeze
   YOUTUBE_RSS_URL = "https://www.youtube.com/feeds/videos.xml?channel_id".freeze
-  YOUTUBE_API_KEY = Rails.application.credentials.dig(:youtube, :api_key)
+  FEED_SEARCH_ENDPOINT = "https://feedsearch.dev/api/v1/search".freeze
 
-  def self.fetch_and_parse(url)
+  def self.fetch_and_parse(feed_url)
+    result = find_feed_url_favicon(feed_url)
+    url = result[:feed_url]
+
     if youtube_url?(url)
-      channel_id = find_channel_id(url)
-      youtube_url = "#{YOUTUBE_RSS_URL}=#{channel_id}"
-      feed = Feedjira.parse(HTTParty.get(youtube_url).body)
+      feed = Feedjira.parse(HTTParty.get(url).body)
       {
         title: feed.title,
+        favicon: result[:favicon],
+        is_podcast: result[:is_podcast],
+        url: url,
+        site_url: result[:site_url],
         entries: feed.entries.map do |entry|
           {
             title: entry.title,
@@ -27,6 +31,10 @@ class RssParserService
       {
         title: feed.title,
         description: feed.description,
+        favicon: result[:favicon],
+        is_podcast: result[:is_podcast],
+        url: url,
+        site_url: result[:site_url],
         entries: feed.entries.map do |entry|
           {
             title: entry.title,
@@ -54,16 +62,19 @@ class RssParserService
     false
   end
 
-  def self.find_channel_id(url)
-    channel_name = url.split("@").last
-    channel_url = URI("#{YOUTUBE_API_URL}&q=#{URI.encode_www_form_component(channel_name)}&key=#{YOUTUBE_API_KEY}")
-    response = Net::HTTP.get(channel_url)
-    data = JSON.parse(response)
+  def self.find_feed_url_favicon(url)
+    response = HTTParty.get(FEED_SEARCH_ENDPOINT, query: { url: url })
+    result = JSON.parse(response.body)
 
-    if data["items"] && !data["items"].empty?
-      data["items"][0]["id"]["channelId"]
-    else
-      nil
+    if result.is_a?(Hash) && result["error"]
+      return nil
     end
+
+    {
+      feed_url: result.first["url"],
+      site_url: result.first["site_url"],
+      favicon: result.first["favicon"],
+      is_podcast: result.first["is_podcast"]
+    }
   end
 end
