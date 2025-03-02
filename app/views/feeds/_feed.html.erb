@@ -7,7 +7,7 @@
           <%= link_to feed.title, feed_path(feed) %>
         </h2>
         <h3 class="text-gray-500 mb-2 hover:text-black truncate">
-          <%= link_to feed.url, feed_path(feed) %>
+          <%= link_to feed.site_url, feed_path(feed) %>
         </h3>
         <div class="prose max-w-none text-sm sm:text-base text-gray-600">
           <%= sanitize feed.description %>

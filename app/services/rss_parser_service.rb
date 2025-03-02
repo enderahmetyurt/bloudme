@@ -2,17 +2,17 @@ class RssParserService
   YOUTUBE_RSS_URL = "https://www.youtube.com/feeds/videos.xml?channel_id".freeze
   FEED_SEARCH_ENDPOINT = "https://feedsearch.dev/api/v1/search".freeze
 
-  def self.fetch_and_parse(feed_url)
-    result = find_feed_url_favicon(feed_url)
-    url = result[:feed_url]
+  def self.fetch_and_parse(given_url)
+    result = find_feed_url_favicon(given_url)
+    feed_url = result[:feed_url]
 
-    if youtube_url?(url)
-      feed = Feedjira.parse(HTTParty.get(url).body)
+    if youtube_url?(feed_url)
+      feed = Feedjira.parse(HTTParty.get(feed_url).body)
       {
         title: feed.title,
         favicon: result[:favicon],
         is_podcast: result[:is_podcast],
-        url: url,
+        feed_url: feed_url,
         site_url: result[:site_url],
         entries: feed.entries.map do |entry|
           {
@@ -27,13 +27,13 @@ class RssParserService
         end
       }
     else
-      feed = Feedjira.parse(HTTParty.get(url).body)
+      feed = Feedjira.parse(HTTParty.get(feed_url).body)
       {
         title: feed.title,
         description: feed.description,
         favicon: result[:favicon],
         is_podcast: result[:is_podcast],
-        url: url,
+        feed_url: feed_url,
         site_url: result[:site_url],
         entries: feed.entries.map do |entry|
           {

@@ -8,11 +8,11 @@ class FeedsController < ApplicationController
   end
 
   def create
-    parsed_feed = RssParserService.fetch_and_parse(feed_params[:url])
+    parsed_feed = RssParserService.fetch_and_parse(feed_params[:feed_url])
 
     if parsed_feed
       @feed = Current.user.feeds.create(
-        url: parsed_feed[:url],
+        feed_url: parsed_feed[:feed_url],
         site_url: parsed_feed[:site_url],
         favicon: parsed_feed[:favicon],
         is_podcast: parsed_feed[:is_podcast],
@@ -44,6 +44,6 @@ class FeedsController < ApplicationController
   private
 
   def feed_params
-    params.require(:feed).permit(:url)
+    params.require(:feed).permit(:feed_url)
   end
 end
