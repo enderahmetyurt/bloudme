@@ -2,12 +2,12 @@
 
 one:
   user: one
-  url: MyString
+  feed_url: MyString
   title: MyString
   description: MyString
 
 two:
   user: two
-  url: MyString
+  feed_url: MyString
   title: MyString
   description: MyString
