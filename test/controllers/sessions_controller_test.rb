@@ -32,7 +32,7 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should destroy session" do
-    sign_in @user
+    sign_in_as(@user)
     delete session_url
     assert_redirected_to new_session_path
   end

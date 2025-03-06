@@ -7,7 +7,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
   end
 
   def sign_in_user
-    sign_in @user
+    sign_in_as(@user)
   end
 
   test "should redirect unauthenticated user from show" do

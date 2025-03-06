@@ -12,7 +12,7 @@ class RegistrationsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should redirect to root when authenticated" do
-    sign_in @user
+    sign_in_as(user)
     get new_registration_path
     assert_redirected_to root_url
     assert_equal "You are already signed in.", flash[:notice]

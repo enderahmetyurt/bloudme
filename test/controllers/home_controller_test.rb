@@ -3,7 +3,7 @@ require "test_helper"
 class HomeControllerTest < ActionDispatch::IntegrationTest
   test "should redirect to posts path when authenticated" do
     user = users(:one)
-    sign_in(user, password: "password")
+    sign_in_as(user)
 
     get root_url
 
