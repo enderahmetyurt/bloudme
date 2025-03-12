@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/rails/rails.git
-  revision: db612a31a7bb328d56f79aa47f1bd58d1e879f9f
+  revision: f575fca24a72cf0631c59ed797c575392fbbc527
   branch: main
   specs:
     actioncable (8.1.0.alpha)
@@ -231,7 +231,7 @@ GEM
       benchmark
       logger
     mini_mime (1.1.5)
-    minitest (5.25.4)
+    minitest (5.25.5)
     mission_control-jobs (1.0.2)
       actioncable (>= 7.1)
       actionpack (>= 7.1)
