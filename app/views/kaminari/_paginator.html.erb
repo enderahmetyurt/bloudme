@@ -1,0 +1,25 @@
+<% if @articles.any? && @articles.total_pages > 1 %>
+  <div class="flex justify-center items-center space-x-2 flex-wrap">
+    <% if @articles.current_page > 1 %>
+      <%= link_to articles_path(read: params["read"], page: @articles.current_page - 1), class: "px-4 py-2 text-sm font-medium text-gray-700 border border-gray-300 rounded-md hover:bg-gray-200" do %>
+        <span><%= t('kaminari.prev') %></span>
+      <% end %>
+    <% else %>
+      <span class="px-4 py-2 text-sm font-medium text-gray-500 border border-gray-300 rounded-md cursor-not-allowed"><%= t('kaminari.prev') %></span>
+    <% end %>
+
+    <% (1..@articles.total_pages).each do |page| %>
+      <%= link_to articles_path(read: params["read"], page: page), class: "px-4 py-2 text-sm font-medium border border-gray-300 rounded-md hover:bg-gray-200 #{'bg-blue-500 text-white' if page == @articles.current_page}" do %>
+        <span><%= page %></span>
+      <% end %>
+    <% end %>
+
+    <% if @articles.current_page < @articles.total_pages %>
+      <%= link_to articles_path(read: params["read"], page: @articles.current_page + 1), class: "px-4 py-2 text-sm font-medium text-gray-700 border border-gray-300 rounded-md hover:bg-gray-200" do %>
+        <span><%= t('kaminari.next') %></span>
+      <% end %>
+    <% else %>
+      <span class="px-4 py-2 text-sm font-medium text-gray-500 border border-gray-300 rounded-md cursor-not-allowed"><%= t('kaminari.next') %></span>
+    <% end %>
+  </div>
+<% end %>

@@ -27,6 +27,10 @@
           <p><%= t("no_article_unicorn") %> <%= t("no_article") %></p>
         </div>
         <%= render @articles %>
+
+        <div class="only:flex mt-8">
+          <%= paginate @articles %>
+        </div>
       </div>
     <% end %>
   </div>

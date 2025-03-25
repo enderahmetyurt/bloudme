@@ -1,9 +1,11 @@
 class ArticlesController < ApplicationController
   def index
     @articles = Article
-      .by_current_user(Current.user)
-      .where(is_read: ActiveModel::Type::Boolean.new.cast(params[:read]) || false)
-      .recent
+        .by_current_user(Current.user)
+        .where(is_read: ActiveModel::Type::Boolean.new.cast(params[:read]) || false)
+        .recent
+        .page(params[:page])
+        .per(10)
     @feed = Feed.new
   end
 

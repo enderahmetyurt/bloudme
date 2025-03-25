@@ -66,3 +66,11 @@ se:
   bookmarks: Bokmärken
   no_bookmarks: Kom igen 😭 Lägg till några fina artiklar här
   rights: Alla rättigheter reserverade.
+  kaminari:
+    prev: "« Föregående"
+    next: "Nästa »"
+    page: "Sida %{page}"
+    total_entries: "%{count} resultat"
+    out_of_range: "Sidan %{page} finns inte"
+    first: "Första"
+    last: "Sista"

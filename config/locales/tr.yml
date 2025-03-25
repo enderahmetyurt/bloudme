@@ -66,3 +66,11 @@ tr:
   bookmarks: Yer İmleri
   no_bookmarks: Hadi ama 😭 Buraya güzel makaleler ekle
   rights: Tüm hakları saklıdır.
+  kaminari:
+    prev: "« Önceki"
+    next: "Sonraki »"
+    page: "Sayfa %{page}"
+    total_entries: "%{count} sonuç"
+    out_of_range: "Sayfa %{page} mevcut değil"
+    first: "İlk"
+    last: "Son"
