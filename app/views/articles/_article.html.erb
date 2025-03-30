@@ -7,7 +7,7 @@
             <img src="<%= article.feed.favicon %>", class="rounded-full w-10 h-10">
             <%= link_to article.title, article_path(article), data: { turbo_frame: "_top" } %>
           </h2>
-          <span><%= link_to article_action(article), article.link, target: "_blank" %></span>
+          <span><%= safe_link_to(article_action(article), article.link, target: "_blank") %></span>
           <% if params["controller"] == "articles" && params["action"] == "show" %>
             <% if @article.youtube_channel_id %>
               <div class="aspect-w-16 aspect-h-9 mt-5">

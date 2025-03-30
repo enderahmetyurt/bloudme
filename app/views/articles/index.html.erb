@@ -26,7 +26,7 @@
         <div class="only:flex hidden gap-5 justify-center items-center mt-10 font-mono text-2xl">
           <p><%= t("no_article_unicorn") %> <%= t("no_article") %></p>
         </div>
-        <%= render @articles %>
+        <%= render partial: "article", collection: @articles %>
 
         <div class="only:flex mt-8">
           <%= paginate @articles %>
