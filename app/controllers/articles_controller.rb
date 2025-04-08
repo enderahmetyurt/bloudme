@@ -5,7 +5,6 @@ class ArticlesController < ApplicationController
                        .where(is_read: read_param)
                        .recent
                        .page(params[:page])
-                       .per(10)
     @feed = Feed.new
   end
 
