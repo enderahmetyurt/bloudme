@@ -6,7 +6,6 @@ class User < ApplicationRecord
 
   has_secure_password
   has_many :sessions, dependent: :destroy
-  has_many :posts, dependent: :destroy
   has_many :feeds, dependent: :destroy
   has_many :bookmarks, dependent: :destroy
   has_many :bookmarked_articles, through: :bookmarks, source: :article
