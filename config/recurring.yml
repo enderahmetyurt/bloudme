@@ -2,4 +2,4 @@ production:
   periodic_update_feed:
     class: UpdateFeedsJob
     queue: default
-    schedule: every 1 hour
+    schedule: every 3 hour
