@@ -1,11 +1,12 @@
 class ArticlesController < ApplicationController
   def index
+    redirect_to new_feed_path if Current.user.feeds.empty?
+
     read_param = ActiveModel::Type::Boolean.new.cast(params[:read]) || false
     @articles = Article.by_current_user(Current.user)
                        .where(is_read: read_param)
                        .recent
                        .page(params[:page])
-    @feed = Feed.new
   end
 
   def show

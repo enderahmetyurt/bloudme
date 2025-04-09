@@ -28,9 +28,11 @@
             </div>
           <% end %>
         </li>
-        <li>
-          <%= link_to t("feeds.new"), new_feed_path, class: "rounded-lg py-1 px-2 border-2 border-white-500 text-white block font-medium" %>
-        </li>
+        <% unless request.path == "/feeds/new" %>
+          <li>
+            <%= link_to t("feeds.new"), new_feed_path, class: "rounded-lg py-1 px-2 border-2 border-white-500 text-white block font-medium" %>
+          </li>
+        <% end %>
         <li class="text-center">
           <div data-controller="dropdown" class="relative">
             <!-- User Avatar -->
@@ -84,9 +86,11 @@
     <div
       data-menu-target="dropdown"
       class="hidden sm:hidden flex-col bg-blue-700 text-white mt-4">
-      <div class="px-4 py-2 text-center">
-        <%= link_to  t("feeds.new"), new_feed_path, class: "rounded-lg py-1 px-2 border-2 border-white-500 text-white block font-medium mb-3 mt-2" %>
-      </div>
+      <% unless request.path == "/feeds/new" %>
+        <div class="px-4 py-2 text-center">
+          <%= link_to  t("feeds.new"), new_feed_path, class: "rounded-lg py-1 px-2 border-2 border-white-500 text-white block font-medium mb-3 mt-2" %>
+        </div>
+      <% end %>
       <div class="px-4 py-2 text-center">
         <%= link_to t("settings.profile"), feeds_path, class: "text-red-500 hover:underline text-white" %>
       </div>
