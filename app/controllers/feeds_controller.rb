@@ -1,5 +1,7 @@
 class FeedsController < ApplicationController
   def index
+    redirect_to new_feed_path if Current.user.feeds.empty?
+
     @feeds = Current.user.feeds
   end
 
