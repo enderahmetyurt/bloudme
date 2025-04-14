@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_03_02_061311) do
+ActiveRecord::Schema[8.1].define(version: 2025_04_14_193143) do
   create_table "articles", force: :cascade do |t|
     t.text "content"
     t.datetime "created_at", null: false
@@ -48,6 +48,16 @@ ActiveRecord::Schema[8.1].define(version: 2025_03_02_061311) do
     t.index ["user_id"], name: "index_feeds_on_user_id"
   end
 
+  create_table "job_runs", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "job_class"
+    t.datetime "next_run_at"
+    t.datetime "ran_at"
+    t.datetime "updated_at", null: false
+    t.integer "user_id", null: false
+    t.index ["user_id"], name: "index_job_runs_on_user_id"
+  end
+
   create_table "sessions", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "ip_address"
@@ -72,5 +82,6 @@ ActiveRecord::Schema[8.1].define(version: 2025_03_02_061311) do
   add_foreign_key "bookmarks", "articles"
   add_foreign_key "bookmarks", "users"
   add_foreign_key "feeds", "users"
+  add_foreign_key "job_runs", "users"
   add_foreign_key "sessions", "users"
 end
