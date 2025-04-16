@@ -1,8 +1,8 @@
 <div class="w-full">
   <% content_for :title, t("articles") %>
-  <div class="flex justify-between items-center">
+  <div class="flex justify-between items-center flex-col md:flex-row">
     <h1 class="font-bold text-4xl"><%= t("articles") %></h1>
-    <div class="font-mono text-gray-500 text-sm">
+    <div class="font-mono text-gray-500 text-sm mt-5 mb-5 md:mt-0 md:mb-0">
       <p><%= t("feed.last_fetched", time: time_ago_in_words(JobRun.last.ran_at)) %></p>
       <p><%= t("feed.next_run", time: time_ago_in_words(JobRun.last.next_run_at)) %></p>
     </div>
