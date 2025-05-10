@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  mount MaintenanceTasks::Engine, at: "/maintenance_tasks"
   mount Avo::Engine, at: Avo.configuration.root_path
   mount MissionControl::Jobs::Engine, at: "/jobs"
 
