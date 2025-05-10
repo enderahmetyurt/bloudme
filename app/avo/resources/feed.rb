@@ -14,4 +14,8 @@ class Avo::Resources::Feed < Avo::BaseResource
     field :user, as: :belongs_to
     field :articles, as: :has_many
   end
+
+  def actions
+    action Avo::Actions::ExportCsv
+  end
 end

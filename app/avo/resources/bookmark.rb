@@ -10,4 +10,8 @@ class Avo::Resources::Bookmark < Avo::BaseResource
     field :article, as: :belongs_to
     field :user, as: :belongs_to
   end
+
+  def actions
+    action Avo::Actions::ExportCsv
+  end
 end

@@ -18,4 +18,8 @@ class Avo::Resources::Article < Avo::BaseResource
     field :youtube_video_id, as: :text
     field :feed, as: :belongs_to
   end
+
+  def actions
+    action Avo::Actions::ExportCsv
+  end
 end
