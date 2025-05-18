@@ -77,3 +77,5 @@ gem "kaminari"
 
 gem "maintenance_tasks", "~> 2.12"
 gem "feedbag"
+gem "sentry-ruby"
+gem "sentry-rails"
