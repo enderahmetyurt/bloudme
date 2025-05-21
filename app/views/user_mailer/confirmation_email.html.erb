@@ -1,0 +1,16 @@
+<h2 style="color: #333;">Email adresinizi onaylayın</h2>
+<p style="font-size: 15px; color: #555;">
+  Merhaba <%= user.email_address %>,
+</p>
+<p style="font-size: 15px; color: #555;">
+  Bloudme hesabınızı kullanmaya başlamadan önce email adresinizi onaylamanız gerekiyor.
+</p>
+<p style="text-align: center; margin: 30px 0;">
+  <a href="<%= confirm_email_url(token: user.confirmation_token) %>"
+     style="background-color: #e63946; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px;">
+    Emailimi Onayla
+  </a>
+</p>
+<p style="font-size: 13px; color: #888;">
+  Bu bağlantı 7 gün boyunca geçerlidir. Eğer bu işlemi siz yapmadıysanız bu maili dikkate almayabilirsiniz.
+</p>
