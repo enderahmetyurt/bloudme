@@ -13,14 +13,14 @@ class RegistrationsController < ApplicationController
     if user.save
       start_new_session_for user
 
-      ResendMailer.send_email(
-        to: user.email_address,
-        subject: "Email adresinizi onaylayın",
-        html: render_to_string(
-          template: "user_mailer/confirmation_email",
-          locals: { user: user }
-        )
-      )
+      # ResendMailer.send_email(
+      #   to: user.email_address,
+      #   subject: "Email adresinizi onaylayın",
+      #   html: render_to_string(
+      #     template: "user_mailer/confirmation_email",
+      #     locals: { user: user }
+      #   )
+      # )
 
       redirect_to after_authentication_url, notice: t("home.sign_up") # TODO: "Kaydınız alındı. Lütfen email adresinizi onaylayın."
     else
