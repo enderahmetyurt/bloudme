@@ -25,7 +25,7 @@ class User < ApplicationRecord
   end
 
   def confirmation_expired?
-    confirmation_sent_at < 7.days.ago
+    confirmation_sent_at && confirmation_sent_at < 7.days.ago
   end
 
   def login_blocked_reason
