@@ -9,12 +9,19 @@ class SessionsController < ApplicationController
 
   def create
     if user = User.authenticate_by(params.permit(:email_address, :password))
-      start_new_session_for user
-      redirect_to after_authentication_url, notice: t("home.signed_in")
+      if !user.email_confirmed? && user.confirmation_expired?
+        redirect_to new_session_path, alert: "Email onay süreniz dolmuş. Lütfen yeniden onay maili isteyin."
+      elsif !user.email_confirmed?
+        redirect_to new_session_path, alert: "Email adresiniz henüz onaylanmamış."
+      else
+        start_new_session_for user
+        redirect_to after_authentication_url, notice: t("home.signed_in")
+      end
     else
       redirect_to new_session_path, alert: "Try another email address or password."
     end
   end
+
 
   def destroy
     terminate_session

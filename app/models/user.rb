@@ -3,6 +3,7 @@ class User < ApplicationRecord
 
   before_create :set_nick_name
   before_create :set_random_avatar
+  before_create :generate_confirmation_token
 
   has_secure_password
   has_many :sessions, dependent: :destroy
@@ -13,6 +14,25 @@ class User < ApplicationRecord
   normalizes :email_address, with: ->(e) { e.strip.downcase }
 
   validates :email_address, uniqueness: true, presence: true, format: { with: URI::MailTo::EMAIL_REGEXP }
+
+  def generate_confirmation_token
+    self.confirmation_token = SecureRandom.urlsafe_base64
+    self.confirmation_sent_at = Time.current
+  end
+
+  def confirm_email!
+    update(email_confirmed: true, confirmation_token: nil, confirmation_sent_at: nil)
+  end
+
+  def confirmation_expired?
+    confirmation_sent_at && confirmation_sent_at < 7.days.ago
+  end
+
+  def login_blocked_reason
+    return "Email onaylanmamış" unless email_confirmed?
+    return "Email onay süresi dolmuş" if confirmation_expired?
+    nil
+  end
 
   private
 

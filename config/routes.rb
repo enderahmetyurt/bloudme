@@ -11,6 +11,9 @@ Rails.application.routes.draw do
       get :settings
     end
   end
+  get "email/confirm", to: "users/confirmations#show", as: :confirm_email
+  get "/email-preview", to: "dev/email_preview#confirmation"
+  get "/email-preview/reminder", to: "dev/email_preview#reminder"
   resources :feeds
   resources :articles do
     collection do
