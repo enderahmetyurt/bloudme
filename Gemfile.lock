@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/rails/rails.git
-  revision: c25c1c1c2175d170e1f7759e72b44bc981201601
+  revision: 612666219b8c44770479c366d9efc936269033ee
   branch: main
   specs:
     actioncable (8.1.0.alpha)
@@ -160,7 +160,7 @@ GEM
       reline (>= 0.3.8)
     docile (1.4.1)
     dotenv (3.1.8)
-    drb (2.2.1)
+    drb (2.2.3)
     ed25519 (1.4.0)
     erb (5.0.1)
     erubi (1.13.1)
@@ -330,7 +330,7 @@ GEM
       actionpack (>= 5.0.1.rc1)
       actionview (>= 5.0.1.rc1)
       activesupport (>= 5.0.1.rc1)
-    rails-dom-testing (2.2.0)
+    rails-dom-testing (2.3.0)
       activesupport (>= 5.0.0)
       minitest
       nokogiri (>= 1.6)
@@ -467,7 +467,7 @@ GEM
     websocket-extensions (0.1.5)
     xpath (3.2.0)
       nokogiri (~> 1.8)
-    zeitwerk (2.7.2)
+    zeitwerk (2.7.3)
 
 PLATFORMS
   arm64-darwin
