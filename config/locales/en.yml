@@ -3,6 +3,9 @@ en:
     welcome: "Welcome to Bloudme"
     description: "Stay updated with the latest content from your favorite blogs and news sites."
     sign_up: "Sign Up"
+    confirmation_email: "Your registration has been received. Please confirm your email address."
+    email_confirmed: Your email has been approved.
+    email_cannot_confirmed: "Invalid or expired confirmation link."
     sign_in: "Sign In"
     sign_out: "Sign Out"
     signed_in: "Signed In"

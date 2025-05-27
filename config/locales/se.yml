@@ -3,6 +3,9 @@ se:
     welcome: "Välkommen till Bloudme"
     description: "Håll dig uppdaterad med det senaste innehållet från dina favoritbloggar och nyhetssajter."
     sign_up: "Registrera dig"
+    confirmation_email: "Din registrering har tagits emot. Vänligen bekräfta din e-postadress."
+    email_confirmed: Din e-post har godkänts.
+    email_cannot_confirmed: "Ogiltig eller utgången bekräftelselänk."
     sign_in: "Logga in"
     sign_out: "Logga ut"
     signed_in: "Inloggad"

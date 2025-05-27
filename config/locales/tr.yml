@@ -3,6 +3,9 @@ tr:
     welcome: "Bloudme'ye Hoşgeldiniz"
     description: "Favori bloglarınızdan ve haber sitelerinizden en son içeriklerle güncel kalın."
     sign_up: "Kayıt Ol"
+    confirmation_email: "Kaydınız alındı. Lütfen e-posta adresinizi onaylayın."
+    email_confirmed: E-posta adresiniz onaylandı.
+    email_cannot_confirmed: "Geçersiz veya süresi dolmuş onay bağlantısı."
     sign_in: "Giriş Yap"
     sign_out: "Çıkış Yap"
     signed_in: "Oturum Açıldı"

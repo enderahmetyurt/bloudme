@@ -4,9 +4,10 @@ class Users::ConfirmationsController < ApplicationController
 
     if user && !user.confirmation_expired?
       user.confirm_email!
-      redirect_to root_path, notice: "Email adresiniz onaylandı."
+      redirect_to root_path, notice: t("home.email_confirmed")
     else
-      redirect_to root_path, alert: "Geçersiz veya süresi dolmuş onay bağlantısı."
+      redirect_to root_path, alert: t("home.email_cannot_confirmed")
+      # TODO: yenisini almak için tıklayınızı göstermek gerek
     end
   end
 end
