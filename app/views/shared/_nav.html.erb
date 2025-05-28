@@ -9,6 +9,11 @@
       </div>
     <% end %>
     <% if authenticated? %>
+      <% if !Current.user.email_confirmed? %>
+        <span class="text-red-700 font-extrabold bg-white p-3 rounded-md">
+          🚨 Your email is not confirmed. <%= link_to "Please confirm it", resend_confirmation_path, class: "hover:underline" %> 🚨
+        </span>
+      <% end %>
       <button
         data-action="click->menu#toggle"
         class="sm:hidden text-white focus:outline-none focus:ring-2 focus:ring-white"

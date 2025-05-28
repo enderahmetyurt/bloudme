@@ -6,6 +6,8 @@ se:
     confirmation_email: "Din registrering har tagits emot. Vänligen bekräfta din e-postadress."
     email_confirmed: Din e-post har godkänts.
     email_cannot_confirmed: "Ogiltig eller utgången bekräftelselänk."
+    confirmation_email_failed: "Bekräftelsen kunde inte skickas"
+    email_cannot_resend_confirmation: "Bekräftelsen kan inte skickas igen"
     sign_in: "Logga in"
     sign_out: "Logga ut"
     signed_in: "Inloggad"

@@ -6,6 +6,8 @@ en:
     confirmation_email: "Your registration has been received. Please confirm your email address."
     email_confirmed: Your email has been approved.
     email_cannot_confirmed: "Invalid or expired confirmation link."
+    confirmation_email_failed: "Confirmation couldn't send"
+    email_cannot_resend_confirmation: "Confirmation cannot resend"
     sign_in: "Sign In"
     sign_out: "Sign Out"
     signed_in: "Signed In"

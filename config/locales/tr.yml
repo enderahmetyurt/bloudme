@@ -6,6 +6,8 @@ tr:
     confirmation_email: "Kaydınız alındı. Lütfen e-posta adresinizi onaylayın."
     email_confirmed: E-posta adresiniz onaylandı.
     email_cannot_confirmed: "Geçersiz veya süresi dolmuş onay bağlantısı."
+    confirmation_email_failed: "Onay gönderilemedi"
+    email_cannot_resend_confirmation: "Onay yeniden gönderilemiyor"
     sign_in: "Giriş Yap"
     sign_out: "Çıkış Yap"
     signed_in: "Oturum Açıldı"

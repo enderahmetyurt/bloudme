@@ -12,6 +12,7 @@ Rails.application.routes.draw do
     end
   end
   get "email/confirm", to: "users/confirmations#show", as: :confirm_email
+  get "email/re-confirm", to: "users/confirmations#resend_confirmation", as: :resend_confirmation
   get "/email-preview", to: "dev/email_preview#confirmation"
   get "/email-preview/reminder", to: "dev/email_preview#reminder"
   resources :feeds
