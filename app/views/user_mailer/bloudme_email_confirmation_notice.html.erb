@@ -1,20 +1,17 @@
-<h2 style="color: #333;">Bloudme Artık Email Onayı İstiyor</h2>
+<h2 style="color: #333;">Bloudme Now Requires Email Confirmation</h2>
 <p style="font-size: 15px; color: #555;">
-  Merhaba <%= user.nick_name %>,
+  Hello <%= user.nick_name %> 👋
 </p>
 <p style="font-size: 15px; color: #555;">
-  Bloudme'de artık tüm kullanıcılarımızın email adresini onaylamasını istiyoruz.
-  Siz eski bir kullanıcı olduğunuz için bu bilgilendirme mailini alıyorsunuz.
+  At Bloudme, we now require all our users to confirm their email addresses.
+  You are receiving this notification email because you are a former user.
 </p>
 <p style="font-size: 15px; color: #555;">
-  Lütfen hesabınızı korumak ve kullanmaya devam edebilmek için aşağıdaki bağlantıdan
-  email adresinizi 7 gün içinde onaylayın.
+  Please confirm your email address within 7 days from the link below to protect your account and continue using it.
 </p>
 <p style="text-align: center; margin: 30px 0;">
-  <%= link_to "Emailimi Onayla",
-              confirm_email_url(token: user.confirmation_token),
-              style: "background-color: #e63946; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; display: inline-block;" %>
+  <%= link_to "Confirm My Email", confirm_email_url(token: user.confirmation_token), style: "background-color: #e63946; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; display: inline-block;" %>
 </p>
 <p style="font-size: 13px; color: #888;">
-  Eğer <%= (user.confirmation_sent_at + 7.days).strftime("%-d %B %Y") %> gün içinde onaylamazsanız, hesabınız sistemden kalıcı olarak silinecektir.
+  If you do not confirm within <%= (user.confirmation_sent_at + 7.days).strftime("%-d %B %Y") %> days, your account will be permanently deleted from the system.
 </p>
