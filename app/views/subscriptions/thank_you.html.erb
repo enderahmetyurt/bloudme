@@ -1,10 +1,22 @@
-<div class="thank-you-page">
-  <h1>🎉 Teşekkürler!</h1>
-  <p>Aboneliğiniz başarıyla başlatıldı.</p>
-  <% if Current.user&.subscription_active? %>
-    <p>Premium özelliklere erişebilirsiniz.</p>
-  <% else %>
-    <p>Aboneliğiniz henüz aktif değil. Birkaç dakika sürebilir veya sayfayı yenileyin.</p>
-  <% end %>
-  <%= link_to "Ana Sayfaya Dön", root_path, class: "btn btn-primary mt-4" %>
+<div class="min-h-screen bg-white text-gray-800 px-4 py-10 flex items-center justify-center">
+  <div class="max-w-md w-full text-center">
+    <div class="text-6xl mb-6">🎉</div>
+    <h1 class="text-3xl md:text-4xl font-bold mb-4">Aboneliğiniz Başarılı!</h1>
+    <p class="text-base md:text-lg text-gray-600 mb-6">
+      Premium üyeliğiniz aktif. Artık Bloudme’nin tüm özelliklerini sınırsız kullanabilirsiniz.
+    </p>
+    <% if Current.user&.subscription_active? %>
+      <p class="mb-10 text-green-600 font-semibold">
+        Aboneliğiniz aktif durumda ✅
+      </p>
+    <% else %>
+      <p class="mb-6 text-yellow-600 font-medium">
+        Aboneliğiniz kısa süre içinde aktif olacak. Lütfen birkaç saniye sonra sayfayı yenileyin.
+      </p>
+    <% end %>
+    <%= link_to "Ana Sayfaya Git", root_path, class: "inline-block w-full md:w-auto bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-6 rounded-md transition" %>
+    <p class="mt-8 text-sm text-gray-400">
+      Herhangi bir sorunuz olursa <a href="mailto:support@bloudme.com" class="underline hover:text-gray-600">bizimle iletişime geçin</a>.
+    </p>
+  </div>
 </div>
