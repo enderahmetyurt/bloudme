@@ -115,3 +115,8 @@ se:
   feed:
     last_fetched: "Senast hämtades för %{time} sedan"
     next_run: "Nästa om cirka %{time}"
+  subscription:
+    subscribe: Prenumerera månadsvis
+    unsubscribe: Avsluta prenumeration
+    success_status: Din prenumeration är aktiv
+    expires_at: Utgångsdatum

@@ -36,13 +36,15 @@ class LemonsqueezyController < ApplicationController
 
   def handle_subscription_created(data)
     user_id = data.dig("meta", "custom_data", "user_id")
-    return unless user_id
+    subscription_id = data.dig("data", "id")
+    return unless user_id && subscription_id
 
     user = User.find_by(id: user_id)
     return unless user
 
     user.update!(
       subscription_active: true,
+       subscription_id: subscription_id,
       subscription_expires_at: 1.month.from_now
     )
   end

@@ -115,3 +115,8 @@ tr:
   feed:
     last_fetched: "Son çekme %{time} önce yapıldı"
     next_run: "Yaklaşık %{time} sonra çalışacak"
+  subscription:
+    subscribe: Aylık Abone Ol
+    unsubscribe: Aboneliği Iptal et
+    success_status: Aboneliğiniz aktif
+    expires_at: Son Kullanma Tarihi

@@ -105,3 +105,8 @@ en:
   feed:
     last_fetched: "Last fetched about %{time} ago"
     next_run: "Next in about %{time}"
+  subscription:
+    subscribe: Subscribe Monthly
+    unsubscribe: Cancel subscription
+    success_status: Your subscription is active
+    expires_at: Expire Date

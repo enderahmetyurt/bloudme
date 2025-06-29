@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_06_29_132457) do
+ActiveRecord::Schema[8.1].define(version: 2025_06_29_153600) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -246,6 +246,7 @@ ActiveRecord::Schema[8.1].define(version: 2025_06_29_132457) do
     t.string "session_token"
     t.boolean "subscription_active", default: false
     t.datetime "subscription_expires_at"
+    t.string "subscription_id"
     t.datetime "updated_at", null: false
     t.index ["email_address"], name: "index_users_on_email_address", unique: true
   end

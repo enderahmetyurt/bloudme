@@ -27,6 +27,7 @@ Rails.application.routes.draw do
   end
   resources :bookmarks, only: %i[index]
   post "/subscribe", to: "subscriptions#create"
+  post "/unsubscribe", to: "subscriptions#unsubscribe"
   get "/subscribe/thank-you", to: "subscriptions#thank_you"
   post "/lemonsqueezy/webhook", to: "lemonsqueezy#webhook"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
