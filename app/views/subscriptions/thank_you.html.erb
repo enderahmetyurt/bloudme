@@ -1,0 +1,10 @@
+<div class="thank-you-page">
+  <h1>🎉 Teşekkürler!</h1>
+  <p>Aboneliğiniz başarıyla başlatıldı.</p>
+  <% if Current.user&.subscription_active? %>
+    <p>Premium özelliklere erişebilirsiniz.</p>
+  <% else %>
+    <p>Aboneliğiniz henüz aktif değil. Birkaç dakika sürebilir veya sayfayı yenileyin.</p>
+  <% end %>
+  <%= link_to "Ana Sayfaya Dön", root_path, class: "btn btn-primary mt-4" %>
+</div>

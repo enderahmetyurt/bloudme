@@ -4,6 +4,7 @@ class User < ApplicationRecord
   before_create :set_nick_name
   before_create :set_random_avatar
   before_create :generate_confirmation_token
+  before_create :generate_session_token
 
   has_secure_password
   has_many :sessions, dependent: :destroy
@@ -42,5 +43,9 @@ class User < ApplicationRecord
 
   def set_nick_name
     self.nick_name ||= email_address.split("@").first
+  end
+
+  def generate_session_token
+    self.session_token ||= SecureRandom.hex(32)
   end
 end
