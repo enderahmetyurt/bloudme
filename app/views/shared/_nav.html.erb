@@ -13,11 +13,12 @@
         <span class="text-red-700 font-extrabold bg-white p-3 rounded-md">
           🚨 Your email is not confirmed. <%= link_to "Please confirm it", resend_confirmation_path, class: "hover:underline" %> 🚨
         </span>
-      <% end %>
-      <% if Current.user.subscription_active? %>
-        <p>Aboneliğiniz aktif 🎉</p>
       <% else %>
-        <%= button_to "Aylık Abone Ol", subscribe_path, method: :post, class: "btn btn-primary", form: { data: { turbo: false } } %>
+        <% if Current.user.subscription_active? %>
+          <p>Aboneliğiniz aktif 🎉</p>
+        <% else %>
+          <%= button_to "Aylık Abone Ol", subscribe_path, method: :post, class: "btn btn-primary", form: { data: { turbo: false } } %>
+        <% end %>
       <% end %>
       <button
         data-action="click->menu#toggle"
