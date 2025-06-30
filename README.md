@@ -8,9 +8,7 @@ Follow your favourite web sites, and read in minimal design.
 - Tailwind
 - Hotwire/Turbo
 - Stimulus
-- SQLite
+- PostgreSQL
 - Active Job
-- Kamal
-- Digitial Ocean
-- Ubuntu VPS
+- Render
 - MiniTest
