@@ -6,7 +6,7 @@
       <div class="text-lg text-red-400 font-semibold"><%= @user.nick_name %></div>
       <div class="text-sm text-gray-500">Joined in <%= @user.created_at.strftime("%B, %Y") %></div>
     </div>
-    <% if Flipper.enabled?(:search, @user) %>
+    <% if Flipper.enabled?(:subscription, @user) %>
       <div>
         <% if @user.subscription_active? %>
           <div class="flex gap-4 items-center">
