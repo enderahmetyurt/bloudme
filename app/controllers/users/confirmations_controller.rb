@@ -7,7 +7,6 @@ class Users::ConfirmationsController < ApplicationController
       redirect_to root_path, notice: t("home.email_confirmed")
     else
       redirect_to root_path, alert: t("home.email_cannot_confirmed")
-      # TODO: yenisini almak için tıklayınızı göstermek gerek
     end
   end
 

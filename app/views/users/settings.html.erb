@@ -6,21 +6,23 @@
       <div class="text-lg text-red-400 font-semibold"><%= @user.nick_name %></div>
       <div class="text-sm text-gray-500">Joined in <%= @user.created_at.strftime("%B, %Y") %></div>
     </div>
-    <div>
-      <% if @user.subscription_active? %>
-        <div class="flex gap-4 items-center">
-          <div>
-            <p><%= t("subscription.success_status") %></p>
-            <p><b><%=  t("subscription.expires_at")%></b> <%= @user.subscription_expires_at.strftime("%d-%B-%Y") %></p>
+    <% if Flipper.enabled?(:search, @user) %>
+      <div>
+        <% if @user.subscription_active? %>
+          <div class="flex gap-4 items-center">
+            <div>
+              <p><%= t("subscription.success_status") %></p>
+              <p><b><%=  t("subscription.expires_at")%></b> <%= @user.subscription_expires_at.strftime("%d-%B-%Y") %></p>
+            </div>
+            <div>
+              <%= button_to t("subscription.unsubscribe"), unsubscribe_path, method: :post, class: "rounded-lg py-1 px-2 border-2 border-red-500 text-red block font-medium", form: { data: { turbo: false } } %>
+            </div>
           </div>
-          <div>
-            <%= button_to t("subscription.unsubscribe"), unsubscribe_path, method: :post, class: "rounded-lg py-1 px-2 border-2 border-red-500 text-red block font-medium", form: { data: { turbo: false } } %>
-          </div>
-        </div>
-      <% else %>
-        <%= button_to t("subscription.subscribe"), subscribe_path, method: :post, class: "rounded-lg py-1 px-2 border-2 border-red-500 text-red block font-medium", form: { data: { turbo: false } } %>
-      <% end %>
-    </div>
+        <% else %>
+          <%= button_to t("subscription.subscribe"), subscribe_path, method: :post, class: "rounded-lg py-1 px-2 border-2 border-red-500 text-red block font-medium", form: { data: { turbo: false } } %>
+        <% end %>
+      </div>
+    <% end %>
   </div>
   <hr class="mt-5 mb-5">
   <div class="grid grid-cols-1 gap-6">
