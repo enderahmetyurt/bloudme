@@ -194,9 +194,9 @@ class ArticlesControllerTest < ActionDispatch::IntegrationTest
     sign_in_user
     assert Bookmark.exists?(article: @article, user: @user)
 
-    patch update_bookmark_article_url(@article), 
-          params: { article: { bookmarked: false } }, 
-          headers: { 
+    patch update_bookmark_article_url(@article),
+          params: { article: { bookmarked: false } },
+          headers: {
             "Accept" => "text/vnd.turbo-stream.html",
             "HTTP_REFERER" => "http://example.com/bookmarks"
           }
