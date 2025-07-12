@@ -4,3 +4,5 @@ import "controllers"
 
 import "trix"
 import "@rails/actiontext"
+
+Turbo.config.forms.submitter = "aria-disabled"
