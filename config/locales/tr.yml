@@ -47,8 +47,12 @@ tr:
     new: "Kaynak Ekle"
     create:
       error: "Kaynak eklenirken hata oluştu. Lütfen Link'i kontrol edin ve tekrar deneyin."
+      success: "Kaynak başarıyla eklendi."
+      url_required: "Kaynak URL'si gereklidir"
     destroy:
       success: Kaynak başarı ile silindi
+    show:
+      not_found: "Kaynak bulunamadı"
   settings: "Ayarlar"
   helpers:
     submit:

@@ -47,8 +47,12 @@ se:
     new: "Lägg till feed"
     create:
       error: "Det gick inte att lägga till flöde. Kontrollera webbadressen och försök igen."
+      success: "Flödet har lagts till framgångsrikt."
+      url_required: "Feed-URL krävs"
     destroy:
       success: Flödet har tagits bort
+    show:
+      not_found: "Flödet hittades inte"
   settings: "Inställningar"
   helpers:
     submit:

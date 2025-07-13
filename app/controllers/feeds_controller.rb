@@ -10,7 +10,13 @@ class FeedsController < ApplicationController
   end
 
   def create
-    parsed_feed = RssParserService.fetch_and_parse(feed_params[:feed_url])
+    feed_url = feed_params[:feed_url]
+    if feed_url.blank?
+      redirect_to new_feed_path, alert: t("feeds.create.url_required")
+      return
+    end
+
+    parsed_feed = RssParserService.fetch_and_parse(feed_url)
 
     if parsed_feed
       @feed = Current.user.feeds.create(
@@ -25,15 +31,19 @@ class FeedsController < ApplicationController
         @feed.articles.create(entry)
       end
 
-      redirect_to articles_path, notice: "Feed added successfully."
+      redirect_to articles_path, notice: t("feeds.create.success")
     else
       redirect_to new_feed_path, alert: t("feeds.create.error")
     end
+  rescue ActionController::ParameterMissing
+    redirect_to new_feed_path, alert: t("feeds.create.url_required")
   end
 
   def show
     @feed = Current.user.feeds.find(params[:id])
     @articles = @feed.articles.recent
+  rescue ActiveRecord::RecordNotFound
+    redirect_to feeds_path, alert: t("feeds.show.not_found")
   end
 
   def destroy
@@ -41,6 +51,8 @@ class FeedsController < ApplicationController
     @feed.destroy
 
     redirect_to feeds_path, notice: t("feeds.destroy.success")
+  rescue ActiveRecord::RecordNotFound
+    redirect_to feeds_path, alert: t("feeds.show.not_found")
   end
 
   private

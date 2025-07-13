@@ -47,8 +47,12 @@ en:
     new: "Add Feed"
     create:
       error: "Error adding feed. Please check the URL and try again."
+      success: "Feed added successfully."
+      url_required: "Feed URL is required"
     destroy:
       success: Feed deleted successfully
+    show:
+      not_found: "Feed not found"
   settings: "Settings"
   helpers:
     submit:
