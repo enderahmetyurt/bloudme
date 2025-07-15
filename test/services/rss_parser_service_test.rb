@@ -48,7 +48,7 @@ class RssParserServiceTest < ActiveSupport::TestCase
     mock_http_response = Minitest::Mock.new
     mock_http_response.expect :body, "<rss></rss>"
 
-    SiteMetadataFetcher.stub :new, -> (_url) { mock_metadata_fetcher } do
+    SiteMetadataFetcher.stub :new, ->(_url) { mock_metadata_fetcher } do
       HTTParty.stub :get, mock_http_response do
         Feedjira.stub :parse, @feed_object do
           result = RssParserService.fetch_and_parse(@url)
@@ -98,7 +98,7 @@ class RssParserServiceTest < ActiveSupport::TestCase
     mock_http_response = Minitest::Mock.new
     mock_http_response.expect :body, "<feed></feed>"
 
-    SiteMetadataFetcher.stub :new, -> (_url) { mock_metadata_fetcher } do
+    SiteMetadataFetcher.stub :new, ->(_url) { mock_metadata_fetcher } do
       HTTParty.stub :get, mock_http_response do
         Feedjira.stub :parse, youtube_feed do
           result = RssParserService.fetch_and_parse("https://youtube.com")
@@ -115,7 +115,7 @@ class RssParserServiceTest < ActiveSupport::TestCase
   end
 
   test "returns nil if feed download fails" do
-    SiteMetadataFetcher.stub :new, -> (_url) { OpenStruct.new(call: nil) } do
+    SiteMetadataFetcher.stub :new, ->(_url) { OpenStruct.new(call: nil) } do
       result = RssParserService.fetch_and_parse(@url)
       assert_nil result
     end
