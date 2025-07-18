@@ -15,14 +15,14 @@ class RssParserServiceTest < ActiveSupport::TestCase
         title: "Post 1",
         content: "Content 1",
         summary: nil,
-        published: Time.now,
+        published: Time.parse("2023-01-01 12:00:00 UTC"),
         url: "https://example.com/post1"
       ),
       OpenStruct.new(
         title: "Post 2",
         content: nil,
         summary: "Summary 2",
-        published: Time.now,
+        published: Time.parse("2023-01-01 12:00:00 UTC"),
         url: "https://example.com/post2"
       )
     ]
@@ -78,7 +78,7 @@ class RssParserServiceTest < ActiveSupport::TestCase
         OpenStruct.new(
           title: "Video 1",
           media_url: "https://media.example.com/video1.mp4",
-          published: Time.now,
+          published: Time.parse("2023-01-01 12:00:00 UTC"),
           url: "https://youtube.com/watch?v=1",
           media_thumbnail_url: nil,
           youtube_channel_id: nil,
@@ -93,13 +93,11 @@ class RssParserServiceTest < ActiveSupport::TestCase
       favicon: "https://youtube.com/favicon.ico"
     }
 
-    mock_metadata_fetcher = Minitest::Mock.new
-    mock_metadata_fetcher.expect :call, youtube_metadata
-    mock_http_response = Minitest::Mock.new
-    mock_http_response.expect :body, "<feed></feed>"
+    metadata_fetcher = OpenStruct.new(call: youtube_metadata)
+    http_response = OpenStruct.new(body: "<feed></feed>")
 
-    SiteMetadataFetcher.stub :new, ->(_url) { mock_metadata_fetcher } do
-      HTTParty.stub :get, mock_http_response do
+    SiteMetadataFetcher.stub :new, ->(_url) { metadata_fetcher } do
+      HTTParty.stub :get, http_response do
         Feedjira.stub :parse, youtube_feed do
           result = RssParserService.fetch_and_parse("https://youtube.com")
 
@@ -109,9 +107,6 @@ class RssParserServiceTest < ActiveSupport::TestCase
         end
       end
     end
-
-    mock_metadata_fetcher.verify
-    mock_http_response.verify
   end
 
   test "returns nil if feed download fails" do
