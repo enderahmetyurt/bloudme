@@ -22,7 +22,7 @@
   <body class="flex flex-col min-h-screen">
     <%= render partial: "shared/nav" %>
     <main class="container mx-auto mt-10 mb-10 px-5 flex flex-col flex-1">
-      <div>
+      <div data-turbo-temporary>
         <% if notice.present? %>
           <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
         <% end %>
