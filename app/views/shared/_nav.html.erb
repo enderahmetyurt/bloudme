@@ -24,12 +24,12 @@
       </button>
       <ul class="hidden sm:flex flex-wrap items-center space-x-6 mt-2 sm:mt-0">
         <li>
-          <%= form_with(url: search_articles_path, method: :get, data: { turbo_frame: "articles" }) do |f| %>
+          <%= form_with(url: search_articles_path, method: :get, data: { turbo_frame: "articles", controller: "search" }) do |f| %>
             <div>
               <%= f.text_field :query,
                   placeholder: t("search"),
-                  class: "border rounded-lg w-full text-gray-900",
-                  data: { turbo_frame: "articles" } %>
+                  class: "border rounded-lg w-48 px-4 py-2 text-gray-900 transform origin-center transition-all duration-300 focus:w-96",
+                  data: { turbo_frame: "articles", search_target: "input" } %>
             </div>
           <% end %>
         </li>
