@@ -1,5 +1,6 @@
 require "test_helper"
 require "minitest/mock"
+require "mocha/minitest"
 require "ostruct"
 
 class RssParserServiceTest < ActiveSupport::TestCase
