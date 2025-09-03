@@ -64,7 +64,7 @@ class RssParserServiceTest < ActiveSupport::TestCase
     HTTParty.stubs(:get).returns(OpenStruct.new(body: feed_body))
 
     mock_feed = OpenStruct.new(
-      title: "YouTube Channel",
+      title: "Youtube Channel",
       entries: [
         OpenStruct.new(
           title: "Video Title",
@@ -83,7 +83,7 @@ class RssParserServiceTest < ActiveSupport::TestCase
     result = RssParserService.fetch_and_parse("https://youtube.com/channel/UC123")
 
     assert_not_nil result
-    assert_equal "YouTube Channel", result[:title]
+    assert_equal "Youtube Channel", result[:title]
     assert_equal "https://youtube.com/favicon.ico", result[:favicon]
     assert_equal 1, result[:entries].count
 
