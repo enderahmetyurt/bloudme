@@ -5,9 +5,11 @@ one:
   feed_url: MyString
   title: MyString
   description: MyString
+  favicon: https://example.com/favicon.ico
 
 two:
   user: two
   feed_url: MyString
   title: MyString
   description: MyString
+  favicon: https://example.com/favicon.ico

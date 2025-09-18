@@ -4,14 +4,14 @@
       <div class="flex flex-col sm:flex-row sm:items-center gap-4">
         <div>
           <h2 class="text-xl sm:text-2xl font-semibold text-blue-600 mb-2 hover:text-black flex items-center gap-2">
-            <img src="<%= article.feed.favicon %>", class="rounded-full w-10 h-10">
+            <%= image_tag(article.feed.favicon, class: "rounded-full w-10 h-10", alt: "#{article.feed.title} favicon") %>
             <%= link_to article.title, article_path(article), data: { turbo_frame: "_top" } %>
           </h2>
           <span><%= safe_link_to(article_action(article), article.link, target: "_blank") %></span>
           <% if params["controller"] == "articles" && params["action"] == "show" %>
             <% if @article.youtube_channel_id %>
               <div class="aspect-w-16 aspect-h-9 mt-5">
-                <iframe src="https://www.youtube.com/embed/<%= @article.youtube_video_id %>?rel=0&autoplay=0 %>" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <iframe src="https://www.youtube.com/embed/<%= @article.youtube_video_id %>?rel=0&autoplay=0 %>" title="YouTube video player for <%= @article.title %>" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
               </div>
             <% else %>
               <div class="max-w-full overflow-x-auto break-words text-sm sm:text-base text-gray-600 mt-5 leading-relaxed space-y-4 [&_pre]:whitespace-pre-wrap [&_pre]:break-words [&_img]:max-w-full [&_table]:max-w-full">

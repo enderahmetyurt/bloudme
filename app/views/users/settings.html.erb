@@ -12,7 +12,7 @@
           <div class="flex gap-4 items-center">
             <div>
               <p><%= t("subscription.success_status") %></p>
-              <p><b><%=  t("subscription.expires_at")%></b> <%= @user.subscription_expires_at.strftime("%d-%B-%Y") %></p>
+              <p><b><%= t("subscription.expires_at") %></b> <%= @user.subscription_expires_at.strftime("%d-%B-%Y") %></p>
             </div>
             <div>
               <%= button_to t("subscription.unsubscribe"), unsubscribe_path, method: :post, class: "rounded-lg py-1 px-2 border-2 border-red-500 text-red block font-medium", form: { data: { turbo: false } } %>
