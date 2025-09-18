@@ -282,7 +282,8 @@ class FeedsControllerTest < ActionDispatch::IntegrationTest
     additional_feed = @user.feeds.create!(
       title: "Additional Feed",
       feed_url: "https://example.com/additional.xml",
-      site_url: "https://example.com"
+      site_url: "https://example.com",
+      favicon: "https://example.com/favicon.ico"
     )
 
     get feeds_url

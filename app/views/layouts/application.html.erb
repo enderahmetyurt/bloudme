@@ -22,7 +22,7 @@
   <body class="flex flex-col min-h-screen">
     <%= render partial: "shared/nav" %>
     <main class="container mx-auto mt-10 mb-10 px-5 flex flex-col flex-1">
-      <div data-turbo-temporary class="flex justify-center">
+      <div data-turbo-temporary="true" class="flex justify-center">
         <% if notice.present? %>
           <div class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg flex items-center justify-between" id="notice" role="alert" data-controller="autohide">
             <span><%= notice %></span>
