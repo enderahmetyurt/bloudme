@@ -9,33 +9,34 @@
       <% end %>
     </div>
   </div>
-  <%= turbo_frame_tag "articles-container" do %>
-    <div class="border-b border-gray-200 w-full">
-      <ul class="flex space-x-2 justify-center">
-        <li class="p-5 <%= params["read"] == "true" ? "" : "bg-gray-100" %>">
-          <%= turbo_frame_tag "unread" do %>
-            <%= render partial: "articles/unread_count", locals: {count: Article.by_current_user(Current.user).unread.count} %>
-          <% end %>
-          <%= link_to t("article.unread"),
+</div>
+<%= turbo_frame_tag "articles-container" do %>
+  <div class="border-b border-gray-200 w-full">
+    <ul class="flex space-x-2 justify-center">
+      <li class="p-5 <%= params["read"] == "true" ? "" : "bg-gray-100" %>">
+        <%= turbo_frame_tag "unread" do %>
+          <%= render partial: "articles/unread_count", locals: {count: Article.by_current_user(Current.user).unread.count} %>
+        <% end %>
+        <%= link_to t("article.unread"),
             articles_path(read: false),
             class: "inline-block text-sm font-medium text-center text-gray-500 border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300"
           %>
-          <li class="p-5 <%= params["read"] == "true" ? "bg-gray-100" : "" %>">
-            <%= link_to t("article.read"),
+      </li>
+      <li class="p-5 <%= params["read"] == "true" ? "bg-gray-100" : "" %>">
+        <%= link_to t("article.read"),
             articles_path(read: true),
             class: "inline-block text-sm font-medium text-center text-gray-500 border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300"
           %>
-          </li>
-        </ul>
-      </div>
-      <div id="articles" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-6 mt-5">
-        <div class="only:flex hidden gap-5 justify-center items-center mt-10 font-mono text-2xl">
-          <p><%= t("no_article_unicorn") %> <%= t("no_article") %></p>
-        </div>
-        <%= render partial: "article", collection: @articles %>
-      </div>
-      <div class="only:flex mt-8">
-        <%= paginate @articles %>
-      </div>
-    <% end %>
+      </li>
+    </ul>
   </div>
+  <div id="articles" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-6 mt-5">
+    <div class="only:flex hidden gap-5 justify-center items-center mt-10 font-mono text-2xl">
+      <p><%= t("no_article_unicorn") %> <%= t("no_article") %></p>
+    </div>
+    <%= render partial: "article", collection: @articles %>
+  </div>
+  <div class="only:flex mt-8">
+    <%= paginate @articles %>
+  </div>
+<% end %>

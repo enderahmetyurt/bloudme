@@ -3,7 +3,7 @@
     <div class="flex flex-col sm:flex-row sm:items-center gap-4 w-full">
       <div class="flex-1 min-w-0">
         <h2 class="text-xl sm:text-2xl font-semibold text-blue-600 mb-2 hover:text-black truncate flex items-center gap-2">
-          <img src="<%= feed.favicon %>", class="rounded-full w-10 h-10">
+          <%= image_tag(feed.favicon, class: "rounded-full w-10 h-10", alt: "#{feed.title} favicon") %>
           <%= link_to feed.title, feed_path(feed) %>
         </h2>
         <h3 class="text-gray-500 mb-2 hover:text-black truncate">

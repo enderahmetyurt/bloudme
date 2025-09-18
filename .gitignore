@@ -89,3 +89,6 @@ simplecov/
 # Temporary files
 *.tmp
 *.temp
+
+# Log files with timestamps
+*_erb_parsing_result_*.log
