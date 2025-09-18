@@ -10,6 +10,9 @@
 # Ignore all environment files.
 /.env*
 
+# Keep .env.development
+!.env.example
+
 # Ignore all logfiles and tempfiles.
 /log/*
 /tmp/*
@@ -47,3 +50,42 @@
 
 /coverage/*
 /config/credentials/test.key
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS generated files
+Thumbs.db
+ehthumbs.db
+
+# Node modules (if any)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Editor temporary files
+.#*
+*#
+*~
+
+# Docker
+.dockerignore
+
+# Local secrets and keys
+*.pem
+*.key
+*.crt
+.env.local
+.env.production.local
+
+# Test coverage
+simplecov/
+
+# Temporary files
+*.tmp
+*.temp

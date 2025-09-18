@@ -6,13 +6,13 @@ class UpdateFeedsJob < ApplicationJob
 
     JobRun.create(
       job_class: self.class.name,
-      user: User.find_by(email_address: "enderyurt@gmail.com"),
+      user: User.find_by(is_admin: true),
       ran_at: Time.current,
       next_run_at: Time.current + 3.hours
     )
   rescue => e
     Rails.logger.error("MyJob failed for user #{user_id}: #{e.message}")
-    raise e # job patlamalı mı? istemiyorsan burayı kaldır
+    raise e
   end
 
   private

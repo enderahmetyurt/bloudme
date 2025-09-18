@@ -5,10 +5,10 @@ class LemonsqueezyController < ApplicationController
   def webhook
     payload = request.raw_post
     signature = request.headers["X-Signature"]
-    secret = "NAlmxO2YFuLgX"
+    secret = Rails.application.credentials.dig(:lemonsqueezy, :secret)
 
     unless valid_signature?(payload, signature, secret)
-      Rails.logger.warn("Geçersiz webhook imzası")
+      Rails.logger.warn("Invalid webhook signature")
       return head :unauthorized
     end
 
