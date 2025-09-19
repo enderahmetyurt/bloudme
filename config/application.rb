@@ -27,5 +27,9 @@ module Bloudme
     I18n.available_locales = [ :en, :tr, :se ]
     config.i18n.default_locale = :en
     config.i18n.fallbacks = true
+    config.active_storage.queues = {
+      analysis: :active_storage_analysis,
+  purge:    :active_storage_purge
+}
   end
 end
