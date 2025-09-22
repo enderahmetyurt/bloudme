@@ -6,7 +6,8 @@ class RssParserService
     return nil unless result
 
     feed_url = result[:feed_url]
-    feed     = Feedjira.parse(HTTParty.get(feed_url).body)
+    headers = { "User-Agent" => "Mozilla/5.0 (X11; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0" }
+    feed = Feedjira.parse(HTTParty.get(feed_url, headers:).body)
 
     if youtube_url?(feed_url)
       parse_youtube_feed(feed, result)
