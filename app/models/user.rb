@@ -30,8 +30,8 @@ class User < ApplicationRecord
   end
 
   def login_blocked_reason
-    return "Email onaylanmamış" unless email_confirmed?
-    return "Email onay süresi dolmuş" if confirmation_expired?
+    return "Email unconfirmed" unless email_confirmed?
+    return "Email confirmation expired" if confirmation_expired?
     nil
   end
 
