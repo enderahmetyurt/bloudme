@@ -22,11 +22,16 @@ class UpdateFeedsJob < ApplicationJob
       parsed_feed = RssParserService.fetch_and_parse(feed.feed_url)
       next unless parsed_feed
 
-      parsed_feed[:entries].each do |entry|
-        unless feed.articles.exists?(link: entry[:link])
-          feed.articles.create(entry)
-        end
+      # Batch load existing article links for this feed to avoid N+1 queries
+      entry_links = parsed_feed[:entries].map { |entry| entry[:link] }
+      existing_links = feed.articles.where(link: entry_links).pluck(:link).to_set
+
+      new_articles = parsed_feed[:entries].filter_map do |entry|
+        entry unless existing_links.include?(entry[:link])
       end
+
+      # Bulk insert new articles
+      feed.articles.insert_all(new_articles) if new_articles.any?
     end
   end
 end
