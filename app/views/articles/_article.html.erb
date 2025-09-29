@@ -4,7 +4,7 @@
       <div class="flex flex-col sm:flex-row sm:items-center gap-4">
         <div>
           <h2 class="text-xl sm:text-2xl font-semibold text-blue-600 mb-2 hover:text-black flex items-center gap-2">
-            <%= image_tag(article.feed.favicon || "default-favicon.png", class: "rounded-full w-10 h-10", alt: "#{article.feed.title} favicon") %>
+            <%= image_tag(article.feed.favicon, class: "rounded-full w-10 h-10", alt: "#{article.feed.title} favicon") %>
             <%= link_to article.title, article_path(article), data: { turbo_frame: "_top" } %>
           </h2>
           <span><%= safe_link_to(article_action(article), article.link, target: "_blank") %></span>

@@ -22,7 +22,7 @@ class FeedsController < ApplicationController
       @feed = Current.user.feeds.create(
         feed_url: parsed_feed[:feed_url],
         site_url: parsed_feed[:site_url],
-        favicon: parsed_feed[:favicon],
+        favicon: parsed_feed[:favicon] || "default-favicon.png",
         is_podcast: parsed_feed[:is_podcast],
         title: parsed_feed[:title],
         description: parsed_feed[:description]
@@ -61,3 +61,5 @@ class FeedsController < ApplicationController
     params.require(:feed).permit(:feed_url)
   end
 end
+
+Feed.where(favicon: nil).count
