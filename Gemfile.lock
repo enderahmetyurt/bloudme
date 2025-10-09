@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/rails/rails.git
-  revision: dac26fdf22498d79fe78501c55fdbf386f20590a
+  revision: 82d39b5f52a6f6fd08bdbd92585cec03dfedaa14
   branch: main
   specs:
     actioncable (8.1.0.beta1)
@@ -70,6 +70,7 @@ GIT
       connection_pool (>= 2.2.5)
       drb
       i18n (>= 1.6, < 2)
+      json
       logger (>= 1.4.2)
       minitest (>= 5.1)
       securerandom (>= 0.3)
@@ -268,7 +269,7 @@ GEM
       benchmark
       logger
     mini_mime (1.1.5)
-    minitest (5.25.5)
+    minitest (5.26.0)
     mission_control-jobs (1.1.0)
       actioncable (>= 7.1)
       actionpack (>= 7.1)
@@ -284,7 +285,7 @@ GEM
     msgpack (1.8.0)
     multi_xml (0.7.1)
       bigdecimal (~> 3.1)
-    net-imap (0.5.11)
+    net-imap (0.5.12)
       date
       net-protocol
     net-pop (0.1.2)
