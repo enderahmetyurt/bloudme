@@ -99,6 +99,23 @@ class ArticlesControllerTest < ActionDispatch::IntegrationTest
     assert_equal "test", assigns(:query)
   end
 
+  test "should search articles case-insensitively" do
+    sign_in_user
+
+    queries = ["mystring", "MYSTRING", "MyStrInG"]
+    results_by_query = queries.map do |q|
+      get search_articles_url, params: { query: q }
+      assert_response :success
+      assert assigns(:articles)
+      assigns(:articles).pluck(:id)
+    end
+
+    results_by_query.each do |ids|
+      assert_includes ids, @article.id
+      assert_equal results_by_query.first, ids
+    end
+  end
+
   test "should redirect unauthenticated user from update_read" do
     patch update_read_article_url(@article), params: { article: { read: true } }
 
