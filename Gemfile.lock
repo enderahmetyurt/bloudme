@@ -215,7 +215,7 @@ GEM
     jbuilder (2.14.1)
       actionview (>= 7.0.0)
       activesupport (>= 7.0.0)
-    job-iteration (1.10.0)
+    job-iteration (1.11.0)
       activejob (>= 6.1)
     json (2.13.2)
     kamal (2.7.0)
