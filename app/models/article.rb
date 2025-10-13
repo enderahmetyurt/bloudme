@@ -14,7 +14,7 @@ class Article < ApplicationRecord
   scope :search, ->(query) {
     return all if query.blank?
 
-    where("articles.title LIKE :query OR articles.content LIKE :query", query: "%#{query}%")
+    where("LOWER(articles.title) LIKE LOWER(:query) OR LOWER(articles.content) LIKE LOWER(:query)", query: "%#{query}%")
   }
 
   def youtube?

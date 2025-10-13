@@ -88,15 +88,29 @@ class ArticlesControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to new_session_path
   end
 
-  test "should search articles" do
+  test "should search articles case-insensitively" do
     sign_in_user
 
-    get search_articles_url, params: { query: "test" }
+    queries = ["mystring", "MYSTRING", "MyStrInG"]
+    results_by_query = queries.map do |q|
+      get search_articles_url, params: { query: q }
+      assert_response :success
+      assert assigns(:articles)
+      assigns(:articles).pluck(:id)
+    end
 
+    results_by_query.each do |ids|
+      assert_includes ids, @article.id
+      assert_equal results_by_query.first, ids
+    end
+  end
+
+  test "should search articles with no results" do
+    sign_in_user
+    get search_articles_url, params: { query: "__no_match_expected__" }
     assert_response :success
-    assert assigns(:query)
     assert assigns(:articles)
-    assert_equal "test", assigns(:query)
+    assert_equal [], assigns(:articles).pluck(:id)
   end
 
   test "should redirect unauthenticated user from update_read" do
