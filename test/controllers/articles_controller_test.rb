@@ -91,7 +91,7 @@ class ArticlesControllerTest < ActionDispatch::IntegrationTest
   test "should search articles case-insensitively" do
     sign_in_user
 
-    queries = ["mystring", "MYSTRING", "MyStrInG"]
+    queries = [ "mystring", "MYSTRING", "MyStrInG" ]
     results_by_query = queries.map do |q|
       get search_articles_url, params: { query: q }
       assert_response :success
