@@ -43,11 +43,11 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
   test "should update preferred locale via settings" do
     sign_in_user
 
-    patch user_path(@user), params: { user: { preferred_locale: "fr" } }
+    patch user_path(@user), params: { user: { preferred_locale: "sv" } }
 
     assert_response :redirect
     assert_redirected_to settings_user_path(@user)
     @user.reload
-    assert_equal "fr", @user.preferred_locale
+    assert_equal "sv", @user.preferred_locale
   end
 end

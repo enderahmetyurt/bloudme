@@ -1,5 +1,5 @@
 class AddPreferredLocaleToUsers < ActiveRecord::Migration[8.1]
   def change
-    add_column :users, :preferred_locale, :string
+    add_column :users, :preferred_locale, :string, default: "en"
   end
 end

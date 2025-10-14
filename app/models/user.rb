@@ -2,11 +2,8 @@ class User < ApplicationRecord
   DICE_BEAR_URL = "https://api.dicebear.com/6.x/adventurer/svg?".freeze
   AVAILABLE_LOCALES = [
     [ "English", "en" ],
-    [ "French", "fr" ],
-    [ "Italian", "it" ],
-    [ "Hindi", "hi" ],
-    [ "Spanish", "es" ],
-    [ "German", "de" ]
+    [ "Swedish", "sv" ],
+    [ "Turkish", "tr" ]
   ].freeze
 
   before_create :set_nick_name

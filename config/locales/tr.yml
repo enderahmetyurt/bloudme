@@ -68,6 +68,8 @@ tr:
       alert: "Diğer kullanıcının profilini görüntüleyemezsiniz."
     settings: Ayarlar
   settings:
+    language: Dil
+    select_language: Dil seçin
     profile: Profil
   search: Ara
   result_for: "%{query} için sonuçlar"
