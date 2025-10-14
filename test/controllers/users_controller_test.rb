@@ -29,4 +29,25 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     assert assigns(:user)
     assert assigns(:feeds)
   end
+
+  test "should show settings page for authenticated user" do
+    sign_in_user
+
+    get settings_user_path(@user)
+
+    assert_response :success
+    assert_select "form.user"
+    assert_match /Select language|Language/i, response.body
+  end
+
+  test "should update preferred locale via settings" do
+    sign_in_user
+
+    patch user_path(@user), params: { user: { preferred_locale: "fr" } }
+
+    assert_response :redirect
+    assert_redirected_to settings_user_path(@user)
+    @user.reload
+    assert_equal "fr", @user.preferred_locale
+  end
 end
