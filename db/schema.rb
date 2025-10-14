@@ -259,7 +259,7 @@ ActiveRecord::Schema[8.1].define(version: 2025_10_14_120000) do
     t.boolean "is_admin", default: false
     t.string "nick_name"
     t.string "password_digest", null: false
-    t.string "preferred_locale"
+    t.string "preferred_locale", default: "en"
     t.string "session_token"
     t.boolean "subscription_active", default: false
     t.datetime "subscription_expires_at"
