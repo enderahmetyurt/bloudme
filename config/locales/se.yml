@@ -68,6 +68,8 @@ se:
       alert: "Du kan inte se andra användares profil"
     settings: Inställningar
   settings:
+    language: Språk
+    select_language: Välj språk
     profile: Profil
   search: Sök
   result_for: Resultat för %{query}
