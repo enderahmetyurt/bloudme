@@ -9,6 +9,7 @@ class ApplicationController < ActionController::Base
       session[:locale] = params[:locale]
     end
 
-    I18n.locale = session[:locale] || I18n.default_locale
+    user_locale = Current.user&.preferred_locale
+    I18n.locale = (user_locale.presence || session[:locale] || I18n.default_locale)
   end
 end
