@@ -18,7 +18,7 @@ module ApplicationHelper
 
     begin
       uri = URI.parse(url)
-      return "" unless ["http", "https", "mailto"].include?(uri.scheme)
+      return "" unless [ "http", "https", "mailto" ].include?(uri.scheme)
       url
     rescue URI::InvalidURIError
       ""
