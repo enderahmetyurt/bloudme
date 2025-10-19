@@ -41,7 +41,7 @@ class FeedsController < ApplicationController
 
   def show
     @feed = Current.user.feeds.find(params[:id])
-    @articles = @feed.articles.recent
+    @articles = @feed.articles.recent.includes(:bookmarks)
   rescue ActiveRecord::RecordNotFound
     redirect_to feeds_path, alert: t("feeds.show.not_found")
   end
