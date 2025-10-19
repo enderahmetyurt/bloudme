@@ -5,12 +5,13 @@ class ArticlesController < ApplicationController
     read_param = ActiveModel::Type::Boolean.new.cast(params[:read]) || false
     @articles = Article.by_current_user(Current.user)
                        .where(is_read: read_param)
+                       .includes(:feed, :bookmarks)
                        .recent
                        .page(params[:page])
   end
 
   def show
-    @article = Article.find(params[:id])
+    @article = Article.includes(:feed, :bookmarks).find(params[:id])
     @article.update(is_read: true)
   end
 
@@ -19,6 +20,7 @@ class ArticlesController < ApplicationController
     @articles = Article
       .by_current_user(Current.user)
       .search(@query)
+      .includes(:feed, :bookmarks)
       .recent
   end
 
