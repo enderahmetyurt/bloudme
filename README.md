@@ -59,7 +59,7 @@ A modern RSS feed reader built with Ruby on Rails, designed for a clean and dist
    ```bash
    rails db:create
    rails db:migrate
-   rails db:seed
+   rails db:seed # See user password
    ```
 
 5. **Build assets**
@@ -166,4 +166,3 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 🛡️ Security
 
 If you discover a security vulnerability, please see [SECURITY.md](SECURITY.md) for reporting instructions.
-
