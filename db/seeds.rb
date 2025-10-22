@@ -26,7 +26,7 @@ puts "  Password: #{password}"
     site_url: "https://#{Faker::Internet.domain_name}",
     feed_url: "https://#{Faker::Internet.domain_name}/feed.xml",
     favicon: Faker::LoremFlickr.image(size: '32x32'),
-    is_podcast: [true, false, nil].sample,
+    is_podcast: [ true, false, nil ].sample,
     user: user
   )
 
@@ -39,8 +39,8 @@ puts "  Password: #{password}"
       content: "<p>#{Faker::Lorem.paragraphs(number: 3).join('</p><p>')}</p>",
       published_at: Faker::Time.backward(days: 365),
       created_at: Faker::Time.backward(days: 365),
-      thumbnail: [Faker::LoremFlickr.image, nil].sample,
-      is_read: [true, false].sample
+      thumbnail: [ Faker::LoremFlickr.image, nil ].sample,
+      is_read: [ true, false ].sample
     )
   end
 end
