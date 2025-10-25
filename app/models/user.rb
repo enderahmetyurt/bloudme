@@ -1,5 +1,10 @@
 class User < ApplicationRecord
   DICE_BEAR_URL = "https://api.dicebear.com/6.x/adventurer/svg?".freeze
+  AVAILABLE_LOCALES = [
+    [ "English", "en" ],
+    [ "Swedish", "se" ],
+    [ "Turkish", "tr" ]
+  ].freeze
 
   before_create :set_nick_name
   before_create :set_random_avatar
@@ -15,6 +20,14 @@ class User < ApplicationRecord
   normalizes :email_address, with: ->(e) { e.strip.downcase }
 
   validates :email_address, uniqueness: true, presence: true, format: { with: URI::MailTo::EMAIL_REGEXP }
+
+  class << self
+    def localized_locales
+      AVAILABLE_LOCALES.map do |name, code|
+        [ I18n.t("languages.#{code}"), code ]
+      end
+    end
+  end
 
   def generate_confirmation_token
     self.confirmation_token = SecureRandom.urlsafe_base64

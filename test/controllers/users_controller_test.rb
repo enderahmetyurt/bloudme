@@ -29,4 +29,56 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     assert assigns(:user)
     assert assigns(:feeds)
   end
+
+  test "should show settings page for authenticated user" do
+    sign_in_user
+
+    get settings_user_path(@user)
+
+    assert_response :success
+    assert_select "form.user"
+    assert_match /Select language|Language/i, response.body
+  end
+
+  test "should update preferred locale via settings" do
+    sign_in_user
+
+    patch user_path(@user), params: { user: { preferred_locale: "tr" } }
+
+    assert_response :redirect
+    assert_redirected_to settings_user_path(@user)
+    @user.reload
+    assert_equal "tr", @user.preferred_locale
+  end
+
+  test "should update preferred locale to Swedish and persist" do
+    sign_in_user
+
+    patch user_path(@user), params: { user: { preferred_locale: "se" } }
+
+    assert_response :redirect
+    assert_redirected_to settings_user_path(@user)
+    @user.reload
+    assert_equal "se", @user.preferred_locale
+  end
+
+  test "should display Turkish UI when user prefers Turkish" do
+    sign_in_user
+    @user.update(preferred_locale: "tr")
+
+    get articles_path
+
+    assert_response :success
+    assert_match /Ara|Sök/i, response.body
+  end
+
+  test "should display Swedish UI when user prefers Swedish" do
+    sign_in_user
+    @user.update(preferred_locale: "se")
+
+    get articles_path
+
+    assert_response :success
+    assert_match /Sök/i, response.body
+  end
 end
