@@ -38,7 +38,7 @@
       </div>
       <div class="my-5">
         <%= form.label :preferred_locale, t("settings.language"), class: "block text-gray-700 font-medium" %>
-        <%= form.select :preferred_locale, options_for_select(User::AVAILABLE_LOCALES, @user.preferred_locale), { include_blank: t("settings.select_language") }, class: "block w-full max-w-md shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2" %>
+        <%= form.select :preferred_locale, options_for_select(User.localized_locales, @user.preferred_locale), { include_blank: t("settings.select_language") }, class: "block w-full max-w-md shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2" %>
       </div>
       <div class="my-5">
         <%= form.label :password, class: "block text-gray-700 font-medium" %>

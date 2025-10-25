@@ -21,6 +21,14 @@ class User < ApplicationRecord
 
   validates :email_address, uniqueness: true, presence: true, format: { with: URI::MailTo::EMAIL_REGEXP }
 
+  class << self
+    def localized_locales
+      AVAILABLE_LOCALES.map do |name, code|
+        [ I18n.t("languages.#{code}"), code ]
+      end
+    end
+  end
+
   def generate_confirmation_token
     self.confirmation_token = SecureRandom.urlsafe_base64
     self.confirmation_sent_at = Time.current

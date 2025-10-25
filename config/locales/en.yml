@@ -69,6 +69,10 @@ en:
     profile: Profile
     language: Language
     select_language: Select language
+  languages:
+    en: English
+    se: Swedish
+    tr: Turkish
   search: Search
   result_for: Result for %{query}
   not_found_for: Not found for %{query}

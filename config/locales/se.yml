@@ -70,6 +70,10 @@ se:
   settings:
     language: Språk
     select_language: Välj språk
+  languages:
+    en: Engelska
+    se: Svenska
+    tr: Turkiska
     profile: Profil
   search: Sök
   result_for: Resultat för %{query}
