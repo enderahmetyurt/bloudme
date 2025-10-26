@@ -63,12 +63,12 @@
                 </li>
                 <li>
                   <% if Current.user.is_admin %>
-                    <li class="mb-5">
+                    <li>
                       <%= link_to "Admin", "/avo", class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" %>
                     </li>
                   <% end %>
                 </li>
-                <li>
+                <li class="mt-5">
                   <%= button_to t("home.sign_out"), session_path, method: :delete, class: "bg-red-600 hover:bg-red-700 text-white py-2 px-4 rounded text-sm" %>
                 </li>
               </ul>
