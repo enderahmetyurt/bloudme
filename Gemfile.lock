@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/rails/rails.git
-  revision: ce5dd62d665fef1f4eaaa0bc8e6fee5df34ffe78
+  revision: f8dbca93520f5bec095b6e81bdfe54af44c05c0a
   branch: main
   specs:
     actioncable (8.2.0.alpha)
@@ -155,7 +155,7 @@ GEM
       rexml
     crass (1.0.6)
     csv (3.3.5)
-    date (3.4.1)
+    date (3.5.0)
     debug (1.11.0)
       irb (~> 1.10)
       reline (>= 0.3.8)
@@ -350,7 +350,7 @@ GEM
       loofah (~> 2.21)
       nokogiri (>= 1.15.7, != 1.16.7, != 1.16.6, != 1.16.5, != 1.16.4, != 1.16.3, != 1.16.2, != 1.16.1, != 1.16.0.rc1, != 1.16.0)
     rainbow (3.1.1)
-    rake (13.3.0)
+    rake (13.3.1)
     rdoc (6.15.0)
       erb
       psych (>= 4.0.0)
@@ -447,7 +447,7 @@ GEM
     thor (1.4.0)
     thruster (0.1.16-arm64-darwin)
     thruster (0.1.16-x86_64-linux)
-    timeout (0.4.3)
+    timeout (0.4.4)
     tsort (0.2.0)
     turbo-rails (2.0.20)
       actionpack (>= 7.1.0)
