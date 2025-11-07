@@ -4,9 +4,11 @@ export default class extends Controller {
   static targets = ["segment", "button", "icon"];
 
   toggle() {
-    const segment = this.element.querySelector(
-      '[data-filter-segment-target="segment"]',
-    );
+    const isDesktop = window.innerWidth >= 1024;
+    const segmentSelector = isDesktop
+      ? '[data-filter-segment-target="segment-desktop"]'
+      : '[data-filter-segment-target="segment"]';
+    const segment = this.element.querySelector(segmentSelector);
 
     if (!segment) {
       console.error("Segment bulunamadı");
@@ -17,13 +19,25 @@ export default class extends Controller {
 
     if (isHidden) {
       segment.classList.remove("hidden");
-      segment.style.width = "0";
+      if (isDesktop) {
+        segment.style.width = "0";
+      } else {
+        segment.style.height = "0";
+      }
       this.iconTarget.setAttribute("fill", "currentColor");
       requestAnimationFrame(() => {
-        segment.style.width = "16rem";
+        if (isDesktop) {
+          segment.style.width = "16rem";
+        } else {
+          segment.style.height = "auto";
+        }
       });
     } else {
-      segment.style.width = "0";
+      if (isDesktop) {
+        segment.style.width = "0";
+      } else {
+        segment.style.height = "0";
+      }
       this.iconTarget.setAttribute("fill", "none");
       setTimeout(() => {
         segment.classList.add("hidden");

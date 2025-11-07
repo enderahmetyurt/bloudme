@@ -10,12 +10,12 @@
     </div>
   </div>
 
-  <div class="flex gap-0 transition-all duration-300">
+  <div class="flex flex-col lg:flex-row gap-0 transition-all duration-300">
     <div class="flex-1 transition-all duration-300">
       <%= turbo_frame_tag "articles-list" do %>
       <div class="border-b border-gray-200 w-full">
-        <div class="flex justify-between items-center">
-          <ul class="flex space-x-2 justify-center flex-1">
+        <div class="flex justify-between items-center flex-col lg:flex-row">
+          <ul class="flex space-x-2 justify-center flex-1 w-full">
             <li class="p-5 <%= params["read"] == "true" ? "" : "bg-gray-100" %>">
               <%= turbo_frame_tag "unread" do %>
                 <%= render partial: "articles/unread_count", locals: {count: Article.by_current_user(Current.user).unread.count} %>
@@ -32,13 +32,35 @@
                 %>
             </li>
           </ul>
-          <button data-action="click->filter-segment#toggle" data-filter-segment-target="button" class="p-2 mr-5 text-gray-600 hover:text-gray-900 rounded-lg transition-colors">
+          <button data-action="click->filter-segment#toggle" data-filter-segment-target="button" class="p-2 mr-5 text-gray-600 hover:text-gray-900 rounded-lg transition-colors lg:mr-5 mr-0">
             <svg class="w-6 h-6" data-filter-segment-target="icon" fill="<%= params[:feed_id].present? ? 'currentColor' : 'none' %>" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"></path>
             </svg>
           </button>
         </div>
       </div>
+
+      <div data-filter-segment-target="segment" class="overflow-hidden transition-all duration-300 hidden lg:hidden w-full" style="height: 0;">
+        <div class="w-full border-b border-gray-200 p-5 bg-white">
+          <h2 class="font-bold text-lg mb-4"><%= t("filters") %></h2>
+          <div class="space-y-4">
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-2"><%= t("sources") %></label>
+              <select class="w-full px-3 py-2 border border-gray-300 rounded-md text-sm bg-white" data-action="change->filter-segment#selectFeed">
+                <option value="" <%= params[:feed_id].blank? ? 'selected' : '' %>>
+                  <%= t("all") %>
+                </option>
+                <% @feeds.each do |feed| %>
+                  <option value="<%= feed.id %>" <%= params[:feed_id].to_i == feed.id ? 'selected' : '' %>>
+                    <%= feed.title %>
+                  </option>
+                <% end %>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div id="articles" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-6 mt-5">
         <div class="only:flex hidden gap-5 justify-center items-center mt-10 font-mono text-2xl">
           <p><%= t("no_article_unicorn") %> <%= t("no_article") %></p>
@@ -51,7 +73,7 @@
       <% end %>
     </div>
 
-    <div data-filter-segment-target="segment" class="overflow-hidden transition-all duration-300 hidden" style="width: 0;">
+    <div data-filter-segment-target="segment-desktop" class="overflow-hidden transition-all duration-300 hidden lg:block w-0" style="width: 0;">
       <div class="w-64 border-l border-gray-200 p-5 bg-white flex-shrink-0 overflow-y-auto relative">
         <h2 class="font-bold text-lg mb-4"><%= t("filters") %></h2>
         <div class="space-y-4">
