@@ -130,3 +130,6 @@ tr:
     unsubscribe: Aboneliği Iptal et
     success_status: Aboneliğiniz aktif
     expires_at: Son Kullanma Tarihi
+  filters: Filtreler
+  sources: Kaynaklar
+  all: Tümü

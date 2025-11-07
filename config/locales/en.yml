@@ -120,3 +120,6 @@ en:
     unsubscribe: Cancel subscription
     success_status: Your subscription is active
     expires_at: Expire Date
+  filters: Filters
+  sources: Sources
+  all: All

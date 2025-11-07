@@ -130,3 +130,6 @@ se:
     unsubscribe: Avsluta prenumeration
     success_status: Din prenumeration är aktiv
     expires_at: Utgångsdatum
+  filters: Filter
+  sources: Källor
+  all: Alla
