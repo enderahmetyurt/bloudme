@@ -3,6 +3,10 @@ import { Controller } from "@hotwired/stimulus";
 export default class extends Controller {
   static targets = ["segment", "button", "icon"];
 
+  connect() {
+    this.iconTarget.setAttribute("fill", "none");
+  }
+
   toggle() {
     const isDesktop = window.innerWidth >= 1024;
     const segmentSelector = isDesktop
