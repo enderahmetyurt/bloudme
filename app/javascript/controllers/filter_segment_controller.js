@@ -73,6 +73,66 @@ export default class extends Controller {
 
         if (newFrame && oldFrame) {
           oldFrame.innerHTML = newFrame.innerHTML;
+          window.history.replaceState({}, "", url.toString());
+        }
+      });
+  }
+
+  toggleUnread(event) {
+    const isChecked = event.currentTarget.checked;
+    const readParam = isChecked ? "false" : "true";
+    const feedId = new URLSearchParams(window.location.search).get("feed_id");
+
+    const url = new URL(window.location);
+    url.searchParams.set("read", readParam);
+    if (feedId) {
+      url.searchParams.set("feed_id", feedId);
+    }
+
+    fetch(url.toString())
+      .then((response) => response.text())
+      .then((html) => {
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(html, "text/html");
+        const newFrame = doc.querySelector('[id="articles-list"]');
+        const oldFrame = document.querySelector('[id="articles-list"]');
+
+        if (newFrame && oldFrame) {
+          oldFrame.innerHTML = newFrame.innerHTML;
+        }
+      });
+  }
+
+  filterToday(event) {
+    const isChecked = event.currentTarget.checked;
+    const feedId = new URLSearchParams(window.location.search).get("feed_id");
+    const readParam =
+      new URLSearchParams(window.location.search).get("read") || "false";
+
+    const url = new URL(window.location);
+    url.searchParams.set("read", readParam);
+
+    if (isChecked) {
+      url.searchParams.set("date", new Date().toISOString().split("T")[0]);
+    } else {
+      url.searchParams.delete("date");
+    }
+
+    if (feedId) {
+      url.searchParams.set("feed_id", feedId);
+    }
+
+    fetch(url.toString())
+      .then((response) => response.text())
+      .then((html) => {
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(html, "text/html");
+        const newFrame = doc.querySelector('[id="articles-list"]');
+        const oldFrame = document.querySelector('[id="articles-list"]');
+
+        if (newFrame && oldFrame) {
+          oldFrame.innerHTML = newFrame.innerHTML;
+          window.history.replaceState({}, "", url.toString());
         }
       });
   }

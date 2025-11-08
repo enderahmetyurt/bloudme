@@ -13,6 +13,11 @@ class ArticlesController < ApplicationController
       @articles = @articles.where(feed_id: params[:feed_id])
     end
 
+    if params[:date].present?
+      date = Date.parse(params[:date])
+      @articles = @articles.where("DATE(published_at) = ?", date)
+    end
+
     @articles = @articles.recent.page(params[:page])
   end
 
