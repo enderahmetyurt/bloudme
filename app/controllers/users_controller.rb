@@ -25,6 +25,7 @@ class UsersController < ApplicationController
     end
 
     if @user.update(user_params)
+      I18n.locale = @user.preferred_locale
       redirect_to settings_user_path(@user), notice: t("users.update.notice")
     else
       render :settings
@@ -32,6 +33,7 @@ class UsersController < ApplicationController
   end
 
   private
+
   def user_params
     params.require(:user).permit(:nick_name, :email_address, :preferred_locale, :password, :password_confirmation)
   end
