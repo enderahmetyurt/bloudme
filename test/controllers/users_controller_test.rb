@@ -46,7 +46,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     patch user_path(@user), params: { user: { preferred_locale: "tr" } }
 
     assert_response :redirect
-    assert_redirected_to settings_user_path(@user)
+    assert_redirected_to user_path(@user)
     @user.reload
     assert_equal "tr", @user.preferred_locale
   end
@@ -57,7 +57,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     patch user_path(@user), params: { user: { preferred_locale: "se" } }
 
     assert_response :redirect
-    assert_redirected_to settings_user_path(@user)
+    assert_redirected_to user_path(@user)
     @user.reload
     assert_equal "se", @user.preferred_locale
   end
