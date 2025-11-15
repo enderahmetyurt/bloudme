@@ -26,7 +26,7 @@ class UsersController < ApplicationController
 
     if @user.update(user_params)
       I18n.locale = @user.preferred_locale
-      redirect_to settings_user_path(@user), notice: t("users.update.notice")
+      redirect_to @user, notice: t("users.update.notice")
     else
       render :settings
     end
