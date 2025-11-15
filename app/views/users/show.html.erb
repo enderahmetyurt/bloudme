@@ -11,9 +11,8 @@
       <div class="text text-gray-500"><%= @user.bio %></div>
 
       <div class="text-sm text-gray-500 mt-5 flex flex-row">
-        <% if @user.website.present? %>
-          <% website_url = @user.website.start_with?("http://", "https://") ? @user.website : "https://#{@user.website}" %>
-          <%= link_to website_url, target: "_blank", rel: "noopener noreferrer" do %>
+        <% if @user.website.present? && sanitize_href(@user.website).present? %>
+          <%= link_to sanitize_href(@user.website), target: "_blank", rel: "noopener noreferrer" do %>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 496 512"
