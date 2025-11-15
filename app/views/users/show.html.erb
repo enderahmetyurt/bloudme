@@ -72,7 +72,7 @@
         <% end %>
 
         <% if @user.linkedin.present? %>
-          <%= link_to "https://linkedin.com/in/#{@user.linkedin}", target: "_blank", rel: "noopener noreferrer" do %>
+          <%= link_to sanitize_href(@user.linkedin), target: "_blank", rel: "noopener noreferrer" do %>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 496 512"
