@@ -7,6 +7,7 @@ class ResendMailer
     uri = URI.parse("https://api.resend.com/emails")
     http = Net::HTTP.new(uri.host, uri.port)
     http.use_ssl = true
+    http.ca_file = "/etc/ssl/cert.pem" if File.exist?("/etc/ssl/cert.pem")
 
     request = Net::HTTP::Post.new(uri.path, {
       "Authorization" => "Bearer #{Rails.application.credentials.dig(:resend, :api_key)}",
