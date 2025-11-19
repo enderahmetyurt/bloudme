@@ -75,6 +75,4 @@ class UserTest < ActiveSupport::TestCase
     @user.confirmation_sent_at = nil
     assert_not @user.confirmation_expired?
   end
-
-
 end
