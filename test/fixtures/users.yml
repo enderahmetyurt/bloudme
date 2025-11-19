@@ -1,10 +1,8 @@
-<% password_digest = BCrypt::Password.create("password") %>
-
 one:
   email_address: one@example.com
-  password_digest: <%= password_digest %>
+  password_digest: <%= BCrypt::Password.create("password") %>
   avatar_url: https://api.dicebear.com/6.x/adventurer/svg?seed=1dabe98076681698
 two:
   email_address: two@example.com
-  password_digest: <%= password_digest %>
+  password_digest: <%= BCrypt::Password.create("password") %>
   avatar_url: https://api.dicebear.com/6.x/adventurer/svg?seed=1dabe98076681698

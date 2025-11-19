@@ -6,6 +6,8 @@ module SessionTestHelper
       cookie_jar.signed[:session_id] = Current.session.id
       cookies[:session_id] = cookie_jar[:session_id]
     end
+
+    user.confirm_email!
   end
 
   def sign_out
