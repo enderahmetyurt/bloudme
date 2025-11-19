@@ -13,9 +13,11 @@
     <% if authenticated? %>
       <% if !Current.user.email_confirmed? %>
         <span class="text-red-700 font-extrabold bg-white p-3 rounded-md">
-          🚨 Your email is not confirmed.
-          <%= link_to "Please confirm it", resend_confirmation_path, class: "hover:underline" %>
-          🚨
+          <p>
+            🚨 Please confirm your email until
+            <%= (Current.user.confirmation_sent_at + 7.days).strftime("%-d %B %Y") %>.
+            After your last day, you cannot use Bloudme 🚨
+          </p>
         </span>
       <% end %>
       <button

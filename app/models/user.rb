@@ -43,12 +43,6 @@ class User < ApplicationRecord
     confirmation_sent_at && confirmation_sent_at < 7.days.ago
   end
 
-  def login_blocked_reason
-    return "Email unconfirmed" unless email_confirmed?
-    return "Email confirmation expired" if confirmation_expired?
-    nil
-  end
-
   private
 
   def set_random_avatar

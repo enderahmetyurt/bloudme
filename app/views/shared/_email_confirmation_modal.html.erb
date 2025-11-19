@@ -1,0 +1,120 @@
+<% if authenticated? && !Current.user.email_confirmed? %>
+  <div
+    class="
+      fixed inset-0 bg-black bg-opacity-70 z-50 flex items-center
+      justify-center p-4
+    "
+  >
+    <div class="bg-white rounded-2xl shadow-2xl max-w-2xl w-full overflow-hidden">
+      <!-- Header -->
+      <div class="bg-gradient-to-r from-red-600 to-red-700 px-6 py-8">
+        <div class="flex justify-center mb-4">
+          <div class="bg-white rounded-full p-4">
+            <svg
+              class="w-12 h-12 text-red-600"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z"
+                clip-rule="evenodd"
+              />
+            </svg>
+          </div>
+        </div>
+
+        <h1 class="text-3xl font-bold text-white text-center">
+          Email Confirmation Required
+        </h1>
+
+        <p class="text-red-100 text-center mt-2">
+          Please confirm your email to use Bloudme
+        </p>
+      </div>
+
+      <!-- Content -->
+      <div class="px-6 py-8 space-y-6">
+        <!-- Message -->
+        <div class="bg-red-50 border-l-4 border-red-600 p-4">
+          <p class="text-red-900 font-semibold">
+            Your email address needs to be verified before you can access
+            Bloudme.
+          </p>
+
+          <p class="text-red-800 text-sm mt-2">
+            We've sent a confirmation email to help verify your account. Please
+            check your inbox and spam folder.
+          </p>
+        </div>
+
+        <!-- Email Info -->
+        <div>
+          <h3 class="font-semibold text-gray-900 mb-3">
+            Registered Email Address
+          </h3>
+
+          <div class="bg-gray-50 rounded-lg p-4 border-2 border-gray-200">
+            <p class="text-gray-900 font-semibold text-center break-all text-lg">
+              <%= Current.user.email_address %>
+            </p>
+          </div>
+        </div>
+
+        <!-- Confirmation Link -->
+        <% if Current.user.confirmation_token && !Current.user.confirmation_expired? %>
+          <div>
+            <h3 class="font-semibold text-gray-900 mb-3">Confirm Your Email</h3>
+
+            <p class="text-gray-700 text-sm mb-3">
+              Click the button below to confirm your email address:
+            </p>
+
+            <div class="bg-blue-50 rounded-lg p-4 border border-blue-300">
+              <%= link_to "✓ Confirm Email Address", confirm_email_url(token: Current.user.confirmation_token), class: "block w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-4 rounded-lg transition-colors duration-200 text-center" %>
+            </div>
+          </div>
+        <% end %>
+
+        <!-- Deadline Warning -->
+        <div class="bg-orange-50 border-l-4 border-orange-500 p-4">
+          <p class="text-orange-800 text-sm mt-2">
+            Your confirmation link expires in 7 days. Don't wait too long!
+          </p>
+        </div>
+
+        <!-- Instructions -->
+        <div>
+          <h3 class="font-semibold text-gray-900 mb-3">What to do:</h3>
+
+          <ol class="text-gray-700 text-sm space-y-2 list-decimal list-inside">
+            <li>Click the "Confirm Email Address" button above</li>
+            <li>Or check your email inbox for our confirmation email</li>
+            <li>Follow the link in the email to confirm</li>
+          </ol>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="space-y-3">
+          <%= link_to "Resend Confirmation Email", resend_confirmation_path, method: :get, class: "block w-full bg-red-600 hover:bg-red-700 text-white font-semibold py-3 px-4 rounded-lg transition-colors duration-200 text-center" %>
+        </div>
+
+        <!-- Help section -->
+        <div class="bg-blue-50 rounded-lg p-4 border border-blue-200">
+          <p class="text-blue-900 text-sm">
+            <span class="font-semibold">💡 Tip:</span> If you don't see the
+            confirmation email, check your spam/junk folder. Still can't find
+            it? Use the button above to request a new confirmation email.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <style>
+    /* Prevent scrolling when modal is open */
+    html, body {
+      overflow: hidden;
+      height: 100%;
+    }
+  </style>
+<% end %>
