@@ -1,63 +1,78 @@
-<nav class="bg-blue-600 text-white" data-controller="menu">
-  <!-- Email confirmation banner -->
-  <% if authenticated? && !Current.user.email_confirmed? %>
-    <div class="bg-red-700 px-4 py-3">
-      <div class="container mx-auto">
-        <p class="text-sm font-semibold">
-          🚨 Please confirm your email until
-          <%= (Current.user.confirmation_sent_at + 7.days).strftime("%-d %B %Y") %>.
-          After your last day, you cannot use Bloudme 🚨
-        </p>
-      </div>
-    </div>
-  <% end %>
+<nav class="bg-blue-600 text-white py-4 p-5" data-controller="menu">
+  <div class="container mx-auto flex flex-wrap items-center justify-between">
+    <%= link_to "Bloudme", root_path, class: "text-2xl font-bold hover:text-blue-300" %>
 
-  <!-- Main navigation -->
-  <div class="container mx-auto px-4 py-4">
-    <div class="flex items-center justify-between gap-4">
-      <!-- Logo -->
-      <div class="flex-shrink-0">
-        <%= link_to "Bloudme", root_path, class: "text-2xl font-bold hover:text-blue-300" %>
+    <% unless authenticated? %>
+      <div>
+        <% I18n.available_locales.each do |locale| %>
+          <%= link_to locale_to_flag(locale), url_for(locale: locale), class: (locale == I18n.locale ? "text-2xl" : "") %>
+        <% end %>
       </div>
+    <% end %>
 
-      <!-- Desktop Navigation (hidden on mobile) -->
-      <% if authenticated? %>
-        <div class="hidden sm:flex items-center gap-6">
-          <!-- Search -->
-          <div class="flex-1 min-w-0">
-            <%= form_with(url: search_articles_path, method: :get, data: { turbo_frame: "articles", controller: "search" }) do |f| %>
+    <% if authenticated? %>
+      <% if !Current.user.email_confirmed? %>
+        <span class="text-red-700 font-extrabold bg-white p-3 rounded-md">
+          <p>
+            🚨 Please confirm your email until
+            <%= (Current.user.confirmation_sent_at + 7.days).strftime("%-d %B %Y") %>.
+            After your last day, you cannot use Bloudme 🚨
+          </p>
+        </span>
+      <% end %>
+      <button
+        data-action="click->menu#toggle"
+        class="
+          sm:hidden text-white focus:outline-none focus:ring-2
+          focus:ring-white
+        "
+        aria-label="Toggle navigation"
+      >
+        <svg
+          class="h-6 w-6"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M4 6h16M4 12h16M4 18h16"
+          />
+        </svg>
+      </button>
+      <ul class="hidden sm:flex flex-wrap items-center space-x-6 mt-2 sm:mt-0">
+        <li>
+          <%= form_with(url: search_articles_path, method: :get, data: { turbo_frame: "articles", controller: "search" }) do |f| %>
+            <div>
               <%= f.text_field :query,
                   placeholder: t("search"),
-                  class: "w-full px-4 py-2 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-300",
+                  class: "border rounded-lg w-48 px-4 py-2 text-gray-900 transform origin-center transition-all duration-300 focus:w-96",
                   data: { turbo_frame: "articles", search_target: "input" } %>
-            <% end %>
-          </div>
-
-          <!-- Add Feed Link -->
-          <% unless request.path == "/feeds/new" %>
-            <div class="flex-shrink-0">
-              <%= link_to t("feeds.new"), new_feed_path, class: "rounded-lg py-2 px-3 border-2 border-white text-white hover:bg-blue-700 font-medium whitespace-nowrap" %>
             </div>
           <% end %>
+        </li>
 
-          <!-- Language Selector (if not authenticated, shown in unauthenticated section) -->
-          <div class="flex-shrink-0 flex gap-2">
-            <% I18n.available_locales.each do |locale| %>
-              <%= link_to locale_to_flag(locale), url_for(locale: locale), class: "text-xl #{locale == I18n.locale ? 'opacity-100' : 'opacity-60 hover:opacity-100'}" %>
-            <% end %>
-          </div>
+        <% unless request.path == "/feeds/new" %>
+          <li>
+            <%= link_to t("feeds.new"), new_feed_path, class: "rounded-lg py-1 px-2 border-2 border-white-500 text-white block font-medium" %>
+          </li>
+        <% end %>
 
-          <!-- User Dropdown -->
-          <div data-controller="dropdown" class="relative flex-shrink-0">
+        <li class="text-center">
+          <div data-controller="dropdown" class="relative">
+            <!-- User Avatar -->
             <%= image_tag Current.user.avatar_url,
                   alt: "User Avatar",
-                  class: "w-10 h-10 rounded-full ring-2 ring-gray-300 cursor-pointer hover:ring-white transition",
+                  class: "w-10 h-10 p-0.5 rounded-full ring-2 ring-gray-500 dark:ring-gray-500l cursor-pointer",
                   data: { action: "click->dropdown#toggle" } %>
 
             <div
               class="
                 absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg
-                hidden z-50
+                hidden pb-5 z-10
               "
               data-dropdown-target="menu"
             >
@@ -76,117 +91,58 @@
                   <% end %>
                 </li>
 
-                <% if Current.user.is_admin %>
-                  <li>
-                    <%= link_to "Admin", "/avo", class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" %>
-                  </li>
-                <% end %>
+                <li>
+                  <% if Current.user.is_admin %>
+                    <li>
+                      <%= link_to "Admin", "/avo", class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" %>
+                    </li>
+                  <% end %>
+                </li>
 
-                <li class="border-t">
-                  <%= button_to t("home.sign_out"), session_path, method: :delete, class: "w-full bg-red-600 hover:bg-red-700 text-white py-2 px-4 rounded text-sm mt-2" %>
+                <li class="mt-5">
+                  <%= button_to t("home.sign_out"), session_path, method: :delete, class: "bg-red-600 hover:bg-red-700 text-white py-2 px-4 rounded text-sm" %>
                 </li>
               </ul>
             </div>
           </div>
-        </div>
-      <% end %>
-
-      <!-- Unauthenticated Navigation -->
-      <% unless authenticated? %>
-        <div class="flex items-center gap-4">
-          <!-- Language Selector -->
-          <div class="flex gap-2">
-            <% I18n.available_locales.each do |locale| %>
-              <%= link_to locale_to_flag(locale), url_for(locale: locale), class: "text-xl #{locale == I18n.locale ? 'opacity-100' : 'opacity-60 hover:opacity-100'}" %>
-            <% end %>
-          </div>
-        </div>
-      <% end %>
-
-      <!-- Mobile Menu Toggle Button -->
-      <% if authenticated? %>
-        <button
-          data-action="click->menu#toggle"
-          class="
-            sm:hidden flex-shrink-0 text-white focus:outline-none focus:ring-2
-            focus:ring-white rounded p-2
-          "
-          aria-label="Toggle navigation"
-        >
-          <svg
-            class="h-6 w-6"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M4 6h16M4 12h16M4 18h16"
-            />
-          </svg>
-        </button>
-      <% end %>
-    </div>
-
-    <!-- Mobile Navigation Menu -->
-    <% if authenticated? %>
+        </li>
+      </ul>
       <div
         data-menu-target="dropdown"
-        class="hidden sm:hidden mt-4 pb-4 border-t border-blue-500"
+        class="hidden sm:hidden flex-col bg-blue-700 text-white mt-4"
       >
-        <!-- Mobile Search -->
-        <div class="mb-4">
-          <%= form_with(url: search_articles_path, method: :get, data: { turbo_frame: "articles", controller: "search" }) do |f| %>
-            <%= f.text_field :query,
-                placeholder: t("search"),
-                class: "w-full px-4 py-2 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-300",
-                data: { turbo_frame: "articles", search_target: "input" } %>
+        <% unless request.path == "/feeds/new" %>
+          <div class="px-4 py-2 text-center">
+            <%= link_to  t("feeds.new"), new_feed_path, class: "rounded-lg py-1 px-2 border-2 border-white-500 text-white block font-medium mb-3 mt-2" %>
+          </div>
+        <% end %>
+
+        <div class="px-4 py-2 text-center">
+          <%= link_to t("settings.profile"), feeds_path, class: "text-red-500 hover:underline text-white" %>
+        </div>
+
+        <div class="px-4 py-2 text-center">
+          <%= link_to t("bookmarks"), bookmarks_path, class: "text-red-500 hover:underline text-white" %>
+        </div>
+
+        <div class="px-4 py-2 text-center">
+          <%= link_to t("users.settings"), settings_user_path(Current.user), class: "text-red-500 hover:underline text-white" %>
+        </div>
+
+        <% if Current.user.is_admin %>
+          <div class="px-4 py-2 text-center">
+            <%= link_to "Admin", "/avo", class: "text-red-500 hover:underline text-white" %>
+          </div>
+        <% end %>
+
+        <div class="px-4 py-2 text-center">
+          <% I18n.available_locales.each do |locale| %>
+            <%= link_to locale_to_flag(locale), url_for(locale: locale), class: (locale == I18n.locale ? "text-2xl" : "") %>
           <% end %>
         </div>
 
-        <!-- Mobile Menu Items -->
-        <div class="space-y-2">
-          <% unless request.path == "/feeds/new" %>
-            <div>
-              <%= link_to t("feeds.new"), new_feed_path, class: "block rounded-lg py-2 px-4 border-2 border-white text-white hover:bg-blue-700 font-medium text-center" %>
-            </div>
-          <% end %>
-
-          <div>
-            <%= link_to t("settings.profile"), user_path(Current.user), class: "block px-4 py-2 text-white hover:bg-blue-700 rounded" %>
-          </div>
-
-          <div>
-            <%= link_to t("bookmarks"), bookmarks_path, class: "block px-4 py-2 text-white hover:bg-blue-700 rounded" %>
-          </div>
-
-          <div>
-            <%= link_to t("users.settings.title"), settings_user_path(Current.user), class: "block px-4 py-2 text-white hover:bg-blue-700 rounded" %>
-          </div>
-
-          <% if Current.user.is_admin %>
-            <div>
-              <%= link_to "Admin", "/avo", class: "block px-4 py-2 text-white hover:bg-blue-700 rounded" %>
-            </div>
-          <% end %>
-
-          <!-- Language Selector for Mobile -->
-          <div class="px-4 py-2 border-t border-blue-500 pt-4">
-            <p class="text-sm text-blue-100 mb-2">Language</p>
-
-            <div class="flex gap-3">
-              <% I18n.available_locales.each do |locale| %>
-                <%= link_to locale_to_flag(locale), url_for(locale: locale), class: "text-xl #{locale == I18n.locale ? 'opacity-100' : 'opacity-60'}" %>
-              <% end %>
-            </div>
-          </div>
-
-          <div class="border-t border-blue-500 pt-4 mt-4">
-            <%= button_to t("home.sign_out"), session_path, method: :delete, class: "w-full bg-red-600 hover:bg-red-700 text-white py-2 px-4 rounded font-medium" %>
-          </div>
+        <div class="px-4 py-2 text-center">
+          <%= button_to t("home.sign_out"), session_path, method: :delete, class: "bg-red-600 hover:bg-red-700 text-white py-2 px-4 rounded w-full mt-5" %>
         </div>
       </div>
     <% end %>
