@@ -10,6 +10,7 @@ class ApplicationController < ActionController::Base
     end
 
     user_locale = Current.user&.preferred_locale
+    session[:locale] = "en" if session[:locale] == "se"
     I18n.locale = (user_locale.presence || session[:locale] || I18n.default_locale)
   end
 end

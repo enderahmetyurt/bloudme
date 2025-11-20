@@ -71,7 +71,6 @@ en:
     select_language: Select language
   languages:
     en: English
-    se: Swedish
     tr: Turkish
   search: Search
   result_for: Result for %{query}

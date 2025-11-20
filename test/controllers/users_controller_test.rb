@@ -51,17 +51,6 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     assert_equal "tr", @user.preferred_locale
   end
 
-  test "should update preferred locale to Swedish and persist" do
-    sign_in_user
-
-    patch user_path(@user), params: { user: { preferred_locale: "se" } }
-
-    assert_response :redirect
-    assert_redirected_to user_path(@user)
-    @user.reload
-    assert_equal "se", @user.preferred_locale
-  end
-
   test "should display Turkish UI when user prefers Turkish" do
     sign_in_user
     @user.update(preferred_locale: "tr")
@@ -69,16 +58,6 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     get articles_path
 
     assert_response :success
-    assert_match /Ara|Sök/i, response.body
-  end
-
-  test "should display Swedish UI when user prefers Swedish" do
-    sign_in_user
-    @user.update(preferred_locale: "se")
-
-    get articles_path
-
-    assert_response :success
-    assert_match /Sök/i, response.body
+    assert_match /Ara/i, response.body
   end
 end

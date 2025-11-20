@@ -24,7 +24,7 @@ module Bloudme
     # config.time_zone = "Central Time (US & Canada)"
     config.active_storage.variant_processor = :mini_magick
     I18n.load_path += Dir[Rails.root.join("lib", "locale", "*.{rb,yml}")]
-    I18n.available_locales = [ :en, :tr, :se ]
+    I18n.available_locales = [ :en, :tr ]
     config.i18n.default_locale = :en
     config.i18n.fallbacks = true
   end
