@@ -13,6 +13,15 @@ password = Faker::Internet.password(min_length: 10, max_length: 20)
 
 user.password = password
 user.password_confirmation = password
+user.nick_name = Faker::Internet.username
+user.full_name = Faker::Name.name
+user.bio = Faker::Lorem.paragraph(sentence_count: 2)
+user.website = "https://#{Faker::Internet.domain_name}"
+user.github = "https://github.com/#{Faker::Internet.username}"
+user.twitter = "https://x.com/#{Faker::Internet.username}"
+user.bsky = "https://bsky.app/profile/@#{Faker::Internet.username}"
+user.linkedin = "https://www.linkedin.com/in/#{Faker::Internet.username}"
+user.mastodon = "https://ruby.social/@#{Faker::Internet.username}"
 user.save!
 user.confirm_email!
 
