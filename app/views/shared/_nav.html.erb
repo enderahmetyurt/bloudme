@@ -126,7 +126,7 @@
         </div>
 
         <div class="px-4 py-2 text-center">
-          <%= link_to t("users.settings"), settings_user_path(Current.user), class: "text-red-500 hover:underline text-white" %>
+          <%= link_to t("users.settings.title"), settings_user_path(Current.user), class: "text-red-500 hover:underline text-white" %>
         </div>
 
         <% if Current.user.is_admin %>
@@ -134,12 +134,6 @@
             <%= link_to "Admin", "/avo", class: "text-red-500 hover:underline text-white" %>
           </div>
         <% end %>
-
-        <div class="px-4 py-2 text-center">
-          <% I18n.available_locales.each do |locale| %>
-            <%= link_to locale_to_flag(locale), url_for(locale: locale), class: (locale == I18n.locale ? "text-2xl" : "") %>
-          <% end %>
-        </div>
 
         <div class="px-4 py-2 text-center">
           <%= button_to t("home.sign_out"), session_path, method: :delete, class: "bg-red-600 hover:bg-red-700 text-white py-2 px-4 rounded w-full mt-5" %>
