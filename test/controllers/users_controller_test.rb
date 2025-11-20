@@ -37,7 +37,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
 
     assert_response :success
     assert_select "form.user"
-    assert_match /Select language|Language/i, response.body
+    assert_match(/Select language|Language/i, response.body)
   end
 
   test "should update preferred locale via settings" do
@@ -58,6 +58,6 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     get articles_path
 
     assert_response :success
-    assert_match /Ara/i, response.body
+    assert_match(/Ara/i, response.body)
   end
 end

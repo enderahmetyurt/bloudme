@@ -36,7 +36,7 @@ class HomeControllerTest < ActionDispatch::IntegrationTest
     get root_url
 
     assert_response :success
-    assert_no_match /redirect/i, response.body
+    assert_no_match(/redirect/i, response.body)
   end
 
   test "should handle multiple consecutive requests correctly" do
