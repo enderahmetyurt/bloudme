@@ -10,7 +10,7 @@
       flex items-center gap-2 px-3 py-2 rounded-md hover:bg-gray-100
       transition-colors
     "
-    title="Share article"
+    title="<%= t("article.share") %>"
   >
     <!-- Font Awesome Share Icon -->
     <svg
@@ -25,7 +25,7 @@
       />
     </svg>
 
-    <span class="text-sm text-gray-600">Share</span>
+    <span class="text-sm text-gray-600"><%= t("article.share") %></span>
   </button>
 
   <!-- Dropdown Menu -->
@@ -58,7 +58,7 @@
         />
       </svg>
 
-      <span class="text-sm">Copy Link</span>
+      <span class="text-sm"><%= t("article.copy_link") %></span>
     </button>
 
     <div class="border-t border-gray-200 my-1"></div>
@@ -83,7 +83,7 @@
           />
         </svg>
 
-        <span class="text-sm">Share on X</span>
+        <span class="text-sm"><%= t("article.share_on_x") %></span>
       </div>
     </a>
 
@@ -107,7 +107,7 @@
           />
         </svg>
 
-        <span class="text-sm">Share on Bluesky</span>
+        <span class="text-sm"><%= t("article.share_on_bsky") %></span>
       </div>
     </a>
 
@@ -130,7 +130,7 @@
           />
         </svg>
 
-        <span class="text-sm">Share on LinkedIn</span>
+        <span class="text-sm"><%= t("article.share_on_linkedin") %></span>
       </div>
     </a>
   </div>

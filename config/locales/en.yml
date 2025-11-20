@@ -22,6 +22,11 @@ en:
     mark_as_unread: "Marked as Unread"
     read: Read
     unread: Unread
+    share: Share
+    copy_link: Copy Link
+    share_on_x: Share on X
+    share_on_bsky: Share on Bluesky
+    share_on_linkedin: Share on Linkedin
   no_article_unicorn: "This is a unicorn 🦄"
   no_article: "You've read all articles."
   registration:
@@ -64,11 +69,11 @@ en:
       notice: User updated.
     show:
       alert: "You can't view other user's profile"
-    settings: Settings
-  settings:
-    profile: Profile
-    language: Language
-    select_language: Select language
+    settings:
+      title: Settings
+      profile: Profile
+      language: Language
+      select_language: Select language
   languages:
     en: English
     tr: Turkish
@@ -82,34 +87,34 @@ en:
     distance_in_words:
       half_a_minute: "half a minute"
       less_than_x_seconds:
-        one:   "less than 1 second"
+        one: "less than 1 second"
         other: "less than %{count} seconds"
       less_than_x_minutes:
-        one:   "less than a minute"
+        one: "less than a minute"
         other: "less than %{count} minutes"
       x_seconds:
-        one:   "1 second"
+        one: "1 second"
         other: "%{count} seconds"
       x_minutes:
-        one:   "1 minute"
+        one: "1 minute"
         other: "%{count} minutes"
       about_x_hours:
-        one:   "1 hour"
+        one: "1 hour"
         other: "%{count} hours"
       x_days:
-        one:   "1 day"
+        one: "1 day"
         other: "%{count} days"
       about_x_months:
-        one:   "1 month"
+        one: "1 month"
         other: "%{count} months"
       about_x_years:
-        one:   "1 year"
+        one: "1 year"
         other: "%{count} years"
       over_x_years:
-        one:   "over 1 year"
+        one: "over 1 year"
         other: "over %{count} years"
       almost_x_years:
-        one:   "almost 1 year"
+        one: "almost 1 year"
         other: "almost %{count} years"
   feed:
     last_fetched: "Last fetched about %{time} ago"

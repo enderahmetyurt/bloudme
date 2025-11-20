@@ -22,6 +22,11 @@ tr:
     mark_as_unread: "Okunmamış Olarak İşaretlendi"
     read: Okunanlar
     unread: Okunmayanlar
+    share: Paylaş
+    copy_link: Bağlantıyı Kopyala
+    share_on_x: X'de Paylaş
+    share_on_bsky: Bluesky'da Paylaş
+    share_on_linkedin: Linkedin'de Paylaş
   no_article_unicorn: "Bu bir tek boynuzlu at 🦄"
   no_article: "Tüm makaleleri okudunuz."
   registration:
@@ -66,10 +71,10 @@ tr:
       notice: Kullanıcı güncellendi
     show:
       alert: "Diğer kullanıcının profilini görüntüleyemezsiniz."
-    settings: Ayarlar
-  settings:
-    language: Dil
-    select_language: Dil seçin
+    settings:
+      title: Ayarlar
+      language: Dil
+      select_language: Dil seçin
   languages:
     en: İngilizce
     se: İsveççe
@@ -93,34 +98,34 @@ tr:
     distance_in_words:
       half_a_minute: "yarım dakika"
       less_than_x_seconds:
-        one:   "1 saniyeden az"
+        one: "1 saniyeden az"
         other: "%{count} saniyeden az"
       less_than_x_minutes:
-        one:   "1 dakikadan az"
+        one: "1 dakikadan az"
         other: "%{count} dakikadan az"
       x_seconds:
-        one:   "1 saniye"
+        one: "1 saniye"
         other: "%{count} saniye"
       x_minutes:
-        one:   "1 dakika"
+        one: "1 dakika"
         other: "%{count} dakika"
       about_x_hours:
-        one:   "1 saat"
+        one: "1 saat"
         other: "%{count} saat"
       x_days:
-        one:   "1 gün"
+        one: "1 gün"
         other: "%{count} gün"
       about_x_months:
-        one:   "1 ay"
+        one: "1 ay"
         other: "%{count} ay"
       about_x_years:
-        one:   "1 yıl"
+        one: "1 yıl"
         other: "%{count} yıl"
       over_x_years:
-        one:   "1 yıldan fazla"
+        one: "1 yıldan fazla"
         other: "%{count} yıldan fazla"
       almost_x_years:
-        one:   "neredeyse 1 yıl"
+        one: "neredeyse 1 yıl"
         other: "neredeyse %{count} yıl"
   feed:
     last_fetched: "Son çekme %{time} önce yapıldı"
