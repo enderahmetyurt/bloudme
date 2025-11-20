@@ -1,11 +1,14 @@
 <div class="w-full mx-auto p-4">
   <% content_for :title, "#{@user.nick_name}" %>
+
   <div class="flex items-center gap-4">
     <%= image_tag @user.avatar_url, class: "w-12 h-12 rounded-full" %>
+
     <div class="font-medium dark:text-white">
       <div class="text-lg text-red-400 font-semibold">
         <%= @user.nick_name %>
       </div>
+
       <div class="text-sm text-gray-500">
         Joined in <%= @user.created_at.strftime("%B, %Y") %>
       </div>
@@ -17,11 +20,13 @@
           <div class="flex gap-4 items-center">
             <div>
               <p><%= t("subscription.success_status") %></p>
+
               <p>
                 <b><%= t("subscription.expires_at") %></b>
                 <%= @user.subscription_expires_at.strftime("%d-%B-%Y") %>
               </p>
             </div>
+
             <div>
               <%= button_to t("subscription.unsubscribe"), unsubscribe_path, method: :post, class: "rounded-lg py-1 px-2 border-2 border-red-500 text-red block font-medium", form: { data: { turbo: false } } %>
             </div>
@@ -32,80 +37,84 @@
       </div>
     <% end %>
   </div>
+
   <hr class="mt-5 mb-5">
 
   <div class="grid grid-cols-1 gap-6">
     <h2 class="text-2xl font-bold text-blue-600">
       <%= t("settings.profile") %>
     </h2>
+
     <%= form_with(model: @user, class: "user") do |form| %>
-      <div class="my-5">
-        <%= form.label :nick_name, class: "block text-gray-700 font-medium" %>
-        <%= form.text_field :nick_name, class: "block w-full max-w-md shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2" %>
-      </div>
+      <div class="grid grid-cols-2 gap-5">
+        <div class="col-span-2 my-5">
+          <%= form.label :bio, class: "block text-gray-700 font-medium" %>
+          <%= form.textarea :bio, class: "block w-full shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2" %>
+        </div>
 
-      <div class="my-5">
-        <%= form.label :full_name, class: "block text-gray-700 font-medium" %>
-        <%= form.text_field :full_name, class: "block w-full max-w-md shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2" %>
-      </div>
+        <div class="my-5">
+          <%= form.label :nick_name, class: "block text-gray-700 font-medium" %>
+          <%= form.text_field :nick_name, class: "block w-full shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2" %>
+        </div>
 
-      <div class="my-5">
-        <%= form.label :email_address, class: "block text-gray-700 font-medium" %>
-        <%= form.text_field :email_address, class: "block w-full max-w-md shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2" %>
-      </div>
+        <div class="my-5">
+          <%= form.label :full_name, class: "block text-gray-700 font-medium" %>
+          <%= form.text_field :full_name, class: "block w-full shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2" %>
+        </div>
 
-      <div class="my-5">
-        <%= form.label :bio, class: "block text-gray-700 font-medium" %>
-        <%= form.textarea :bio, class: "block w-full max-w-md shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2" %>
-      </div>
+        <div class="my-5">
+          <%= form.label :email_address, class: "block text-gray-700 font-medium" %>
+          <%= form.text_field :email_address, class: "block w-full shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2" %>
+        </div>
 
-      <div class="my-5">
-        <%= form.label :website, class: "block text-gray-700 font-medium" %>
-        <%= form.text_field :website, class: "block w-full max-w-md shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2", placeholder: "https://mywebsite.com" %>
-      </div>
+        <div class="my-5">
+          <%= form.label :preferred_locale, t("settings.language"), class: "block text-gray-700 font-medium" %>
+          <%= form.select :preferred_locale, options_for_select(User.localized_locales, @user.preferred_locale), { include_blank: t("settings.select_language") }, class: "block w-full shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2" %>
+        </div>
 
-      <div class="my-5">
-        <%= form.label :github, class: "block text-gray-700 font-medium" %>
-        <%= form.text_field :github, class: "block w-full max-w-md shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2", placeholder: "https://github.com/mynickname" %>
-      </div>
+        <div class="my-5">
+          <%= form.label :website, class: "block text-gray-700 font-medium" %>
+          <%= form.text_field :website, class: "block w-full shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2", placeholder: "https://mywebsite.com" %>
+        </div>
 
-      <div class="my-5">
-        <%= form.label :twitter, class: "block text-gray-700 font-medium" %>
-        <%= form.text_field :twitter, class: "block w-full max-w-md shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2", placeholder: "https://x.com/myhandle" %>
-      </div>
+        <div class="my-5">
+          <%= form.label :github, class: "block text-gray-700 font-medium" %>
+          <%= form.text_field :github, class: "block w-full shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2", placeholder: "https://github.com/mynickname" %>
+        </div>
 
-      <div class="my-5">
-        <%= form.label :bsky, class: "block text-gray-700 font-medium" %>
-        <%= form.text_field :bsky, class: "block w-full max-w-md shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2", placeholder: "https://bsky.app/profile/@myhandle" %>
-      </div>
+        <div class="my-5">
+          <%= form.label :twitter, class: "block text-gray-700 font-medium" %>
+          <%= form.text_field :twitter, class: "block w-full shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2", placeholder: "https://x.com/myhandle" %>
+        </div>
 
-      <div class="my-5">
-        <%= form.label :linkedin, class: "block text-gray-700 font-medium" %>
-        <%= form.text_field :linkedin, class: "block w-full max-w-md shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2", placeholder: "https://www.linkedin.com/in/myprofile" %>
-      </div>
+        <div class="my-5">
+          <%= form.label :bsky, class: "block text-gray-700 font-medium" %>
+          <%= form.text_field :bsky, class: "block w-full shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2", placeholder: "https://bsky.app/profile/@myhandle" %>
+        </div>
 
-      <div class="my-5">
-        <%= form.label :mastodon, class: "block text-gray-700 font-medium" %>
-        <%= form.text_field :mastodon, class: "block w-full max-w-md shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2", placeholder: "https://ruby.social/@myhandle" %>
-      </div>
+        <div class="my-5">
+          <%= form.label :linkedin, class: "block text-gray-700 font-medium" %>
+          <%= form.text_field :linkedin, class: "block w-full shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2", placeholder: "https://www.linkedin.com/in/myprofile" %>
+        </div>
 
-      <div class="my-5">
-        <%= form.label :preferred_locale, t("settings.language"), class: "block text-gray-700 font-medium" %>
-        <%= form.select :preferred_locale, options_for_select(User.localized_locales, @user.preferred_locale), { include_blank: t("settings.select_language") }, class: "block w-full max-w-md shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2" %>
-      </div>
+        <div class="my-5">
+          <%= form.label :mastodon, class: "block text-gray-700 font-medium" %>
+          <%= form.text_field :mastodon, class: "block w-full shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2", placeholder: "https://ruby.social/@myhandle" %>
+        </div>
 
-      <div class="my-5">
-        <%= form.label :password, class: "block text-gray-700 font-medium" %>
-        <%= form.password_field :password, class: "block w-full max-w-md shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2" %>
-      </div>
+        <div class="my-5">
+          <%= form.label :password, class: "block text-gray-700 font-medium" %>
+          <%= form.password_field :password, class: "block w-full shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2" %>
+        </div>
 
-      <div class="my-5">
-        <%= form.label :password_confirmation, class: "block text-gray-700 font-medium" %>
-        <%= form.password_field :password_confirmation, class: "block w-full max-w-md shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2" %>
-      </div>
+        <div class="my-5">
+          <%= form.label :password_confirmation, class: "block text-gray-700 font-medium" %>
+          <%= form.password_field :password_confirmation, class: "block w-full shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2" %>
+        </div>
 
-      <div class="my-5">
-        <%= form.submit class: "w-full max-w-md rounded-lg py-3 px-5 bg-blue-600 text-white font-medium cursor-pointer text-center" %>
+        <div class="col-span-2 my-5">
+          <%= form.submit class: "w-full rounded-lg py-3 px-5 bg-blue-600 text-white font-medium cursor-pointer text-center" %>
+        </div>
       </div>
     <% end %>
   </div>
