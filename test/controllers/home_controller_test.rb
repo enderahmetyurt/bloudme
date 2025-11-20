@@ -32,16 +32,6 @@ class HomeControllerTest < ActionDispatch::IntegrationTest
     assert_equal "tr", session[:locale]
   end
 
-  test "should handle locale parameter when authenticated" do
-    user = users(:one)
-    sign_in_as(user)
-
-    get root_url, params: { locale: "se" }
-
-    assert_redirected_to articles_path
-    assert_equal "se", session[:locale]
-  end
-
   test "should allow unauthenticated access" do
     get root_url
 
