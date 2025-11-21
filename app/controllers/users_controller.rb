@@ -1,25 +1,17 @@
 class UsersController < ApplicationController
+  before_action :set_user, only: [:show, :settings, :update]
+
   def show
-    @user = User.find(params[:id])
-
-    if @user != Current.user
-      redirect_to root_path, alert: t("users.show.alert")
-    end
-
     @feeds = @user.feeds.recent
   end
 
   def settings
-    @user = User.find(params[:id])
-
     if @user != Current.user
       redirect_to root_path, alert: t("users.show.alert")
     end
   end
 
   def update
-    @user = User.find(params[:id])
-
     if @user != Current.user
       redirect_to root_path, alert: t("users.show.alert")
     end
@@ -33,6 +25,10 @@ class UsersController < ApplicationController
   end
 
   private
+
+  def set_user
+    @user = User.find_by!(nick_name: params[:id])
+  end
 
   def user_params
     params.require(:user).permit(:nick_name, :email_address, :preferred_locale, :password, :password_confirmation, :twitter, :bsky, :github, :linkedin, :mastodon, :website, :bio, :full_name)

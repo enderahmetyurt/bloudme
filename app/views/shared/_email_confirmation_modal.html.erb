@@ -1,4 +1,4 @@
-<% if authenticated? && !Current.user.email_confirmed? %>
+<% if authenticated? && Current.user.trial_ends? %>
   <div
     class="
       fixed inset-0 bg-black bg-opacity-70 z-50 flex items-center

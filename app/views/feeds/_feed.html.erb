@@ -1,24 +1,49 @@
 <div id="<%= dom_id feed %>" class="w-full">
-  <div class="bg-white shadow-md rounded-lg p-6 flex flex-col sm:flex-row justify-between items-start gap-4">
+  <div
+    class="
+      bg-white shadow-md rounded-lg p-6 flex flex-col sm:flex-row
+      justify-between items-start gap-4
+    "
+  >
     <div class="flex flex-col sm:flex-row sm:items-center gap-4 w-full">
       <div class="flex-1 min-w-0">
-        <h2 class="text-xl sm:text-2xl font-semibold text-blue-600 mb-2 hover:text-black truncate flex items-center gap-2">
+        <h2
+          class="
+            text-xl sm:text-2xl font-semibold text-blue-600 mb-2
+            hover:text-black truncate flex items-center gap-2
+          "
+        >
           <%= image_tag(feed.favicon, class: "rounded-full w-10 h-10", alt: "#{feed.title} favicon") %>
+
           <%= link_to feed.title, feed_path(feed) %>
         </h2>
+
         <h3 class="text-gray-500 mb-2 hover:text-black truncate">
           <%= link_to feed.site_url, sanitize_href(feed.site_url), target: "_blank", rel: "noopener noreferrer" %>
         </h3>
+
         <div class="prose max-w-none text-sm sm:text-base text-gray-600">
           <%= sanitize feed.description %>
         </div>
       </div>
     </div>
+
     <% if feed.user == Current.user %>
       <div class="text-sm text-gray-500 flex items-center">
         <%= button_to feed_path(feed), method: :delete, class: "p-2 bg-gray-100 hover:bg-gray-200 rounded-lg" do %>
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-trash">
-            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="icon icon-tabler icons-tabler-outline icon-tabler-trash"
+          >
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
             <path d="M4 7l16 0" />
             <path d="M10 11l0 6" />
             <path d="M14 11l0 6" />
