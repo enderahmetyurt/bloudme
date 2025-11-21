@@ -10,13 +10,18 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     sign_in_as(@user)
   end
 
-  test "should redirect unauthenticated user from show" do
+  test "should allow unauthenticated user to view user show" do
     get user_url(@user)
 
-    assert_response :redirect
-    assert_redirected_to new_session_path
-    assert_nil assigns(:user)
-    assert_nil assigns(:posts)
+    assert_response :success
+    assert assigns(:user)
+    assert assigns(:feeds)
+  end
+
+  test "should not set current user for unauthenticated visitor" do
+    get user_url(@user)
+
+    assert_nil Current.user
   end
 
   test "should show authenticated user and their feeds" do
@@ -28,6 +33,14 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
 
     assert assigns(:user)
     assert assigns(:feeds)
+  end
+
+  test "should set current user for authenticated visitor" do
+    sign_in_user
+
+    get user_url(@user)
+
+    assert_equal @user, Current.user
   end
 
   test "should show settings page for authenticated user" do

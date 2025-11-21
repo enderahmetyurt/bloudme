@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  allow_unauthenticated_access only: :show
+  before_action :resume_session, only: :show
   before_action :set_user, only: [ :show, :settings, :update ]
 
   def show

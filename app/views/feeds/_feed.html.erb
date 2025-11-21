@@ -15,7 +15,11 @@
         >
           <%= image_tag(feed.favicon, class: "rounded-full w-10 h-10", alt: "#{feed.title} favicon") %>
 
-          <%= link_to feed.title, feed_path(feed) %>
+          <% if feed.user == Current.user %>
+            <%= link_to feed.title, feed_path(feed) %>
+          <% else %>
+            <%= feed.title %>
+          <% end %>
         </h2>
 
         <h3 class="text-gray-500 mb-2 hover:text-black truncate">

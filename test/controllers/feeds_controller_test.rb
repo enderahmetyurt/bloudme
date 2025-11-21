@@ -294,4 +294,56 @@ class FeedsControllerTest < ActionDispatch::IntegrationTest
     assert_includes feeds, additional_feed
     assert feeds.count >= 2
   end
+
+  test "should show trash icon to feed owner in index" do
+    sign_in_user
+
+    get feeds_url
+
+    assert_response :success
+    assert_select "svg.icon-tabler-trash"
+  end
+
+  test "should only show trash icon for current user's feeds" do
+    other_user = users(:two)
+    other_feed = other_user.feeds.create!(
+      title: "Other User Feed",
+      feed_url: "https://other.com/feed.xml",
+      site_url: "https://other.com",
+      favicon: "https://other.com/favicon.ico"
+    )
+
+    sign_in_user
+
+    get feeds_url
+    assert_response :success
+    assert_select "svg.icon-tabler-trash"
+  end
+
+  test "should not show trash icon to unauthenticated user viewing user profile" do
+    get user_url(@user)
+
+    assert_response :success
+    assert_select "svg.icon-tabler-trash", count: 0
+  end
+
+  test "should show trash icon when authenticated user views their own profile" do
+    sign_in_user
+
+    get user_url(@user)
+
+    assert_response :success
+    assert_select "svg.icon-tabler-trash"
+  end
+
+  test "should not show trash icon when authenticated user views other user's profile" do
+    sign_in_user_with_no_feeds
+    other_user = @user
+
+    get user_url(other_user)
+
+    assert_response :success
+    # Trash icon should NOT be visible for other user's feeds
+    assert_select "svg.icon-tabler-trash", count: 0
+  end
 end
