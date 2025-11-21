@@ -1,8 +1,12 @@
 one:
   email_address: one@example.com
+  nick_name: One
   password_digest: <%= BCrypt::Password.create("password") %>
   avatar_url: https://api.dicebear.com/6.x/adventurer/svg?seed=1dabe98076681698
+  trial_end_date: <%= DateTime.current %>
 two:
   email_address: two@example.com
+  nick_name: Two
   password_digest: <%= BCrypt::Password.create("password") %>
   avatar_url: https://api.dicebear.com/6.x/adventurer/svg?seed=1dabe98076681698
+  trial_end_date: <%= DateTime.current %>

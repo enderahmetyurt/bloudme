@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :settings, :update]
+  before_action :set_user, only: [ :show, :settings, :update ]
 
   def show
     @feeds = @user.feeds.recent
