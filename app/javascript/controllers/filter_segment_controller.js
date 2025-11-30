@@ -1,10 +1,13 @@
 import { Controller } from "@hotwired/stimulus";
 
 export default class extends Controller {
-  static targets = ["segment", "button", "icon"];
+  static targets = ["segment", "button", "icon", "sortDropdown"];
 
   connect() {
     this.iconTarget.setAttribute("fill", "none");
+    if (this.hasSortDropdownTarget) {
+      this.updateSortButtonState();
+    }
   }
 
   toggle() {
@@ -135,5 +138,98 @@ export default class extends Controller {
           window.history.replaceState({}, "", url.toString());
         }
       });
+  }
+
+  toggleSort() {
+    const dropdown = document.querySelector(
+      '[data-filter-segment-target="sort-dropdown"]',
+    );
+    if (dropdown) {
+      dropdown.classList.toggle("hidden");
+      if (!dropdown.classList.contains("hidden")) {
+        this.updateSortButtonState();
+      }
+    }
+  }
+
+  selectSort(event) {
+    const sortValue = event.currentTarget.getAttribute("data-sort-value");
+    const feedId = new URLSearchParams(window.location.search).get("feed_id");
+    const dateParam = new URLSearchParams(window.location.search).get("date");
+
+    // Get actual checkbox state
+    const unreadCheckbox =
+      document.querySelector("#unread-checkbox") ||
+      document.querySelector("#unread-checkbox-desktop");
+    const isUnreadChecked = unreadCheckbox ? unreadCheckbox.checked : false;
+    const readParam = isUnreadChecked ? "false" : "true";
+
+    const url = new URL(window.location);
+    url.searchParams.set("read", readParam);
+
+    if (sortValue !== "default") {
+      url.searchParams.set("sort", sortValue);
+    } else {
+      url.searchParams.delete("sort");
+    }
+
+    if (feedId) {
+      url.searchParams.set("feed_id", feedId);
+    }
+
+    if (dateParam) {
+      url.searchParams.set("date", dateParam);
+    }
+
+    // Close dropdown
+    const dropdown = document.querySelector(
+      '[data-filter-segment-target="sort-dropdown"]',
+    );
+    if (dropdown) {
+      dropdown.classList.add("hidden");
+    }
+
+    fetch(url.toString())
+      .then((response) => response.text())
+      .then((html) => {
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(html, "text/html");
+        const newFrame = doc.querySelector('[id="articles-list"]');
+        const oldFrame = document.querySelector('[id="articles-list"]');
+
+        if (newFrame && oldFrame) {
+          oldFrame.innerHTML = newFrame.innerHTML;
+          window.history.replaceState({}, "", url.toString());
+          if (this.hasSortDropdownTarget) {
+            this.updateSortButtonState();
+          }
+        }
+      });
+  }
+
+  updateSortButtonState() {
+    const dropdown = document.querySelector(
+      '[data-filter-segment-target="sort-dropdown"]',
+    );
+    if (!dropdown) return;
+
+    const currentSort =
+      new URLSearchParams(window.location.search).get("sort") || "default";
+    const sortOptions = dropdown.querySelectorAll(".sort-option");
+
+    sortOptions.forEach((option) => {
+      const optionValue = option.getAttribute("data-sort-value");
+      const checkmark = option.querySelector("span");
+
+      if (optionValue === currentSort) {
+        if (checkmark) {
+          checkmark.textContent = "✓";
+        }
+      } else {
+        if (checkmark) {
+          checkmark.textContent = "";
+        }
+      }
+    });
   }
 }

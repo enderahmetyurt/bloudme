@@ -18,7 +18,21 @@ class ArticlesController < ApplicationController
       @articles = @articles.where("DATE(published_at) = ?", date)
     end
 
-    @articles = @articles.recent.page(params[:page])
+    # Apply sorting
+    case params[:sort]
+    when "latest"
+      @articles = @articles.recent
+    when "oldest"
+      @articles = @articles.order(published_at: :asc)
+    when "title_asc"
+      @articles = @articles.order(title: :asc)
+    when "title_desc"
+      @articles = @articles.order(title: :desc)
+    else
+      @articles = @articles.recent
+    end
+
+    @articles = @articles.page(params[:page])
   end
 
   def show
