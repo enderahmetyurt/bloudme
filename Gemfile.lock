@@ -132,7 +132,7 @@ GEM
     bcrypt (3.1.20)
     bcrypt_pbkdf (1.1.2)
     benchmark (0.4.1)
-    bigdecimal (3.3.1)
+    bigdecimal (4.0.1)
     bindex (0.8.1)
     bootsnap (1.20.1)
       msgpack (~> 1.2)
@@ -192,7 +192,7 @@ GEM
     herb (0.8.6-arm64-darwin)
     herb (0.8.6-x86_64-linux-gnu)
     htmlbeautifier (1.4.3)
-    httparty (0.23.2)
+    httparty (0.24.0)
       csv
       mini_mime (>= 1.0.0)
       multi_xml (>= 0.5.2)
@@ -285,8 +285,8 @@ GEM
     mocha (3.0.1)
       ruby2_keywords (>= 0.0.5)
     msgpack (1.8.0)
-    multi_xml (0.7.2)
-      bigdecimal (~> 3.1)
+    multi_xml (0.8.0)
+      bigdecimal (>= 3.1, < 5)
     net-imap (0.6.2)
       date
       net-protocol
