@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/rails/rails.git
-  revision: d1b952656385c681f9d7f16a97f706c68c5a9540
+  revision: 3b5b9a96a83c14a3fd9f0bc0a256e2084997d54c
   branch: main
   specs:
     actioncable (8.2.0.alpha)
@@ -34,7 +34,7 @@ GIT
       rails-html-sanitizer (~> 1.6)
       useragent (~> 0.16)
     actiontext (8.2.0.alpha)
-      action_text-trix (~> 2.1.15)
+      action_text-trix (~> 2.1.16)
       actionpack (= 8.2.0.alpha)
       activerecord (= 8.2.0.alpha)
       activestorage (= 8.2.0.alpha)
