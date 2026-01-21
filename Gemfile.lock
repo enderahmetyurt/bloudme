@@ -328,7 +328,7 @@ GEM
       date
       stringio
     public_suffix (7.0.2)
-    puma (7.1.0)
+    puma (7.2.0)
       nio4r (~> 2.0)
     raabro (1.4.0)
     racc (1.8.1)
@@ -515,7 +515,7 @@ DEPENDENCIES
   mocha
   pg (~> 1.6)
   propshaft
-  puma (~> 7.1)
+  puma (~> 7.2)
   rails!
   rails-controller-testing
   rubocop-rails-omakase
