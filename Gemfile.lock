@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/rails/rails.git
-  revision: 2f4e455d77fdc2bb5a716449b02e825114bbb81b
+  revision: 49bb5ebeadfb8806900668347e83a6fed25c1452
   branch: main
   specs:
     actioncable (8.2.0.alpha)
@@ -317,7 +317,7 @@ GEM
     pp (0.6.3)
       prettyprint
     prettyprint (0.2.0)
-    prism (1.8.0)
+    prism (1.9.0)
     prop_initializer (0.2.0)
       zeitwerk (>= 2.6.18)
     propshaft (1.3.1)
