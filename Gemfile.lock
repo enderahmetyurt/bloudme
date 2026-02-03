@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/rails/rails.git
-  revision: 90ccb4501a2eecb85ee8978994034941d94ebf31
+  revision: 6e7e4a16ea3558d582a0bda1145c2484c94f978d
   branch: main
   specs:
     actioncable (8.2.0.alpha)
@@ -217,7 +217,7 @@ GEM
       activesupport (>= 7.0.0)
     job-iteration (1.12.0)
       activejob (>= 6.1)
-    json (2.18.0)
+    json (2.18.1)
     kamal (2.10.1)
       activesupport (>= 7.0)
       base64 (~> 0.2)
