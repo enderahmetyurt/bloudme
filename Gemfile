@@ -78,7 +78,7 @@ gem "mission_control-jobs"
 gem "avo", ">= 3.2.1"
 gem "kaminari"
 
-gem "maintenance_tasks", "~> 2.13"
+gem "maintenance_tasks", "~> 2.14"
 gem "feedbag"
 gem "sentry-ruby"
 gem "sentry-rails"
