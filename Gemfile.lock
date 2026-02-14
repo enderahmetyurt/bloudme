@@ -254,7 +254,7 @@ GEM
       net-imap
       net-pop
       net-smtp
-    maintenance_tasks (2.13.0)
+    maintenance_tasks (2.14.0)
       actionpack (>= 7.1)
       activejob (>= 7.1)
       activerecord (>= 7.1)
@@ -509,7 +509,7 @@ DEPENDENCIES
   jbuilder
   kamal
   kaminari
-  maintenance_tasks (~> 2.13)
+  maintenance_tasks (~> 2.14)
   mission_control-jobs
   mocha
   pg (~> 1.6)
