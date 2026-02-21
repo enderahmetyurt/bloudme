@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.2].define(version: 2026_02_21_105658) do
+ActiveRecord::Schema[8.2].define(version: 2026_02_21_114733) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -26,6 +26,7 @@ ActiveRecord::Schema[8.2].define(version: 2026_02_21_105658) do
     t.datetime "updated_at", null: false
     t.string "youtube_channel_id"
     t.string "youtube_video_id"
+    t.index ["feed_id", "link"], name: "index_articles_on_feed_id_and_link", unique: true
     t.index ["feed_id"], name: "index_articles_on_feed_id"
   end
 
@@ -56,7 +57,8 @@ ActiveRecord::Schema[8.2].define(version: 2026_02_21_105658) do
     t.string "site_url"
     t.string "title"
     t.datetime "updated_at", null: false
-    t.integer "user_id", null: false
+    t.integer "user_id"
+    t.index ["feed_url"], name: "index_feeds_on_feed_url", unique: true
     t.index ["user_id"], name: "index_feeds_on_user_id"
   end
 
@@ -397,7 +399,6 @@ ActiveRecord::Schema[8.2].define(version: 2026_02_21_105658) do
   add_foreign_key "bookmarks", "users"
   add_foreign_key "feed_subscriptions", "feeds"
   add_foreign_key "feed_subscriptions", "users"
-  add_foreign_key "feeds", "users"
   add_foreign_key "job_runs", "users"
   add_foreign_key "rails_pulse_operations", "rails_pulse_queries", column: "query_id"
   add_foreign_key "rails_pulse_operations", "rails_pulse_requests", column: "request_id"
