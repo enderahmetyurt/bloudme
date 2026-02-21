@@ -20,7 +20,8 @@ class FixUserArticlesConstraints < ActiveRecord::Migration[8.2]
 
     add_index :user_articles, [:user_id, :article_id], unique: true,
               algorithm: :concurrently,
-              name: "index_user_articles_on_user_id_and_article_id"
+              name: "index_user_articles_on_user_id_and_article_id",
+              if_not_exists: true
   end
 
   def down
