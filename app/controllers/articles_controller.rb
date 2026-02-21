@@ -1,13 +1,16 @@
 class ArticlesController < ApplicationController
   def index
-    redirect_to new_feed_path if Current.user.feeds.empty?
+    redirect_to new_feed_path if Current.user.subscribed_feeds.empty?
 
-    @feeds = Current.user.feeds.recent
+    @feeds = Current.user.subscribed_feeds.recent
 
     read_param = ActiveModel::Type::Boolean.new.cast(params[:read]) || false
-    @articles = Article.by_current_user(Current.user)
-                       .where(is_read: read_param)
-                       .includes(:feed, :bookmarks)
+    @articles = if read_param
+                  Article.read_for_user(Current.user)
+                else
+                  Article.unread_for_user(Current.user)
+                end
+    @articles = @articles.includes(:feed, :bookmarks)
 
     if params[:feed_id].present?
       @articles = @articles.where(feed_id: params[:feed_id])
@@ -18,7 +21,6 @@ class ArticlesController < ApplicationController
       @articles = @articles.where("DATE(published_at) = ?", date)
     end
 
-    # Apply sorting
     case params[:sort]
     when "latest"
       @articles = @articles.recent
@@ -45,7 +47,7 @@ class ArticlesController < ApplicationController
   def search
     @query = params[:query]
     @articles = Article
-      .by_current_user(Current.user)
+      .for_user(Current.user)
       .search(@query)
       .includes(:feed, :bookmarks)
       .recent
@@ -63,8 +65,8 @@ class ArticlesController < ApplicationController
         render(
           turbo_stream: [
             turbo_stream.remove("#{helpers.dom_id(@article)}_container"),
-            turbo_stream.update("unread", partial: "articles/unread_count", locals: { count: Article.by_current_user(Current.user).unread.count }),
-            turbo_stream.update("read", partial: "articles/read_count", locals: { count: Article.by_current_user(Current.user).read.count })
+            turbo_stream.update("unread", partial: "articles/unread_count", locals: { count: Article.unread_for_user(Current.user).count }),
+            turbo_stream.update("read", partial: "articles/read_count", locals: { count: Article.read_for_user(Current.user).count })
           ])
       end
       format.html { redirect_to articles_path, notice: "Updated todo status." }

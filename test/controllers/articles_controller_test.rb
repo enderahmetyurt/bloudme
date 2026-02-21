@@ -25,7 +25,7 @@ class ArticlesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should redirect to new feed path when user has no feeds" do
-    @user_with_no_feeds.feeds.destroy_all
+    @user_with_no_feeds.feed_subscriptions.destroy_all
     sign_in_user_with_no_feeds
 
     get articles_url
@@ -71,7 +71,7 @@ class ArticlesControllerTest < ActionDispatch::IntegrationTest
   test "should show article and mark as read" do
     sign_in_user
     @unread_article.update(is_read: false)
-    assert_not @unread_article.is_read
+    UserArticle.find_or_create_by!(user: @user, article: @unread_article).update!(is_read: false)
 
     get article_url(@unread_article)
 
@@ -79,6 +79,7 @@ class ArticlesControllerTest < ActionDispatch::IntegrationTest
     assert assigns(:article)
     @unread_article.reload
     assert @unread_article.is_read
+    assert UserArticle.find_by(user: @user, article: @unread_article).is_read
   end
 
   test "should redirect unauthenticated user from search" do
@@ -129,6 +130,7 @@ class ArticlesControllerTest < ActionDispatch::IntegrationTest
     assert_equal "text/vnd.turbo-stream.html; charset=utf-8", response.content_type
     @article.reload
     assert @article.is_read
+    assert UserArticle.find_by(user: @user, article: @article).is_read
   end
 
   test "should update article read status via html" do

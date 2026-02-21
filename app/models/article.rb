@@ -12,6 +12,22 @@ class Article < ApplicationRecord
     joins(feed: :user).where(feeds: { user: user })
   }
 
+  scope :for_user, ->(user) {
+    joins(:user_articles).where(user_articles: { user_id: user.id })
+  }
+
+  scope :unread_for_user, ->(user) {
+    for_user(user).where(user_articles: { is_read: false })
+  }
+
+  scope :read_for_user, ->(user) {
+    for_user(user).where(user_articles: { is_read: true })
+  }
+
+  def read_for_user?(user)
+    user_articles.exists?(user_id: user.id, is_read: true)
+  end
+
   scope :search, ->(query) {
     return all if query.blank?
 

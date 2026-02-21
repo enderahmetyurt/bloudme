@@ -9,7 +9,6 @@ class FeedsControllerTest < ActionDispatch::IntegrationTest
     @feed = feeds(:one)
     @article = articles(:one)
 
-    # Mock RssParserService for testing
     @mock_feed_data = {
       feed_url: "https://example.com/feed.xml",
       site_url: "https://example.com",
@@ -76,7 +75,7 @@ class FeedsControllerTest < ActionDispatch::IntegrationTest
 
   test "should redirect to new feed path when user has no feeds" do
     sign_in_user_with_no_feeds
-    @user_with_no_feeds.feeds.destroy_all
+    @user_with_no_feeds.feed_subscriptions.destroy_all
 
     get feeds_url
 
@@ -91,7 +90,7 @@ class FeedsControllerTest < ActionDispatch::IntegrationTest
 
     assert_response :success
     assert assigns(:feeds)
-    assert_equal @user.feeds, assigns(:feeds)
+    assert_includes assigns(:feeds), @feed
   end
 
   # NEW action tests
@@ -126,8 +125,12 @@ class FeedsControllerTest < ActionDispatch::IntegrationTest
 
     stub_successful_rss_parsing do
       assert_difference "Feed.count", 1 do
-        assert_difference "Article.count", 1 do
-          post feeds_url, params: { feed: { feed_url: "https://example.com/feed.xml" } }
+        assert_difference "FeedSubscription.count", 1 do
+          assert_difference "Article.count", 1 do
+            assert_difference "UserArticle.count", 1 do
+              post feeds_url, params: { feed: { feed_url: "https://example.com/feed.xml" } }
+            end
+          end
         end
       end
     end
@@ -140,7 +143,6 @@ class FeedsControllerTest < ActionDispatch::IntegrationTest
     assert_equal @mock_feed_data[:title], feed.title
     assert_equal @mock_feed_data[:description], feed.description
     assert_equal @mock_feed_data[:feed_url], feed.feed_url
-    assert_equal @user, feed.user
   end
 
   test "should create articles when creating feed" do
@@ -204,11 +206,10 @@ class FeedsControllerTest < ActionDispatch::IntegrationTest
 
   test "should not allow user to view other user's feeds" do
     sign_in_user_with_no_feeds
-    other_feed = @user.feeds.first
+    other_feed = feeds(:one)
 
     get feed_url(other_feed)
 
-    # Should redirect to feeds path when user tries to access unauthorized feed
     assert_response :redirect
   end
 
@@ -220,7 +221,6 @@ class FeedsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
     articles = assigns(:articles)
     assert_not_nil articles
-    # Verify articles belong to the feed
     articles.each do |article|
       assert_equal @feed, article.feed
     end
@@ -234,11 +234,13 @@ class FeedsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to new_session_path
   end
 
-  test "should destroy feed for authenticated user" do
+  test "should destroy subscription for authenticated user" do
     sign_in_user
 
-    assert_difference "Feed.count", -1 do
-      delete feed_url(@feed)
+    assert_difference "FeedSubscription.count", -1 do
+      assert_no_difference "Feed.count" do
+        delete feed_url(@feed)
+      end
     end
 
     assert_response :redirect
@@ -248,21 +250,11 @@ class FeedsControllerTest < ActionDispatch::IntegrationTest
 
   test "should not allow user to destroy other user's feeds" do
     sign_in_user_with_no_feeds
-    other_feed = @user.feeds.first
+    other_feed = feeds(:one)
 
     delete feed_url(other_feed)
 
-    # Should redirect when user tries to destroy unauthorized feed
     assert_response :redirect
-  end
-
-  test "should destroy associated articles when destroying feed" do
-    sign_in_user
-    feed_articles_count = @feed.articles.count
-
-    assert_difference "Article.count", -feed_articles_count do
-      delete feed_url(@feed)
-    end
   end
 
   # Edge cases and error handling
@@ -271,20 +263,20 @@ class FeedsControllerTest < ActionDispatch::IntegrationTest
 
     get feed_url(id: 99999)
 
-    # Should handle invalid ID gracefully
     assert_response :redirect
   end
 
   test "should handle multiple feeds in index" do
     sign_in_user
 
-    # Create additional feed
-    additional_feed = @user.feeds.create!(
+    additional_feed = Feed.create!(
       title: "Additional Feed",
       feed_url: "https://example.com/additional.xml",
       site_url: "https://example.com",
-      favicon: "https://example.com/favicon.ico"
+      favicon: "https://example.com/favicon.ico",
+      user: @user
     )
+    FeedSubscription.create!(user: @user, feed: additional_feed)
 
     get feeds_url
 
@@ -295,27 +287,11 @@ class FeedsControllerTest < ActionDispatch::IntegrationTest
     assert feeds.count >= 2
   end
 
-  test "should show trash icon to feed owner in index" do
+  test "should show trash icon to feed subscriber in index" do
     sign_in_user
 
     get feeds_url
 
-    assert_response :success
-    assert_select "svg.icon-tabler-trash"
-  end
-
-  test "should only show trash icon for current user's feeds" do
-    other_user = users(:two)
-    other_feed = other_user.feeds.create!(
-      title: "Other User Feed",
-      feed_url: "https://other.com/feed.xml",
-      site_url: "https://other.com",
-      favicon: "https://other.com/favicon.ico"
-    )
-
-    sign_in_user
-
-    get feeds_url
     assert_response :success
     assert_select "svg.icon-tabler-trash"
   end
@@ -343,7 +319,6 @@ class FeedsControllerTest < ActionDispatch::IntegrationTest
     get user_url(other_user)
 
     assert_response :success
-    # Trash icon should NOT be visible for other user's feeds
     assert_select "svg.icon-tabler-trash", count: 0
   end
 end

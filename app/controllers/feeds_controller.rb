@@ -1,12 +1,12 @@
 class FeedsController < ApplicationController
   def index
-    redirect_to new_feed_path if Current.user.feeds.empty?
+    redirect_to new_feed_path if Current.user.subscribed_feeds.empty?
 
-    @feeds = Current.user.feeds
+    @feeds = Current.user.subscribed_feeds
   end
 
   def new
-    @feed = Current.user.feeds.build
+    @feed = Feed.new
   end
 
   def create
@@ -19,19 +19,23 @@ class FeedsController < ApplicationController
     parsed_feed = RssParserService.fetch_and_parse(feed_url)
 
     if parsed_feed
-      @feed = Current.user.feeds.create(
-        feed_url: parsed_feed[:feed_url],
+      @feed = Feed.find_or_initialize_by(feed_url: parsed_feed[:feed_url])
+      @feed.assign_attributes(
         site_url: parsed_feed[:site_url],
         favicon: parsed_feed[:favicon] || "default-favicon.png",
         is_podcast: parsed_feed[:is_podcast],
         title: parsed_feed[:title],
-        description: parsed_feed[:description]
+        description: parsed_feed[:description],
+        user: @feed.user || Current.user
       )
+      @feed.save!
 
       FeedSubscription.find_or_create_by!(user: Current.user, feed: @feed)
 
       parsed_feed[:entries].each do |entry|
-        article = @feed.articles.create(entry)
+        article = @feed.articles.find_or_create_by!(link: entry[:link]) do |a|
+          a.assign_attributes(entry.except(:link))
+        end
 
         UserArticle.find_or_create_by!(user: Current.user, article: article)
       end
@@ -45,15 +49,15 @@ class FeedsController < ApplicationController
   end
 
   def show
-    @feed = Current.user.feeds.find(params[:id])
+    @feed = Current.user.subscribed_feeds.find(params[:id])
     @articles = @feed.articles.recent.includes(:bookmarks)
   rescue ActiveRecord::RecordNotFound
     redirect_to feeds_path, alert: t("feeds.show.not_found")
   end
 
   def destroy
-    @feed = Current.user.feeds.find(params[:id])
-    @feed.destroy
+    subscription = Current.user.feed_subscriptions.find_by!(feed_id: params[:id])
+    subscription.destroy
 
     redirect_to feeds_path, notice: t("feeds.destroy.success")
   rescue ActiveRecord::RecordNotFound
@@ -66,5 +70,3 @@ class FeedsController < ApplicationController
     params.require(:feed).permit(:feed_url)
   end
 end
-
-Feed.where(favicon: nil).count
