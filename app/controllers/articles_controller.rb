@@ -1,13 +1,12 @@
 class ArticlesController < ApplicationController
   def index
-    redirect_to new_feed_path if Current.user.feeds.empty?
+    redirect_to new_feed_path if Current.user.subscribed_feeds.empty?
 
-    @feeds = Current.user.feeds.recent
+    @feeds = Current.user.subscribed_feeds.recent
 
     read_param = ActiveModel::Type::Boolean.new.cast(params[:read]) || false
-    @articles = Article.by_current_user(Current.user)
-                       .where(is_read: read_param)
-                       .includes(:feed, :bookmarks)
+    @articles = read_param ? Article.read_for_user(Current.user) : Article.unread_for_user(Current.user)
+    @articles = @articles.includes(:feed, :bookmarks)
 
     if params[:feed_id].present?
       @articles = @articles.where(feed_id: params[:feed_id])
@@ -18,7 +17,6 @@ class ArticlesController < ApplicationController
       @articles = @articles.where("DATE(published_at) = ?", date)
     end
 
-    # Apply sorting
     case params[:sort]
     when "latest"
       @articles = @articles.recent
@@ -38,12 +36,14 @@ class ArticlesController < ApplicationController
   def show
     @article = Article.includes(:feed, :bookmarks).find(params[:id])
     @article.update(is_read: true)
+
+    UserArticle.find_or_create_by!(user: Current.user, article: @article).update!(is_read: true)
   end
 
   def search
     @query = params[:query]
     @articles = Article
-      .by_current_user(Current.user)
+      .for_user(Current.user)
       .search(@query)
       .includes(:feed, :bookmarks)
       .recent
@@ -51,15 +51,18 @@ class ArticlesController < ApplicationController
 
   def update_read
     @article = Article.find(params[:id])
-    @article.update(is_read: ActiveModel::Type::Boolean.new.cast(params[:article][:read]))
+    read_value = ActiveModel::Type::Boolean.new.cast(params[:article][:read])
+    @article.update(is_read: read_value)
+
+    UserArticle.find_or_create_by!(user: Current.user, article: @article).update!(is_read: read_value)
 
     respond_to do |format|
       format.turbo_stream do
         render(
           turbo_stream: [
             turbo_stream.remove("#{helpers.dom_id(@article)}_container"),
-            turbo_stream.update("unread", partial: "articles/unread_count", locals: { count: Article.by_current_user(Current.user).unread.count }),
-            turbo_stream.update("read", partial: "articles/read_count", locals: { count: Article.by_current_user(Current.user).read.count })
+            turbo_stream.update("unread", partial: "articles/unread_count", locals: { count: Article.unread_for_user(Current.user).count }),
+            turbo_stream.update("read", partial: "articles/read_count", locals: { count: Article.read_for_user(Current.user).count })
           ])
       end
       format.html { redirect_to articles_path, notice: "Updated todo status." }

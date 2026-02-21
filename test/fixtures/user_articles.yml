@@ -1,0 +1,14 @@
+one:
+  user: one
+  article: one
+  is_read: true
+
+two:
+  user: two
+  article: two
+  is_read: true
+
+unread:
+  user: two
+  article: unread
+  is_read: false

@@ -11,7 +11,9 @@ module ActiveSupport
   class TestCase
     include SessionTestHelper
     # Run tests in parallel with specified workers
-    parallelize(workers: :number_of_processors)
+    parallelize(workers: :number_of_processors) do |worker|
+      ActiveRecord::Base.establish_connection
+    end
 
     # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
     fixtures :all

@@ -15,7 +15,7 @@
         >
           <%= image_tag(feed.favicon, class: "rounded-full w-10 h-10", alt: "#{feed.title} favicon") %>
 
-          <% if feed.user == Current.user %>
+          <% if Current.user&.feed_subscriptions&.exists?(feed_id: feed.id) %>
             <%= link_to feed.title, feed_path(feed) %>
           <% else %>
             <%= feed.title %>
@@ -32,7 +32,7 @@
       </div>
     </div>
 
-    <% if feed.user == Current.user %>
+    <% if Current.user&.feed_subscriptions&.exists?(feed_id: feed.id) %>
       <div class="text-sm text-gray-500 flex items-center">
         <%= button_to feed_path(feed), method: :delete, class: "p-2 bg-gray-100 hover:bg-gray-200 rounded-lg" do %>
           <svg

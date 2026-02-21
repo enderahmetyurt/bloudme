@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   before_action :set_user, only: [ :show, :settings, :update ]
 
   def show
-    @feeds = @user.feeds.recent
+    @feeds = @user.subscribed_feeds.recent
   end
 
   def settings
