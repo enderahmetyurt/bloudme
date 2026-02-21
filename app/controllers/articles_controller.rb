@@ -5,11 +5,7 @@ class ArticlesController < ApplicationController
     @feeds = Current.user.subscribed_feeds.recent
 
     read_param = ActiveModel::Type::Boolean.new.cast(params[:read]) || false
-    @articles = if read_param
-                  Article.read_for_user(Current.user)
-                else
-                  Article.unread_for_user(Current.user)
-                end
+    @articles = read_param ? Article.read_for_user(Current.user) : Article.unread_for_user(Current.user)
     @articles = @articles.includes(:feed, :bookmarks)
 
     if params[:feed_id].present?
