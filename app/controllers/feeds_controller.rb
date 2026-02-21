@@ -27,8 +27,13 @@ class FeedsController < ApplicationController
         title: parsed_feed[:title],
         description: parsed_feed[:description]
       )
+
+      FeedSubscription.find_or_create_by!(user: Current.user, feed: @feed)
+
       parsed_feed[:entries].each do |entry|
-        @feed.articles.create(entry)
+        article = @feed.articles.create(entry)
+
+        UserArticle.find_or_create_by!(user: Current.user, article: article)
       end
 
       redirect_to articles_path, notice: t("feeds.create.success")

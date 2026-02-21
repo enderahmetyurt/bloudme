@@ -38,6 +38,8 @@ class ArticlesController < ApplicationController
   def show
     @article = Article.includes(:feed, :bookmarks).find(params[:id])
     @article.update(is_read: true)
+
+    UserArticle.find_or_create_by!(user: Current.user, article: @article).update!(is_read: true)
   end
 
   def search
@@ -51,7 +53,10 @@ class ArticlesController < ApplicationController
 
   def update_read
     @article = Article.find(params[:id])
-    @article.update(is_read: ActiveModel::Type::Boolean.new.cast(params[:article][:read]))
+    read_value = ActiveModel::Type::Boolean.new.cast(params[:article][:read])
+    @article.update(is_read: read_value)
+
+    UserArticle.find_or_create_by!(user: Current.user, article: @article).update!(is_read: read_value)
 
     respond_to do |format|
       format.turbo_stream do

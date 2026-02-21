@@ -31,7 +31,20 @@ class UpdateFeedsJob < ApplicationJob
       end
 
       # Bulk insert new articles
-      feed.articles.insert_all(new_articles) if new_articles.any?
+      if new_articles.any?
+        feed.articles.insert_all(new_articles)
+
+        subscriber_ids = feed.feed_subscriptions.pluck(:user_id)
+        if subscriber_ids.any?
+          new_article_ids = feed.articles.where(link: new_articles.map { |a| a[:link] }).pluck(:id)
+          user_article_records = subscriber_ids.flat_map do |user_id|
+            new_article_ids.map do |article_id|
+              { user_id: user_id, article_id: article_id, is_read: false, created_at: Time.current, updated_at: Time.current }
+            end
+          end
+          UserArticle.insert_all(user_article_records) if user_article_records.any?
+        end
+      end
     end
   end
 end
