@@ -1,7 +1,13 @@
 Rails.application.routes.draw do
-  mount MaintenanceTasks::Engine, at: "/maintenance_tasks"
-  mount Avo::Engine, at: Avo.configuration.root_path
-  mount MissionControl::Jobs::Engine, at: "/jobs"
+  admin_constraint = lambda do |request|
+    session_id = request.cookie_jar.signed[:session_id]
+    session = Session.find_by(id: session_id) if session_id
+    session&.user&.is_admin?
+  end
+
+  mount MaintenanceTasks::Engine, at: "/maintenance_tasks", constraints: admin_constraint
+  mount Avo::Engine, at: Avo.configuration.root_path, constraints: admin_constraint
+  mount MissionControl::Jobs::Engine, at: "/jobs", constraints: admin_constraint
 
   resource :session
   resources :passwords, param: :token
