@@ -14,8 +14,11 @@ class User < ApplicationRecord
   has_secure_password
   has_many :sessions, dependent: :destroy
   has_many :feeds, dependent: :destroy
+  has_many :feed_subscriptions, dependent: :destroy
+  has_many :subscribed_feeds, through: :feed_subscriptions, source: :feed
   has_many :bookmarks, dependent: :destroy
   has_many :bookmarked_articles, through: :bookmarks, source: :article
+  has_many :user_articles, dependent: :destroy
 
   normalizes :email_address, with: ->(e) { e.strip.downcase }
 

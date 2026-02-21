@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.2].define(version: 2025_11_21_133249) do
+ActiveRecord::Schema[8.2].define(version: 2026_02_21_105658) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -36,6 +36,15 @@ ActiveRecord::Schema[8.2].define(version: 2025_11_21_133249) do
     t.integer "user_id", null: false
     t.index ["article_id"], name: "index_bookmarks_on_article_id"
     t.index ["user_id"], name: "index_bookmarks_on_user_id"
+  end
+
+  create_table "feed_subscriptions", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.bigint "feed_id", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
+    t.index ["feed_id"], name: "index_feed_subscriptions_on_feed_id"
+    t.index ["user_id"], name: "index_feed_subscriptions_on_user_id"
   end
 
   create_table "feeds", force: :cascade do |t|
@@ -345,6 +354,16 @@ ActiveRecord::Schema[8.2].define(version: 2025_11_21_133249) do
     t.index ["key"], name: "index_solid_queue_semaphores_on_key", unique: true
   end
 
+  create_table "user_articles", force: :cascade do |t|
+    t.bigint "article_id", null: false
+    t.datetime "created_at", null: false
+    t.boolean "is_read"
+    t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
+    t.index ["article_id"], name: "index_user_articles_on_article_id"
+    t.index ["user_id"], name: "index_user_articles_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "avatar_url"
     t.text "bio", default: ""
@@ -376,6 +395,8 @@ ActiveRecord::Schema[8.2].define(version: 2025_11_21_133249) do
   add_foreign_key "articles", "feeds"
   add_foreign_key "bookmarks", "articles"
   add_foreign_key "bookmarks", "users"
+  add_foreign_key "feed_subscriptions", "feeds"
+  add_foreign_key "feed_subscriptions", "users"
   add_foreign_key "feeds", "users"
   add_foreign_key "job_runs", "users"
   add_foreign_key "rails_pulse_operations", "rails_pulse_queries", column: "query_id"
@@ -388,4 +409,6 @@ ActiveRecord::Schema[8.2].define(version: 2025_11_21_133249) do
   add_foreign_key "solid_queue_ready_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "solid_queue_recurring_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "solid_queue_scheduled_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
+  add_foreign_key "user_articles", "articles"
+  add_foreign_key "user_articles", "users"
 end

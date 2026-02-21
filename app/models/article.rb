@@ -2,6 +2,7 @@ class Article < ApplicationRecord
   belongs_to :feed
   has_many :bookmarks, dependent: :destroy
   has_many :users_who_bookmarked, through: :bookmarks, source: :user
+  has_many :user_articles, dependent: :destroy
 
   scope :recent, -> { order(published_at: :desc) }
   scope :unread, -> { where(is_read: false) }
