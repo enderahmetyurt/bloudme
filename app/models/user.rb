@@ -13,7 +13,6 @@ class User < ApplicationRecord
 
   has_secure_password
   has_many :sessions, dependent: :destroy
-  has_many :feeds, dependent: :destroy
   has_many :feed_subscriptions, dependent: :destroy
   has_many :subscribed_feeds, through: :feed_subscriptions, source: :feed
   has_many :bookmarks, dependent: :destroy

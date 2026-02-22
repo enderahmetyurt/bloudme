@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.2].define(version: 2026_02_21_122839) do
+ActiveRecord::Schema[8.2].define(version: 2026_02_22_073514) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -18,7 +18,6 @@ ActiveRecord::Schema[8.2].define(version: 2026_02_21_122839) do
     t.text "content"
     t.datetime "created_at", null: false
     t.integer "feed_id", null: false
-    t.boolean "is_read", default: false
     t.string "link"
     t.datetime "published_at"
     t.string "thumbnail"
@@ -57,9 +56,7 @@ ActiveRecord::Schema[8.2].define(version: 2026_02_21_122839) do
     t.string "site_url"
     t.string "title"
     t.datetime "updated_at", null: false
-    t.integer "user_id"
     t.index ["feed_url"], name: "index_feeds_on_feed_url", unique: true
-    t.index ["user_id"], name: "index_feeds_on_user_id"
   end
 
   create_table "flipper_features", force: :cascade do |t|

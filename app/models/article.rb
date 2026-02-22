@@ -5,10 +5,6 @@ class Article < ApplicationRecord
   has_many :user_articles, dependent: :destroy
 
   scope :recent, -> { order(published_at: :desc) }
-  scope :unread, -> { where(is_read: false) }
-  scope :by_current_user, ->(user) {
-    joins(feed: :user).where(feeds: { user: user })
-  }
 
   scope :for_user, ->(user) {
     joins(:user_articles).where(user_articles: { user_id: user.id })

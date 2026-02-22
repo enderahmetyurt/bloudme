@@ -1,17 +1,18 @@
 class Avo::Resources::Feed < Avo::BaseResource
   # self.includes = []
-  # self.attachments = []
   # self.search = {
-  #   query: -> { query.ransack(id_eq: params[:q], m: "or").result(distinct: false) }
+  #   query: -> { query.ransack(title_cont: params[:q]).result(distinct: false) }
   # }
 
   def fields
     field :id, as: :id
-    field :description, as: :textarea
     field :title, as: :text
-    field :url, as: :text
-    field :user_id, as: :number
-    field :user, as: :belongs_to
+    field :feed_url, as: :text
+    field :site_url, as: :text
+    field :description, as: :textarea
+    field :favicon, as: :text
+    field :is_podcast, as: :boolean
+    field :feed_subscriptions, as: :has_many
     field :articles, as: :has_many
   end
 
