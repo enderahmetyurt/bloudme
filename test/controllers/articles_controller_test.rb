@@ -70,15 +70,12 @@ class ArticlesControllerTest < ActionDispatch::IntegrationTest
 
   test "should show article and mark as read" do
     sign_in_user
-    @unread_article.update(is_read: false)
     UserArticle.find_or_create_by!(user: @user, article: @unread_article).update!(is_read: false)
 
     get article_url(@unread_article)
 
     assert_response :success
     assert assigns(:article)
-    @unread_article.reload
-    assert @unread_article.is_read
     assert UserArticle.find_by(user: @user, article: @unread_article).is_read
   end
 
@@ -128,8 +125,6 @@ class ArticlesControllerTest < ActionDispatch::IntegrationTest
 
     assert_response :success
     assert_equal "text/vnd.turbo-stream.html; charset=utf-8", response.content_type
-    @article.reload
-    assert @article.is_read
     assert UserArticle.find_by(user: @user, article: @article).is_read
   end
 
@@ -141,8 +136,7 @@ class ArticlesControllerTest < ActionDispatch::IntegrationTest
     assert_response :redirect
     assert_redirected_to articles_path
     assert_equal "Updated todo status.", flash[:notice]
-    @article.reload
-    assert @article.is_read
+    assert UserArticle.find_by(user: @user, article: @article).is_read
   end
 
   test "should redirect unauthenticated user from update_bookmark" do

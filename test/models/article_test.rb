@@ -12,12 +12,13 @@ class ArticleTest < ActiveSupport::TestCase
     assert_equal Article.order(published_at: :desc), Article.recent
   end
 
-  test "unread scope should return only unread articles" do
-    assert_includes Article.unread, @unread_article
-    assert_not_includes Article.unread, @article
+  test "unread_for_user scope should return only unread articles for user" do
+    user_two = users(:two)
+    assert_includes Article.unread_for_user(user_two), @unread_article
+    assert_not_includes Article.unread_for_user(user_two), articles(:two)
   end
 
-  test "by_current_user scope should return articles belonging to the user's feeds" do
-    assert_includes Article.by_current_user(@user), @article
+  test "for_user scope should return articles belonging to the user" do
+    assert_includes Article.for_user(@user), @article
   end
 end

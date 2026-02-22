@@ -273,8 +273,7 @@ class FeedsControllerTest < ActionDispatch::IntegrationTest
       title: "Additional Feed",
       feed_url: "https://example.com/additional.xml",
       site_url: "https://example.com",
-      favicon: "https://example.com/favicon.ico",
-      user: @user
+      favicon: "https://example.com/favicon.ico"
     )
     FeedSubscription.create!(user: @user, feed: additional_feed)
 

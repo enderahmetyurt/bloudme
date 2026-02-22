@@ -1,12 +1,10 @@
 one:
-  user: one
   feed_url: https://example.com/feed1.xml
   title: MyString
   description: MyString
   favicon: https://example.com/favicon.ico
 
 two:
-  user: two
   feed_url: https://example.com/feed2.xml
   title: MyString
   description: MyString

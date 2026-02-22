@@ -25,8 +25,7 @@ class FeedsController < ApplicationController
         favicon: parsed_feed[:favicon] || "default-favicon.png",
         is_podcast: parsed_feed[:is_podcast],
         title: parsed_feed[:title],
-        description: parsed_feed[:description],
-        user: @feed.user || Current.user
+        description: parsed_feed[:description]
       )
       @feed.save!
 
