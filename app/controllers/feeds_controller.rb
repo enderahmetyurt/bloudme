@@ -57,6 +57,7 @@ class FeedsController < ApplicationController
 
   def destroy
     subscription = Current.user.feed_subscriptions.find_by!(feed_id: params[:id])
+    UserArticle.joins(:article).where(user: Current.user, articles: { feed_id: params[:id] }).destroy_all
     subscription.destroy
 
     redirect_to feeds_path, notice: t("feeds.destroy.success")
