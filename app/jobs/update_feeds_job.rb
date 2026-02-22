@@ -11,7 +11,7 @@ class UpdateFeedsJob < ApplicationJob
       next_run_at: Time.current + 3.hours
     )
   rescue => e
-    Rails.logger.error("MyJob failed for user #{user_id}: #{e.message}")
+    Rails.logger.error("#{self.class.name} failed: #{e.message}")
     raise e
   end
 
@@ -42,7 +42,7 @@ class UpdateFeedsJob < ApplicationJob
               { user_id: user_id, article_id: article_id, is_read: false, created_at: Time.current, updated_at: Time.current }
             end
           end
-          UserArticle.insert_all(user_article_records) if user_article_records.any?
+          UserArticle.insert_all(user_article_records, unique_by: [:user_id, :article_id]) if user_article_records.any?
         end
       end
     end
