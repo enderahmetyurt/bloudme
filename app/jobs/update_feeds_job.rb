@@ -27,12 +27,12 @@ class UpdateFeedsJob < ApplicationJob
       existing_links = feed.articles.where(link: entry_links).pluck(:link).to_set
 
       new_articles = parsed_feed[:entries].filter_map do |entry|
-        entry unless existing_links.include?(entry[:link])
+        entry.merge(feed_id: feed.id, created_at: Time.current, updated_at: Time.current) unless existing_links.include?(entry[:link])
       end
 
       # Bulk insert new articles
       if new_articles.any?
-        feed.articles.insert_all(new_articles)
+        Article.insert_all(new_articles)
 
         subscriber_ids = feed.feed_subscriptions.pluck(:user_id)
         if subscriber_ids.any?
