@@ -176,11 +176,11 @@ GEM
       sax-machine (>= 1.0, < 2)
     ffi (1.17.3-arm64-darwin)
     ffi (1.17.3-x86_64-linux-gnu)
-    flipper (1.3.6)
+    flipper (1.4.0)
       concurrent-ruby (< 2)
-    flipper-active_record (1.3.6)
+    flipper-active_record (1.4.0)
       activerecord (>= 4.2, < 9)
-      flipper (~> 1.3.6)
+      flipper (~> 1.4.0)
     fugit (1.12.1)
       et-orbi (~> 1.4)
       raabro (~> 1.4)
@@ -268,7 +268,8 @@ GEM
     mini_magick (5.3.1)
       logger
     mini_mime (1.1.5)
-    minitest (6.0.1)
+    minitest (6.0.2)
+      drb (~> 2.0)
       prism (~> 1.5)
     mission_control-jobs (1.1.0)
       actioncable (>= 7.1)
@@ -495,7 +496,7 @@ DEPENDENCIES
   feedbag
   feedjira
   flipper
-  flipper-active_record (~> 1.3)
+  flipper-active_record (~> 1.4)
   herb
   htmlbeautifier
   httparty
