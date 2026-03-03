@@ -108,10 +108,10 @@ GEM
     active_link_to (1.0.5)
       actionpack
       addressable
-    addressable (2.8.8)
+    addressable (2.8.9)
       public_suffix (>= 2.0.2, < 8.0)
     ast (2.4.3)
-    avo (3.29.1)
+    avo (3.30.0)
       actionview (>= 6.1)
       active_link_to
       activerecord (>= 6.1)
@@ -326,7 +326,7 @@ GEM
     psych (5.3.1)
       date
       stringio
-    public_suffix (7.0.2)
+    public_suffix (7.0.5)
     puma (7.2.0)
       nio4r (~> 2.0)
     raabro (1.4.0)
@@ -464,7 +464,7 @@ GEM
     uri (1.1.1)
     useragent (0.16.11)
     vcr (6.4.0)
-    view_component (4.2.0)
+    view_component (4.5.0)
       actionview (>= 7.1.0)
       activesupport (>= 7.1.0)
       concurrent-ruby (~> 1)
